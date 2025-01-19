@@ -1,0 +1,13 @@
+todo sleep
+deadline sleep /by tonight
+event sleep /from 1am tonight /to 11am tomorrow
+list
+mark 1
+list
+mark 3
+list
+unmark 1
+list
+unmark 3
+list
+bye
