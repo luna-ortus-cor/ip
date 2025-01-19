@@ -17,6 +17,8 @@ public class Miku{
                 handleMark(in,1);
             }else if(in.matches("unmark \\d+")){
                 handleMark(in,0);
+            }else if(in.matches("delete \\d+")){
+                handleDelete(in);
             }else if(in.split(" ")[0].equals("todo")){
                 handleTodo(in);
             }else if(in.split(" ")[0].equals("deadline")){
@@ -49,6 +51,17 @@ public class Miku{
             }else{
                 taskList.get(idx).markNotDone();
             }
+        }catch(IndexOutOfBoundsException e){
+            handleError(5);
+        }
+    }
+
+    private static void handleDelete(String in){
+        try{
+            int idx = Integer.valueOf(in.split(" ")[1])-1;
+            taskList.get(idx).delete();
+            taskList.remove(idx);
+            System.out.println(Constants.INDENT+"now you have "+taskList.size()+" tasks in the list.");
         }catch(IndexOutOfBoundsException e){
             handleError(5);
         }

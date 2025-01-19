@@ -26,6 +26,11 @@ public class Task{
             System.out.println("Task is already not done");
         }
     }
+
+    public void delete(){
+        System.out.println(Constants.INDENT+"UwU i've removed this task:");
+        System.out.println(Constants.INDENT+Constants.INDENT+this.toString());
+    }
     
     @Override
     public String toString(){
