@@ -12,7 +12,7 @@ public class Miku{
         System.out.println(Constants.INDENT+"what can i do for you?");
         
         String in = sc.nextLine();
-        while(!in.equals("bye")){
+        while(!in.trim().equals("bye")){
             if(in.trim().equals("list")){
                 printList(taskList,0);       
             }else if(in.matches("mark \\d+")){
@@ -21,14 +21,18 @@ public class Miku{
                 handleMark(in,0);
             }else if(in.matches("delete \\d+")){
                 handleDelete(in);
-            }else if(in.split(" ")[0].equals("todo")){
+            }else if(in.split(" ")[0].trim().equals("todo")){
                 handleTodo(in);
-            }else if(in.split(" ")[0].equals("deadline")){
+            }else if(in.split(" ")[0].trim().equals("deadline")){
                 handleDeadline(in);
-            }else if(in.split(" ")[0].equals("event")){
+            }else if(in.split(" ")[0].trim().equals("event")){
                 handleEvent(in);
-            }else if(in.split(" ")[0].equals("games")){
+            }else if(in.split(" ")[0].trim().equals("games")){
                 handleGame();
+            }else if(in.split(" ")[0].trim().equals("track")){
+                handleTrack();
+            }else if(in.split(" ")[0].trim().equals("stats")){
+                handleStats();
             }else{
                 handleError(1);
             }
@@ -37,13 +41,17 @@ public class Miku{
         System.out.println(Constants.INDENT+Constants.EXIT_MSG);
     }
     
-    //type=0 is task, type=1 is game
+    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats
     private static <T> void printList(ArrayList<T> list,int type){
         int idx = 1;
         if(type==0){
             System.out.println(Constants.INDENT+Constants.TASK_LIST_MSG);
-        }else{
+        }else if(type==1){
             System.out.println(Constants.INDENT+Constants.GAMES_MSG);
+        }else if(type==2){
+            System.out.println(Constants.INDENT+Constants.TRACK_MSG);
+        }else{
+            System.out.println(Constants.INDENT+Constants.STATS_MSG);
         }
         for(T t:list){
             System.out.println(Constants.INDENT+Constants.INDENT+idx+". "+t.toString());
@@ -153,6 +161,33 @@ public class Miku{
             }
         }else{
             //go back
+        }
+    }
+
+    private static void handleTrack(){
+        printList(Constants.TRACK_LIST,2);
+        int choice = sc.nextInt();sc.nextLine();
+        if(choice==1){
+            System.out.print("Enter START DATE (YYYY-MM-DD): ");
+            String startDate = sc.nextLine();
+            System.out.print("Enter START TIME (HH:mm): ");
+            String startTime = sc.nextLine();
+            System.out.print("Enter END DATE (YYYY-MM-DD): ");
+            String endDate = sc.nextLine();
+            System.out.print("Enter END TIME (HH:mm): ");
+            String endTime = sc.nextLine();
+            System.out.print("Enter ACTIVITY: ");
+            String name = sc.nextLine();
+            Activity a = new Activity(startDate, startTime, endDate, endTime, name);
+            TimeTracker.saveActivityToFile(a);
+        }
+    }
+
+    private static void handleStats(){
+        printList(Constants.TRACK_LIST,3);
+        int choice = sc.nextInt();sc.nextLine();
+        if(choice==1){
+            TimeTracker.displayStatistics();
         }
     }
                 

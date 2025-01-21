@@ -13,5 +13,8 @@ public class Constants{
     public static final String EVENT_EMPTY_WS = ":3 oops! name and/or from and/or to field of event cannot be empty!";
     public static final String LIST_IDX_INVALID = ":3 oops! no such task exists or task number is empty!";
     public static final String GAMES_MSG = "yay~ here are the list of games available!";
-    public static final ArrayList<String> GAMES_LIST = new ArrayList<String>(Arrays.asList("Mental Math","Wordle","back")); 
+    public static final ArrayList<String> GAMES_LIST = new ArrayList<String>(Arrays.asList("Mental Math","Wordle","Back"));
+    public static final String TRACK_MSG = "^~^ sure! what would you like to track?";
+    public static final ArrayList<String> TRACK_LIST = new ArrayList<String>(Arrays.asList("Time","Mood","Alcohol","Back"));
+    public static final String STATS_MSG = "^~^ sure! which stats would you like to see?";
 }
