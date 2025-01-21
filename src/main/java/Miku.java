@@ -1,18 +1,20 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Miku{
     private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static Scanner sc = new Scanner(System.in);
 
     public static void main(String args[]){
         System.out.println(Constants.MIKU_LOGO);
         System.out.println(Constants.INDENT+"hello! i'm Miku desuyo!");
         System.out.println(Constants.INDENT+"what can i do for you?");
-        Scanner sc = new Scanner(System.in);
+        
         String in = sc.nextLine();
         while(!in.equals("bye")){
             if(in.trim().equals("list")){
-                printList(taskList);       
+                printList(taskList,0);       
             }else if(in.matches("mark \\d+")){
                 handleMark(in,1);
             }else if(in.matches("unmark \\d+")){
@@ -25,6 +27,8 @@ public class Miku{
                 handleDeadline(in);
             }else if(in.split(" ")[0].equals("event")){
                 handleEvent(in);
+            }else if(in.split(" ")[0].equals("games")){
+                handleGame();
             }else{
                 handleError(1);
             }
@@ -32,10 +36,15 @@ public class Miku{
         }
         System.out.println(Constants.INDENT+Constants.EXIT_MSG);
     }
-
-    private static <T> void printList(ArrayList<T> list){
+    
+    //type=0 is task, type=1 is game
+    private static <T> void printList(ArrayList<T> list,int type){
         int idx = 1;
-        System.out.println(Constants.INDENT+Constants.TASK_LIST_MSG);
+        if(type==0){
+            System.out.println(Constants.INDENT+Constants.TASK_LIST_MSG);
+        }else{
+            System.out.println(Constants.INDENT+Constants.GAMES_MSG);
+        }
         for(T t:list){
             System.out.println(Constants.INDENT+Constants.INDENT+idx+". "+t.toString());
             idx++;
@@ -118,6 +127,32 @@ public class Miku{
             }
         }catch(ArrayIndexOutOfBoundsException e){
             handleError(4);
+        }
+    }
+
+    private static void handleGame(){
+        printList(Constants.GAMES_LIST,1);
+        int choice = sc.nextInt();sc.nextLine();
+        if(choice==1){
+            System.out.println("Welcome to Mental Math Game!");
+            System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard, 4: Insane): ");
+            int difficulty = sc.nextInt();sc.nextLine();
+            System.out.print("Select length (1: Short, 2: Normal, 3: Long): ");
+            int length = sc.nextInt();sc.nextLine();
+            MentalMathGame game = new MentalMathGame(difficulty, length);
+            game.startGame();
+        }else if(choice==2){
+            try{
+                System.out.println("Welcome to Wordle Game!");
+                System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard): ");
+                int difficulty = sc.nextInt();sc.nextLine();
+                WordleGame game = new WordleGame(difficulty);
+                game.startGame();
+            }catch(IOException e) {
+                System.out.println("Error loading word list: " + e.getMessage());   
+            }
+        }else{
+            //go back
         }
     }
                 

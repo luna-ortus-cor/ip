@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Constants{
     public static final String INDENT = "    ";
     public static final String MIKU_LOGO =  " __  __ _ _\n|  \\/  (_) | ___   _\n| |\\/| | | |/ / | | |\n| |  | | |   <| |_| |\n|_|  |_|_|_|\\_\\\\__,_|";
@@ -9,4 +12,6 @@ public class Constants{
     public static final String DEADLINE_EMPTY_WS = ":3 oops! name and/or by field of deadline cannot be empty!";
     public static final String EVENT_EMPTY_WS = ":3 oops! name and/or from and/or to field of event cannot be empty!";
     public static final String LIST_IDX_INVALID = ":3 oops! no such task exists or task number is empty!";
+    public static final String GAMES_MSG = "yay~ here are the list of games available!";
+    public static final ArrayList<String> GAMES_LIST = new ArrayList<String>(Arrays.asList("Mental Math","Wordle","back")); 
 }
