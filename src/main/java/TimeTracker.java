@@ -3,7 +3,7 @@ import java.text.*;
 import java.util.*;
 
 public class TimeTracker {
-    private static final String FILE_NAME = "time_tracker.txt";
+    private static final String FILE_NAME = Constants.FILEPATH_TIME_TRACKER;
     private static List<Activity> activities = new ArrayList<>();
 
     // Method to save activity to file

@@ -5,12 +5,13 @@ import java.io.*;
 public class Miku{
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private static Scanner sc = new Scanner(System.in);
+    private static final String FILE_NAME = Constants.FILEPATH_TASKLIST;
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException{
         System.out.println(Constants.MIKU_LOGO);
         System.out.println(Constants.INDENT+"hello! i'm Miku desuyo!");
         System.out.println(Constants.INDENT+"what can i do for you?");
-        
+        loadTaskList();
         String in = sc.nextLine();
         while(!in.trim().equals("bye")){
             if(in.trim().equals("list")){
@@ -21,6 +22,8 @@ public class Miku{
                 handleMark(in,0);
             }else if(in.matches("delete \\d+")){
                 handleDelete(in);
+            }else if(in.matches("delete /all")){
+                taskList.clear();
             }else if(in.split(" ")[0].trim().equals("todo")){
                 handleTodo(in);
             }else if(in.split(" ")[0].trim().equals("deadline")){
@@ -38,7 +41,52 @@ public class Miku{
             }
             in=sc.nextLine();
         }
+        saveTaskList();
         System.out.println(Constants.INDENT+Constants.EXIT_MSG);
+    }
+
+    private static void loadTaskList() throws IOException{
+        File f = new File(FILE_NAME);
+        if(f.isFile()){
+            try(BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))){
+                String line;
+                while((line=br.readLine())!=null){
+                    String type=line.split("] ")[0];
+                    String done=line.split("] ")[1];
+                    String name=line.split("] ")[2].split(" ")[0];
+                    if(type.equals("[T")){
+                        taskList.add(new Todo(name,done.equals("[X")?true:false));
+                    }else if(type.equals("[D")){
+                        int start=line.indexOf("(");
+                        int end=line.indexOf(")");
+                        String by=line.substring(start+1,end).split("by: ")[1];
+                        taskList.add(new Deadline(name,done.equals("[X")?true:false,by));
+                    }else if(type.equals("[E")){
+                        int start=line.indexOf("(");
+                        int end=line.indexOf(")");
+                        String from=line.substring(start+1,end).split(" to: ")[0].split("from: ")[1];
+                        String to=line.substring(start+1,end).split(" to: ")[1];
+                        taskList.add(new Event(name,done.equals("[X")?true:false,from,to));
+                    }else{
+                        //do nth
+                    }
+                }
+            }catch(IOException e){
+                System.out.println("Error reading task list from file.");
+            }
+        }
+    }
+    //consider changing save format for easier read/write
+    private static void saveTaskList() throws IOException{
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME,false))){
+            for(Task t:taskList){
+                bw.write(t.toString());
+                bw.newLine();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+            System.out.println("Error saving task list to file.");
+        }
     }
     
     //type=0 is task, type=1 is game, type=2 is track, type=3 is stats

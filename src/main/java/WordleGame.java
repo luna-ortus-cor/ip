@@ -6,6 +6,7 @@ public class WordleGame {
     private int maxGuesses;
     private ArrayList<String> wordList;
     private String targetWord;
+    private static final String FILE_NAME = Constants.FILEPATH_WORDLIST;
 
     public WordleGame(int difficulty) throws IOException {
         this.difficulty = difficulty;
@@ -23,7 +24,7 @@ public class WordleGame {
 
     private ArrayList<String> loadWordList() throws IOException {
         ArrayList<String> words = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("words.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim().toLowerCase();
