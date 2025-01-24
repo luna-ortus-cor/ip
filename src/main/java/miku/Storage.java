@@ -18,9 +18,16 @@ public class Storage{
 
     public ArrayList<Task> readTasks(String fp){
         ArrayList<Task> taskList = new ArrayList<>();
+        //ClassLoader classLoader = getClass().getClassLoader();
         File f = new File(fp);
         if(f.isFile()){
+        //try (InputStream is = classLoader.getResourceAsStream(fp)) {
+        //    if (is == null) {
+        //        handleError(6); // File not found
+        //        return taskList;
+        //    }
             try(BufferedReader br = new BufferedReader(new FileReader(fp))){
+            //try(BufferedReader br = new BufferedReader(new InputStreamReader(is))){
                 String line;
                 //DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 Pattern todoPattern = Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(.+)$");
@@ -55,7 +62,9 @@ public class Storage{
             }catch(IOException e){
                 handleError(6);
             }
-        }
+        }//catch(IOException e){
+         //   handleError(6);
+        //}
         return taskList;
     }
 
