@@ -1,0 +1,5 @@
+T | 1 | sleep
+E | 0 | sleep | 01 Jan 2025, 11:00PM | 02 Jan 2025, 11:00AM
+D | 1 | sleep | tonight
+E | 0 | sleep | tonight | tmr
+D | 1 | sleep | 01 Jan 2025, 11:00PM

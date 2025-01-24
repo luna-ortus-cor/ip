@@ -34,4 +34,8 @@ public class Task{
     public String toString(){
         return "["+(this.done?"X":" ")+"] "+this.name;
     }
+
+    public String toSaveFormat(){
+        return (this.done?"1":"0")+ " | "+this.name;
+    }
 }
