@@ -12,29 +12,22 @@ public class Task{
         this.done=done;
     }
 
-    public void markDone(){
+    public int markDone(){
         if(!this.done){
             this.done=!this.done;
-            System.out.println(Constants.INDENT+"YATTA! I've marked this task as done:");
-            System.out.println(Constants.INDENT+Constants.INDENT+this.toString());
+            return 1;
         }else{
-            System.out.println(Constants.INDENT+"Task is already done");
+            return 0;
         }
     }
 
-    public void markNotDone(){
+    public int markNotDone(){
         if(this.done){
             this.done=!this.done;
-            System.out.println(Constants.INDENT+"T_T I've marked this task as not done:");
-            System.out.println(Constants.INDENT+Constants.INDENT+this.toString());
+            return 1;
         }else{
-            System.out.println("Task is already not done");
+            return 0;
         }
-    }
-
-    public void delete(){
-        System.out.println(Constants.INDENT+"UwU i've removed this task:");
-        System.out.println(Constants.INDENT+Constants.INDENT+this.toString());
     }
     
     @Override
