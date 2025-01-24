@@ -21,9 +21,9 @@ public class Constants{
     public static final String TRACK_MSG = "^~^ sure! what would you like to track?";
     public static final ArrayList<String> TRACK_LIST = new ArrayList<String>(Arrays.asList("Time","Mood","Alcohol","Back"));
     public static final String STATS_MSG = "^~^ sure! which stats would you like to see?";
-    public static final String FILEPATH_WORDLIST = "../../../data/words.txt";
-    public static final String FILEPATH_TIME_TRACKER = "../../../data/time_tracker.txt";
-    public static final String FILEPATH_TASKLIST = "../../../data/tasks.txt";
+    public static final String FILEPATH_WORDLIST = "./data/words.txt";
+    public static final String FILEPATH_TIME_TRACKER = "./data/time_tracker.txt";
+    public static final String FILEPATH_TASKLIST = "./data/tasks.txt";
     public static final String READ_LIST_FILE_ERROR = ":3 oops! error reading list from file!";
     public static final String WRITE_LIST_FILE_ERROR = ":3 oops! error writing list to file!";
     public static final String TASK_MARK_DONE_SUCCESS = "YATTA! I've marked this task as done:";
