@@ -1,5 +1,9 @@
-import java.util.ArrayList;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Storage{
     private Ui ui;
@@ -16,23 +20,32 @@ public class Storage{
         if(f.isFile()){
             try(BufferedReader br = new BufferedReader(new FileReader(fp))){
                 String line;
+                //DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                Pattern todoPattern = Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(.+)$");
+                Pattern deadlinePattern = Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
+                Pattern eventPattern = Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
                 while((line=br.readLine())!=null){
-                    String type=line.split("] ")[0];
-                    String done=line.split("] ")[1];
-                    String name=line.split("] ")[2].split(" ")[0];
-                    if(type.equals("[T")){
-                        taskList.add(new Todo(name,done.equals("[X")?true:false));
-                    }else if(type.equals("[D")){
-                        int start=line.indexOf("(");
-                        int end=line.indexOf(")");
-                        String by=line.substring(start+1,end).split("by: ")[1];
-                        taskList.add(new Deadline(name,done.equals("[X")?true:false,by));
-                    }else if(type.equals("[E")){
-                        int start=line.indexOf("(");
-                        int end=line.indexOf(")");
-                        String from=line.substring(start+1,end).split(" to: ")[0].split("from: ")[1];
-                        String to=line.substring(start+1,end).split(" to: ")[1];
-                        taskList.add(new Event(name,done.equals("[X")?true:false,from,to));
+                    Matcher todoMatcher = todoPattern.matcher(line);
+                    Matcher deadlineMatcher = deadlinePattern.matcher(line);
+                    Matcher eventMatcher = eventPattern.matcher(line);
+                    if (todoMatcher.matches()) {
+                        boolean isDone = todoMatcher.group(1).equals("1");
+                        String name = todoMatcher.group(2).trim();
+                        taskList.add(new Todo(name, isDone));
+                    } else if (deadlineMatcher.matches()) {
+                        boolean isDone = deadlineMatcher.group(1).equals("1");
+                        String name = deadlineMatcher.group(2).trim();
+                        String by = deadlineMatcher.group(3).trim();
+                        //LocalDateTime by = LocalDateTime.parse(deadlineMatcher.group(3).trim(), DATE_TIME_FORMATTER);
+                        taskList.add(new Deadline(name, isDone, by));
+                    } else if (eventMatcher.matches()) {
+                        boolean isDone = eventMatcher.group(1).equals("1");
+                        String name = eventMatcher.group(2).trim();
+                        String from = eventMatcher.group(3).trim();
+                        String to = eventMatcher.group(4).trim();
+                        //LocalDateTime from = LocalDateTime.parse(eventMatcher.group(3).trim(), DATE_TIME_FORMATTER);
+                        //LocalDateTime to = LocalDateTime.parse(eventMatcher.group(4).trim(), DATE_TIME_FORMATTER);
+                        taskList.add(new Event(name, isDone, from, to));
                     }else{
                         //do nth
                     }
@@ -43,11 +56,11 @@ public class Storage{
         }
         return taskList;
     }
-    //consider changing save format for easier read/write
+
     public void writeTasks(ArrayList<Task> taskList, String fp){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fp,false))){
             for(Task t:taskList){
-                bw.write(t.toString());
+                bw.write(t.toSaveFormat());
                 bw.newLine();
             }
         }catch(IOException e){
