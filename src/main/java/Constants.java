@@ -20,4 +20,10 @@ public class Constants{
     public static final String FILEPATH_WORDLIST = "../../../data/words.txt";
     public static final String FILEPATH_TIME_TRACKER = "../../../data/time_tracker.txt";
     public static final String FILEPATH_TASKLIST = "../../../data/tasks.txt";
+    public static final String READ_LIST_FILE_ERROR = ":3 oops! error reading list from file!";
+    public static final String WRITE_LIST_FILE_ERROR = ":3 oops! error writing list to file!";
+    public static final String TASK_MARK_DONE_SUCCESS = "YATTA! I've marked this task as done:";
+    public static final String TASK_MARK_DONE_FAILURE = "Task is already done";
+    public static final String TASK_MARK_NOT_DONE_SUCCESS = "T_T I've marked this task as not done:";
+    public static final String TASK_MARK_NOT_DONE_FAILURE = "Task is already not done";
 }
