@@ -56,6 +56,6 @@ public class Deadline extends Task{
     }
 
     public String toSaveFormat(){
-        return "D | "+super.toSaveFormat()+" | "+getFormattedDateTime(this.by,this.byLDT);
+        return "D | "+super.toSaveFormat()+" | "+getUnformattedDateTime(this.by,this.byLDT);
     }
 }

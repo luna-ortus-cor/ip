@@ -7,8 +7,12 @@ public class Ui{
 
     public void printStartMsg(){
         System.out.println(Constants.MIKU_LOGO);
-        System.out.println(Constants.INDENT+"hello! i'm Miku desuyo!");
-        System.out.println(Constants.INDENT+"what can i do for you?");
+        System.out.println(Constants.INDENT+Constants.START_MSG_1);
+        System.out.println(Constants.INDENT+Constants.START_MSG_2);
+    }
+
+    public void printNextInstrMsg(){
+        System.out.println(Constants.AWAIT_INSTR);
     }
 
     public void printExitMsg(){

@@ -6,6 +6,8 @@ import java.util.Arrays;
 public class Constants{
     public static final String INDENT = "    ";
     public static final String MIKU_LOGO =  " __  __ _ _\n|  \\/  (_) | ___   _\n| |\\/| | | |/ / | | |\n| |  | | |   <| |_| |\n|_|  |_|_|_|\\_\\\\__,_|";
+    public static final String START_MSG_1 = "yahallo! i'm Miku desuyo!";
+    public static final String START_MSG_2 = "what can i do for you?";
     public static final String EXIT_MSG = "byee~ hope to see you again soon!";
     public static final String INSTR_INVALID = ":3 oops! i don't understand that!";
     public static final String ADD_TASK = "got it! I've added this task desu:";
@@ -28,4 +30,5 @@ public class Constants{
     public static final String TASK_MARK_DONE_FAILURE = "Task is already done";
     public static final String TASK_MARK_NOT_DONE_SUCCESS = "T_T I've marked this task as not done:";
     public static final String TASK_MARK_NOT_DONE_FAILURE = "Task is already not done";
+    public static final String AWAIT_INSTR = "Please enter an instruction (type \"options\" for the full list of instructions)";
 }

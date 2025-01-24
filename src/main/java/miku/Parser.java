@@ -34,7 +34,7 @@ public class Parser{
         Pattern todoPattern = Pattern.compile("^todo (.+)$");
         Pattern deadlinePattern = Pattern.compile("^deadline (.+)$");
         Pattern eventPattern = Pattern.compile("^event (.+)$");
-        Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|bye)$");
+        Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye)$");
         Matcher matcher;
 
         if (listPattern.matcher(in).matches()) {
@@ -64,6 +64,9 @@ public class Parser{
                     break;
                 case "stats":
                     handleStats();
+                    break;
+                case "chat":
+                    handleChat();
                     break;
                 case "bye":
                     handleExit();
@@ -227,6 +230,10 @@ public class Parser{
         if(choice==1){
             TimeTracker.displayStatistics();
         }
+    }
+
+    private void handleChat(){
+        int choice = sc.nextInt();sc.nextLine(); //choose language
     }
                 
     //error codes
