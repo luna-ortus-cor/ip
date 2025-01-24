@@ -17,6 +17,7 @@ public class Miku{
         String in;
         int response = 1;
         while(response==1){
+            ui.printNextInstrMsg();
             in=sc.nextLine();
             response=p.parse(in);
         }

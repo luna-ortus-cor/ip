@@ -66,6 +66,6 @@ public class Event extends Task{
     }
 
     public String toSaveFormat(){
-        return "E | "+super.toSaveFormat()+" | "+getFormattedDateTime(this.from,this.fromLDT)+" | "+getFormattedDateTime(this.to,this.toLDT);
+        return "E | "+super.toSaveFormat()+" | "+getUnformattedDateTime(this.from,this.fromLDT)+" | "+getUnformattedDateTime(this.to,this.toLDT);
     }
 }
