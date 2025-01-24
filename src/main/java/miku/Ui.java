@@ -1,3 +1,5 @@
+package miku;
+
 public class Ui{
     public Ui(){
 
