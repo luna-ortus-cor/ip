@@ -6,24 +6,39 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.Scanner;
 
-
 public class Parser{
     private Ui ui;
     private static TaskList taskList;
     private static Storage storage;
     private Scanner sc = new Scanner(System.in);
-
+    
+    /**
+     * Instantiates a new Parser instance taking in a Ui ui.
+     *
+     * @param ui a Ui instance
+     */
     public Parser(Ui ui){
         this.ui=ui;
         this.taskList=new TaskList(ui);
         this.storage=new Storage(ui);
     }
-
+    
+    /**
+     * Starts the parser and initializes relevant variables,
+     * such as the TaskList
+     */
     public void start(){
         loadTaskList();
         ui.printStartMsg();
     }
-
+    
+    /**
+     * Parses an input string from the user and determines subsequent actions.
+     * Returns an integer 0 or 1 to determine if the bot has received an instruction to exit.
+     *
+     * @param in a String of the user input
+     * @return an integer denoting if the bot has received an instruction to exit
+     */
     public int parse(String in){
         in=in.trim();
         Pattern listPattern = Pattern.compile("^list$");
@@ -77,7 +92,7 @@ public class Parser{
         }
         return 1;
     }
-
+    
     private void handleExit(){
         saveTaskList();
         ui.printExitMsg();

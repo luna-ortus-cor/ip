@@ -9,7 +9,14 @@ public class Event extends Task{
     String to;
     LocalDateTime fromLDT;
     LocalDateTime toLDT;
-
+    
+    /**
+     * Create a new Event instance.
+     *
+     * @param name description of the Event
+     * @param from a String representing either a colloquial time or valid date time formatted time
+     * @param to a String representing either a colloquial time or valid date timf formatted time
+     */
     public Event(String name, String from, String to){
         super(name);
         try{
@@ -26,6 +33,13 @@ public class Event extends Task{
         }
     }
     
+    /**
+     * Create a new Event instance specifying the doneness of the Event.
+     *
+     * @param name description of the Event
+     * @param isDone boolean denoting doneness of the Event
+     * @param from a String representing either a colloquial time or valid date time formatted time
+     */
     public Event(String name, boolean done, String from, String to){
         super(name,done);
         try{
@@ -42,7 +56,7 @@ public class Event extends Task{
         }
     }
 
-    public String getFormattedDateTime(String s, LocalDateTime ldt){
+    private String getFormattedDateTime(String s, LocalDateTime ldt){
         if(s==null){
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mma");
             return ldt.format(outputFormat);
@@ -51,7 +65,7 @@ public class Event extends Task{
         }
     }
 
-    public String getUnformattedDateTime(String s, LocalDateTime ldt){
+    private String getUnformattedDateTime(String s, LocalDateTime ldt){
         if(s==null){
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyy-MM-dd HHmm");
             return ldt.format(outputFormat);
@@ -60,11 +74,21 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * Returns a string representation of the Event for the UI.
+     *
+     * @return a string representation of the Event
+     */
     @Override
     public String toString(){
         return "[E] "+super.toString()+" (from: "+getFormattedDateTime(this.from,this.fromLDT)+" to: "+getFormattedDateTime(this.to,this.toLDT)+")";
     }
 
+    /**
+     * Returns a string representation of the Event for the save file.
+     *
+     * @return a string representation of the Event
+     */
     public String toSaveFormat(){
         return "E | "+super.toSaveFormat()+" | "+getUnformattedDateTime(this.from,this.fromLDT)+" | "+getUnformattedDateTime(this.to,this.toLDT);
     }

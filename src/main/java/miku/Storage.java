@@ -9,13 +9,24 @@ import java.util.regex.Pattern;
 
 public class Storage{
     private Ui ui;
-
+    
+    /**
+     * Initializes a Storage instance for reading and writing of files. 
+     *
+     * @param ui a Ui instance
+     */
     public Storage(Ui ui){
         this.ui=ui;
     }
 
     //we should also include generic read and write methods for arbitrary files
-
+    
+    /**
+     * Reads task from a file specified by a file path and returns an arraylist of the tasks.
+     *
+     * @param fp a String containing the file path
+     * @return an ArrayList of Tasks
+     */
     public ArrayList<Task> readTasks(String fp){
         ArrayList<Task> taskList = new ArrayList<>();
         //ClassLoader classLoader = getClass().getClassLoader();
@@ -67,7 +78,13 @@ public class Storage{
         //}
         return taskList;
     }
-
+    
+    /**
+     * Write tasks from an arraylist of tasks to a file specified by a file path.
+     *
+     * @param taskList an ArrayList of Tasks
+     * @param fp a String containing the file path
+     */
     public void writeTasks(ArrayList<Task> taskList, String fp){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fp,false))){
             for(Task t:taskList){
