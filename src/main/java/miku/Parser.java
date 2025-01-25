@@ -35,6 +35,7 @@ public class Parser{
         Pattern deadlinePattern = Pattern.compile("^deadline (.+)$");
         Pattern eventPattern = Pattern.compile("^event (.+)$");
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye)$");
+        Pattern searchNamePattern = Pattern.compile("^find (.+)$");
         Matcher matcher;
 
         if (listPattern.matcher(in).matches()) {
@@ -53,6 +54,8 @@ public class Parser{
             handleDeadline(matcher.group(1));
         } else if ((matcher = eventPattern.matcher(in)).matches()) {
             handleEvent(matcher.group(1));
+        } else if ((matcher = searchNamePattern.matcher(in)).matches()) {
+            handleSearchName(matcher.group(1));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -91,7 +94,7 @@ public class Parser{
         taskList.saveTasks(storage);
     }
 
-    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats
+    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats, type=4 is search
     private <T> void printList(ArrayList<T> list,int type){
         int idx = 1;
         if(type==0){
@@ -100,8 +103,10 @@ public class Parser{
             ui.printGamesMsg();
         }else if(type==2){
             ui.printTrackMsg();
-        }else{
+        }else if(type==3){
             ui.printStatsMsg();
+        }else{
+            ui.printSearchMsg();
         }
         for(T t:list){
             ui.printListItem(idx,t);
@@ -234,6 +239,11 @@ public class Parser{
 
     private void handleChat(){
         int choice = sc.nextInt();sc.nextLine(); //choose language
+    }
+
+    private void handleSearchName(String in){
+        ArrayList<Task> searchList = taskList.searchName(in);
+        printList(searchList,4);
     }
                 
     //error codes

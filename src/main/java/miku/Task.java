@@ -32,6 +32,10 @@ public class Task{
         }
     }
     
+    public String getName(){
+        return this.name;
+    }
+
     @Override
     public String toString(){
         return "["+(this.done?"X":" ")+"] "+this.name;

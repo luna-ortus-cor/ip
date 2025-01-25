@@ -22,6 +22,10 @@ public class Ui{
     public void printListItem(int idx, Object item){
         System.out.println(Constants.INDENT+Constants.INDENT+idx+". "+item.toString());
     }
+    
+    public void printSearchMsg(){
+        System.out.println(Constants.INDENT+Constants.SEARCH_MSG);
+    }
 
     public <T extends Task> void printMarkDoneMsg(T task, int response){
         if(response==1){
