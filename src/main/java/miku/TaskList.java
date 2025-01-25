@@ -1,6 +1,8 @@
 package miku;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskList{
     private ArrayList<Task> taskList = new ArrayList<Task>();
@@ -128,6 +130,19 @@ public class TaskList{
         Event e = new Event(name, from, to);
         taskList.add(e);
         ui.printAddMsg(e,taskList.size());
+    }
+
+    public ArrayList<Task> searchName(String in){
+        ArrayList<Task> temp = new ArrayList<Task>();
+        Pattern searchPattern = Pattern.compile(".*"+Pattern.quote(in)+".*");
+        Matcher matcher;
+        for(Task t:taskList){
+            matcher = searchPattern.matcher(t.getName());
+            if(matcher.find()){
+                temp.add(t);
+            }
+        }
+        return temp;
     }
 
     private void handleError(int code){

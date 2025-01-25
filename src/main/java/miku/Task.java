@@ -52,7 +52,11 @@ public class Task{
             return 0;
         }
     }
-    
+
+    public String getName(){
+        return this.name;
+    }
+
     /**
      * Returns a string representation of the task for the UI.
      *

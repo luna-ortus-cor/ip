@@ -37,6 +37,10 @@ public class Ui{
     public void printListItem(int idx, Object item){
         System.out.println(Constants.INDENT+Constants.INDENT+idx+". "+item.toString());
     }
+    
+    public void printSearchMsg(){
+        System.out.println(Constants.INDENT+Constants.SEARCH_MSG);
+    }
 
     /**
      * Prints the message when the user marks a task as done.
