@@ -50,6 +50,15 @@ public class Ui {
     }
 
     /**
+     * Prints the help message.
+     */
+    public void printHelpMsg() {
+        for (String s:Constants.HELP_LIST) {
+            System.out.println(Constants.INDENT + s);
+        }
+    }
+
+    /**
      * Prints the message when the user marks a task as done.
      *
      * @param task the task to be marked done

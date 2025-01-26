@@ -38,6 +38,12 @@ public class Constants {
     public static final String TASK_MARK_NOT_DONE_SUCCESS = "T_T I've marked this task as not done:";
     public static final String TASK_MARK_NOT_DONE_FAILURE = "Task is already not done";
     public static final String AWAIT_INSTR =
-        "Please enter an instruction (type \"options\" for the full list of instructions)";
+        "Please enter an instruction (type \"help\" for the full list of instructions)";
     public static final String SEARCH_MSG = "here are the results of your search desu:";
+    public static final ArrayList<String> HELP_LIST =
+        new ArrayList<String>(Arrays.asList("type \"bye\" to exit", "type \"todo <name>\" to add a todo",
+                    "type \"deadline <name> /by <datetime>\" to add a deadline",
+                    "type \"event <name> /from <datetime> /to <datetime>\" to add an event",
+                    "type \"games\" to see the list of games", "type \"track\" to track a statistic",
+                    "type \"stats\" to see the list of statistics", "type \"chat\" to chat with Miku"));
 }

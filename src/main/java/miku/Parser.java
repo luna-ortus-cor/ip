@@ -51,7 +51,7 @@ public class Parser {
         Pattern todoPattern = Pattern.compile("^todo (.+)$");
         Pattern deadlinePattern = Pattern.compile("^deadline (.+)$");
         Pattern eventPattern = Pattern.compile("^event (.+)$");
-        Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye)$");
+        Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
         Pattern searchNamePattern = Pattern.compile("^find (.+)$");
         Matcher matcher;
 
@@ -91,6 +91,9 @@ public class Parser {
             case "bye":
                 handleExit();
                 return 0;
+            case "help":
+                handleHelp();
+                break;
             default:
                 handleExit();
                 return 0;
@@ -132,6 +135,10 @@ public class Parser {
             ui.printListItem(idx, t);
             idx++;
         }
+    }
+
+    private void handleHelp() {
+        ui.printHelpMsg();
     }
 
     //mark done if mark=1, else mark not done if mark=0
@@ -260,8 +267,10 @@ public class Parser {
     }
 
     private void handleChat() {
-        int choice = sc.nextInt();
-        sc.nextLine(); //choose language
+        //int choice = sc.nextInt();
+        //sc.nextLine(); //choose language
+        ChatInstance chat = new ChatInstance();
+        chat.chat();
     }
 
     private void handleSearchName(String in) {
