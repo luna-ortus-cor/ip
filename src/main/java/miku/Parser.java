@@ -1,37 +1,39 @@
 package miku;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
-import java.io.*;
-import java.util.Scanner;
 
-public class Parser{
-    private Ui ui;
+/**
+ * Parser class to parse user instructions and take relevant action.
+ */
+public class Parser {
     private static TaskList taskList;
     private static Storage storage;
+    private static Ui ui;
     private Scanner sc = new Scanner(System.in);
-    
+
     /**
      * Instantiates a new Parser instance taking in a Ui ui.
      *
      * @param ui a Ui instance
      */
-    public Parser(Ui ui){
-        this.ui=ui;
-        this.taskList=new TaskList(ui);
-        this.storage=new Storage(ui);
+    public Parser(Ui ui) {
+        this.ui = ui;
+        this.taskList = new TaskList(ui);
+        this.storage = new Storage(ui);
     }
-    
+
     /**
      * Starts the parser and initializes relevant variables,
      * such as the TaskList
      */
-    public void start(){
+    public void start() {
         loadTaskList();
         ui.printStartMsg();
     }
-    
+
     /**
      * Parses an input string from the user and determines subsequent actions.
      * Returns an integer 0 or 1 to determine if the bot has received an instruction to exit.
@@ -39,8 +41,8 @@ public class Parser{
      * @param in a String of the user input
      * @return an integer denoting if the bot has received an instruction to exit
      */
-    public int parse(String in){
-        in=in.trim();
+    public int parse(String in) {
+        in = in.trim();
         Pattern listPattern = Pattern.compile("^list$");
         Pattern markPattern = Pattern.compile("^mark (\\d+)$");
         Pattern unmarkPattern = Pattern.compile("^unmark (\\d+)$");
@@ -74,79 +76,82 @@ public class Parser{
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
-                case "games":
-                    handleGame();
-                    break;
-                case "track":
-                    handleTrack();
-                    break;
-                case "stats":
-                    handleStats();
-                    break;
-                case "chat":
-                    handleChat();
-                    break;
-                case "bye":
-                    handleExit();
-                    return 0;
+            case "games":
+                handleGame();
+                break;
+            case "track":
+                handleTrack();
+                break;
+            case "stats":
+                handleStats();
+                break;
+            case "chat":
+                handleChat();
+                break;
+            case "bye":
+                handleExit();
+                return 0;
+            default:
+                handleExit();
+                return 0;
             }
         } else {
             handleError(1);
         }
         return 1;
     }
-    
-    private void handleExit(){
+
+    private void handleExit() {
         saveTaskList();
         ui.printExitMsg();
     }
 
-    private void loadTaskList(){
+    private void loadTaskList() {
         taskList.loadTasks(storage);
     }
-    
-    private void saveTaskList(){
+
+    private void saveTaskList() {
         taskList.saveTasks(storage);
     }
 
     //type=0 is task, type=1 is game, type=2 is track, type=3 is stats, type=4 is search
-    private <T> void printList(ArrayList<T> list,int type){
+    private <T> void printList(ArrayList<T> list, int type) {
         int idx = 1;
-        if(type==0){
+        if (type == 0) {
             ui.printTaskListMsg();
-        }else if(type==1){
+        } else if (type == 1) {
             ui.printGamesMsg();
-        }else if(type==2){
+        } else if (type == 2) {
             ui.printTrackMsg();
-        }else if(type==3){
+        } else if (type == 3) {
             ui.printStatsMsg();
-        }else{
+        } else {
             ui.printSearchMsg();
         }
-        for(T t:list){
-            ui.printListItem(idx,t);
+        for (T t:list) {
+            ui.printListItem(idx, t);
             idx++;
         }
     }
-    
+
     //mark done if mark=1, else mark not done if mark=0
-    private void handleMark(String idx, int mark){
-        if(mark==1){
-            taskList.markDone(Integer.valueOf(idx.trim())-1);
-        }else{
-            taskList.markNotDone(Integer.valueOf(idx.trim())-1);
+    private void handleMark(String idx, int mark) {
+        if (mark == 1) {
+            taskList.markDone(Integer.valueOf(idx.trim()) - 1);
+        } else {
+            taskList.markNotDone(Integer.valueOf(idx.trim()) - 1);
         }
     }
 
-    private void handleDelete(String idx){
-        taskList.delete(Integer.valueOf(idx.trim())-1);
+    private void handleDelete(String idx) {
+        taskList.delete(Integer.valueOf(idx.trim()) - 1);
     }
 
-    private void handleDeleteAll(){
+    private void handleDeleteAll() {
         taskList.deleteAll();
     }
 
-    private void handleTodo(String in){
+    private void handleTodo(String in) {
         Pattern todoPattern = Pattern.compile("^(.*)$");
         Matcher matcher = todoPattern.matcher(in);
 
@@ -162,7 +167,7 @@ public class Parser{
         }
     }
 
-    private void handleDeadline(String in){
+    private void handleDeadline(String in) {
         Pattern deadlinePattern = Pattern.compile("^(.*?)\\s+/by\\s+(.*)$");
         Matcher matcher = deadlinePattern.matcher(in);
 
@@ -180,7 +185,7 @@ public class Parser{
         }
     }
 
-    private void handleEvent(String in){
+    private void handleEvent(String in) {
         Pattern eventPattern = Pattern.compile("^(.*?)\\s+/from\\s+(.*?)\\s+/to\\s+(.*)$");
         Matcher matcher = eventPattern.matcher(in);
 
@@ -199,36 +204,37 @@ public class Parser{
         }
     }
 
-    private void handleGame(){
-        printList(Constants.GAMES_LIST,1);
-        int choice = sc.nextInt();sc.nextLine();
-        if(choice==1){
+    private void handleGame() {
+        printList(Constants.GAMES_LIST, 1);
+        int choice = sc.nextInt();
+        sc.nextLine();
+        if (choice == 1) {
             System.out.println("Welcome to Mental Math Game!");
             System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard, 4: Insane): ");
-            int difficulty = sc.nextInt();sc.nextLine();
+            int difficulty = sc.nextInt();
+            sc.nextLine();
             System.out.print("Select length (1: Short, 2: Normal, 3: Long): ");
-            int length = sc.nextInt();sc.nextLine();
+            int length = sc.nextInt();
+            sc.nextLine();
             MentalMathGame game = new MentalMathGame(difficulty, length);
             game.startGame();
-        }else if(choice==2){
-            try{
-                System.out.println("Welcome to Wordle Game!");
-                System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard): ");
-                int difficulty = sc.nextInt();sc.nextLine();
-                WordleGame game = new WordleGame(difficulty);
-                game.startGame();
-            }catch(IOException e) {
-                System.out.println("Error loading word list: " + e.getMessage());   
-            }
-        }else{
+        } else if (choice == 2) {
+            System.out.println("Welcome to Wordle Game!");
+            System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard): ");
+            int difficulty = sc.nextInt();
+            sc.nextLine();
+            WordleGame game = new WordleGame(difficulty);
+            game.startGame();
+        } else {
             //go back
         }
     }
 
-    private void handleTrack(){
-        printList(Constants.TRACK_LIST,2);
-        int choice = sc.nextInt();sc.nextLine();
-        if(choice==1){
+    private void handleTrack() {
+        printList(Constants.TRACK_LIST, 2);
+        int choice = sc.nextInt();
+        sc.nextLine();
+        if (choice == 1) {
             System.out.print("Enter START DATE (YYYY-MM-DD): ");
             String startDate = sc.nextLine();
             System.out.print("Enter START TIME (HH:mm): ");
@@ -244,23 +250,25 @@ public class Parser{
         }
     }
 
-    private void handleStats(){
-        printList(Constants.TRACK_LIST,3);
-        int choice = sc.nextInt();sc.nextLine();
-        if(choice==1){
+    private void handleStats() {
+        printList(Constants.TRACK_LIST, 3);
+        int choice = sc.nextInt();
+        sc.nextLine();
+        if (choice == 1) {
             TimeTracker.displayStatistics();
         }
     }
 
-    private void handleChat(){
-        int choice = sc.nextInt();sc.nextLine(); //choose language
+    private void handleChat() {
+        int choice = sc.nextInt();
+        sc.nextLine(); //choose language
     }
 
-    private void handleSearchName(String in){
+    private void handleSearchName(String in) {
         ArrayList<Task> searchList = taskList.searchName(in);
-        printList(searchList,4);
+        printList(searchList, 4);
     }
-                
+
     //error codes
     //1:invalid instruction
     //2:name field of todo is empty or whitespace
@@ -269,7 +277,7 @@ public class Parser{
     //5:no such task exists or task number is empty or whitespace
     //6:error reading task list from file
     //7:error writing task list to file
-    private void handleError(int code){
+    private void handleError(int code) {
         ui.printErrorMsg(code);
     }
 }

@@ -1,17 +1,20 @@
 package miku;
 
-public class Task{
-    String name;
-    boolean isDone;
-    
+/**
+ * Task class that stores relevant task related properties
+ */
+public class Task {
+    private String name;
+    private boolean isDone;
+
     /**
      * Creates a new Task instance
      *
      * @param name description of Task
      */
-    public Task(String name){
-        this.name=name;
-        this.isDone=false;
+    public Task(String name) {
+        this.name = name;
+        this.isDone = false;
     }
 
     /**
@@ -20,9 +23,9 @@ public class Task{
      * @param name description of Task
      * @param isDone boolean denoting if task is done
      */
-    public Task(String name, boolean isDone){
-        this.name=name;
-        this.isDone=isDone;
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
     }
 
     /**
@@ -30,11 +33,11 @@ public class Task{
      *
      * @return an int denoting a successful change in doneness
      */
-    public int markDone(){
-        if(!this.isDone){
-            this.isDone=!this.isDone;
+    public int markDone() {
+        if (!this.isDone) {
+            this.isDone = !this.isDone;
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -44,16 +47,21 @@ public class Task{
      *
      * @return an int denoting a successful change in doneness
      */
-    public int markNotDone(){
-        if(this.isDone){
-            this.isDone=!this.isDone;
+    public int markNotDone() {
+        if (this.isDone) {
+            this.isDone = !this.isDone;
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
 
-    public String getName(){
+    /**
+     * Returns the descrption of the task.
+     *
+     * @return the description of the task
+     */
+    public String getName() {
         return this.name;
     }
 
@@ -63,8 +71,8 @@ public class Task{
      * @return a string representation of the task
      */
     @Override
-    public String toString(){
-        return "["+(this.isDone?"X":" ")+"] "+this.name;
+    public String toString() {
+        return "[" + (this.isDone ? "X" : " ") + "] " + this.name;
     }
 
     /**
@@ -72,7 +80,7 @@ public class Task{
      *
      * @return a string representation of the task
      */
-    public String toSaveFormat(){
-        return (this.isDone?"1":"0")+ " | "+this.name;
+    public String toSaveFormat() {
+        return (this.isDone ? "1" : "0") + " | " + this.name;
     }
 }

@@ -10,7 +10,7 @@ public class WordleGame {
     private String targetWord;
     private static final String FILE_NAME = Constants.FILEPATH_WORDLIST;
 
-    public WordleGame(int difficulty) throws IOException {
+    public WordleGame(int difficulty) {
         this.difficulty = difficulty;
         this.wordList = loadWordList();
         this.targetWord = selectTargetWord();
@@ -24,7 +24,7 @@ public class WordleGame {
         };
     }
 
-    private ArrayList<String> loadWordList() throws IOException {
+    private ArrayList<String> loadWordList() {
         ArrayList<String> words = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
@@ -34,6 +34,8 @@ public class WordleGame {
                     words.add(line);
                 }
             }
+        } catch (IOException e){
+            System.out.println("Error loading word list.");
         }
         return words;
     }
