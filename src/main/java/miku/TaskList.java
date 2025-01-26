@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TaskList{
-    private ArrayList<Task> taskList = new ArrayList<Task>();
+/**
+ * Class to store array of tasks and handle operations on tasks in list.
+ */
+public class TaskList {
     private static final String FILE_PATH = Constants.FILEPATH_TASKLIST;
+    private ArrayList<Task> taskList = new ArrayList<Task>();
     private Ui ui;
-    
+
     /**
      * Instantiates a new TaskList instance taking in a Ui ui.
      *
      * @param ui a Ui instance
      */
-    public TaskList(Ui ui){
-        this.ui=ui;
+    public TaskList(Ui ui) {
+        this.ui = ui;
     }
 
     /**
@@ -23,7 +26,7 @@ public class TaskList{
      *
      * @return an arraylist of tasks in the TaskList
      */
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return this.taskList;
     }
 
@@ -32,8 +35,8 @@ public class TaskList{
      *
      * @param s a Storage instance
      */
-    public void loadTasks(Storage s){
-        this.taskList=s.readTasks(FILE_PATH);
+    public void loadTasks(Storage s) {
+        this.taskList = s.readTasks(FILE_PATH);
     }
 
     /**
@@ -41,8 +44,8 @@ public class TaskList{
      *
      * @param s a Storage instance
      */
-    public void saveTasks(Storage s){
-        s.writeTasks(this.taskList,FILE_PATH);
+    public void saveTasks(Storage s) {
+        s.writeTasks(this.taskList, FILE_PATH);
     }
 
     /**
@@ -50,11 +53,11 @@ public class TaskList{
      *
      * @param idx the index of the task in the list
      */
-    public void markDone(int idx){
-        try{
+    public void markDone(int idx) {
+        try {
             int response = taskList.get(idx).markDone();
-            ui.printMarkDoneMsg(taskList.get(idx),response);
-        }catch(IndexOutOfBoundsException e){
+            ui.printMarkDoneMsg(taskList.get(idx), response);
+        } catch (IndexOutOfBoundsException e) {
             handleError(5);
         }
     }
@@ -64,11 +67,11 @@ public class TaskList{
      *
      * @param idx the index of the task in the list
      */
-    public void markNotDone(int idx){
-        try{
+    public void markNotDone(int idx) {
+        try {
             int response = taskList.get(idx).markNotDone();
-            ui.printMarkNotDoneMsg(taskList.get(idx),response);
-        }catch(IndexOutOfBoundsException e){
+            ui.printMarkNotDoneMsg(taskList.get(idx), response);
+        } catch (IndexOutOfBoundsException e) {
             handleError(5);
         }
     }
@@ -78,12 +81,12 @@ public class TaskList{
      *
      * @param idx the index of the task in the list
      */
-    public void delete(int idx){
-        try{
+    public void delete(int idx) {
+        try {
             Task t = taskList.get(idx);
             taskList.remove(idx);
-            ui.printDeleteMsg(t,taskList.size());
-        }catch(IndexOutOfBoundsException e){
+            ui.printDeleteMsg(t, taskList.size());
+        } catch (IndexOutOfBoundsException e) {
             handleError(5);
         }
     }
@@ -91,7 +94,7 @@ public class TaskList{
     /**
      * Delete all tasks in the list.
      */
-    public void deleteAll(){
+    public void deleteAll() {
         taskList.clear();
         ui.printDeleteAllMsg();
     }
@@ -101,10 +104,10 @@ public class TaskList{
      *
      * @param name description of the Todo
      */
-    public void addTodo(String name){
+    public void addTodo(String name) {
         Todo t = new Todo(name);
         taskList.add(t);
-        ui.printAddMsg(t,taskList.size());
+        ui.printAddMsg(t, taskList.size());
     }
 
     /**
@@ -113,10 +116,10 @@ public class TaskList{
      * @param name description of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
      */
-    public void addDeadline(String name, String by){
+    public void addDeadline(String name, String by) {
         Deadline d = new Deadline(name, by);
         taskList.add(d);
-        ui.printAddMsg(d,taskList.size());
+        ui.printAddMsg(d, taskList.size());
     }
 
     /**
@@ -126,26 +129,32 @@ public class TaskList{
      * @param from a String representing either a colloquial time or valid date time formmated time
      * @param to a String representing either a colloquial time or valid date time formatted time
      */
-    public void addEvent(String name, String from, String to){
+    public void addEvent(String name, String from, String to) {
         Event e = new Event(name, from, to);
         taskList.add(e);
-        ui.printAddMsg(e,taskList.size());
+        ui.printAddMsg(e, taskList.size());
     }
 
-    public ArrayList<Task> searchName(String in){
+    /**
+     * Search for tasks where a particular string appears as a substring in task description.
+     *
+     * @param in string to be searched for in task descriptions
+     * @return arraylist of tasks where search string appears as substring in task description
+     */
+    public ArrayList<Task> searchName(String in) {
         ArrayList<Task> temp = new ArrayList<Task>();
-        Pattern searchPattern = Pattern.compile(".*"+Pattern.quote(in)+".*");
+        Pattern searchPattern = Pattern.compile(".*" + Pattern.quote(in) + ".*");
         Matcher matcher;
-        for(Task t:taskList){
+        for (Task t:taskList) {
             matcher = searchPattern.matcher(t.getName());
-            if(matcher.find()){
+            if (matcher.find()) {
                 temp.add(t);
             }
         }
         return temp;
     }
 
-    private void handleError(int code){
+    private void handleError(int code) {
         ui.printErrorMsg(code);
     }
 }
