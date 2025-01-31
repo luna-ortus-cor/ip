@@ -43,8 +43,40 @@ public class Event extends Task {
      * @param isDone boolean denoting doneness of the Event
      * @param from a String representing either a colloquial time or valid date time formatted time
      */
-    public Event(String name, boolean done, String from, String to) {
-        super(name, done);
+    public Event(String name, boolean isDone, String from, String to) {
+        super(name, isDone);
+        try {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.fromLdt = LocalDateTime.parse(from, inputFormat);
+            this.toLdt = LocalDateTime.parse(to, inputFormat);
+            this.from = null;
+            this.to = null;
+        } catch (DateTimeParseException e) {
+            this.from = from;
+            this.to = to;
+            this.fromLdt = null;
+            this.toLdt = null;
+        }
+    }
+
+    public Event(String name, int priority, String from, String to) {
+        super(name, priority);
+        try {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.fromLdt = LocalDateTime.parse(from, inputFormat);
+            this.toLdt = LocalDateTime.parse(to, inputFormat);
+            this.from = null;
+            this.to = null;
+        } catch (DateTimeParseException e) {
+            this.from = from;
+            this.to = to;
+            this.fromLdt = null;
+            this.toLdt = null;
+        }
+    }
+
+    public Event(String name, boolean isDone, int priority, String from, String to) {
+        super(name, isDone, priority);
         try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             this.fromLdt = LocalDateTime.parse(from, inputFormat);

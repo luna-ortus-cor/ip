@@ -51,8 +51,12 @@ public class Parser {
         Pattern todoPattern = Pattern.compile("^todo (.+)$");
         Pattern deadlinePattern = Pattern.compile("^deadline (.+)$");
         Pattern eventPattern = Pattern.compile("^event (.+)$");
+        Pattern todoPatternPrio = Pattern.compile("^todo (.+)\\s+/prio\\s+(\\d)$");
+        Pattern deadlinePatternPrio = Pattern.compile("^deadline (.+)\\s+/prio\\s+(\\d)$");
+        Pattern eventPatternPrio = Pattern.compile("^event (.+)\\s+/prio\\s+(\\d)$");
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
         Pattern searchNamePattern = Pattern.compile("^find (.+)$");
+        Pattern setPriorityPattern = Pattern.compile("^set (\\d+) (\\d)$");
         Matcher matcher;
 
         if (listPattern.matcher(in).matches()) {
@@ -65,6 +69,12 @@ public class Parser {
             handleDelete(matcher.group(1));
         } else if (deleteAllPattern.matcher(in).matches()) {
             handleDeleteAll();
+        } else if ((matcher = todoPatternPrio.matcher(in)).matches()) {
+            handleTodo(matcher.group(1), matcher.group(2));
+        } else if ((matcher = deadlinePatternPrio.matcher(in)).matches()) {
+            handleDeadline(matcher.group(1), matcher.group(2));
+        } else if ((matcher = eventPatternPrio.matcher(in)).matches()) {
+            handleEvent(matcher.group(1), matcher.group(2));
         } else if ((matcher = todoPattern.matcher(in)).matches()) {
             handleTodo(matcher.group(1));
         } else if ((matcher = deadlinePattern.matcher(in)).matches()) {
@@ -73,6 +83,8 @@ public class Parser {
             handleEvent(matcher.group(1));
         } else if ((matcher = searchNamePattern.matcher(in)).matches()) {
             handleSearchName(matcher.group(1));
+        } else if ((matcher = setPriorityPattern.matcher(in)).matches()) {
+            handleSetPriority(matcher.group(1), matcher.group(2));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -159,6 +171,10 @@ public class Parser {
         taskList.deleteAll();
     }
 
+    private void handleSetPriority(String idx, String priority) {
+        taskList.setPriority(Integer.valueOf(idx.trim()) - 1, Integer.valueOf(priority));
+    }
+
     private void handleTodo(String in) {
         Pattern todoPattern = Pattern.compile("^(.*)$");
         Matcher matcher = todoPattern.matcher(in);
@@ -169,6 +185,22 @@ public class Parser {
                 handleError(2); // Empty task description
             } else {
                 taskList.addTodo(name);
+            }
+        } else {
+            handleError(2); // Invalid input
+        }
+    }
+
+    private void handleTodo(String in, String priority) {
+        Pattern todoPattern = Pattern.compile("^(.*)$");
+        Matcher matcher = todoPattern.matcher(in);
+
+        if (matcher.matches()) {
+            String name = matcher.group(1).trim();
+            if (name.isEmpty()) {
+                handleError(2); // Empty task description
+            } else {
+                taskList.addTodo(name, Integer.valueOf(priority.trim()));
             }
         } else {
             handleError(2); // Invalid input
@@ -193,6 +225,24 @@ public class Parser {
         }
     }
 
+    private void handleDeadline(String in, String priority) {
+        Pattern deadlinePattern = Pattern.compile("^(.*?)\\s+/by\\s+(.*)$");
+        Matcher matcher = deadlinePattern.matcher(in);
+
+        if (matcher.matches()) {
+            String name = matcher.group(1).trim();
+            String by = matcher.group(2).trim();
+
+            if (name.isEmpty() || by.isEmpty()) {
+                handleError(3); // Empty task description or deadline
+            } else {
+                taskList.addDeadline(name, Integer.valueOf(priority.trim()), by);
+            }
+        } else {
+            handleError(3); // Invalid input
+        }
+    }
+
     private void handleEvent(String in) {
         Pattern eventPattern = Pattern.compile("^(.*?)\\s+/from\\s+(.*?)\\s+/to\\s+(.*)$");
         Matcher matcher = eventPattern.matcher(in);
@@ -206,6 +256,25 @@ public class Parser {
                 handleError(4); // Empty task description, from, or to fields
             } else {
                 taskList.addEvent(name, from, to);
+            }
+        } else {
+            handleError(4); // Invalid input
+        }
+    }
+
+    private void handleEvent(String in, String priority) {
+        Pattern eventPattern = Pattern.compile("^(.*?)\\s+/from\\s+(.*?)\\s+/to\\s+(.*)$");
+        Matcher matcher = eventPattern.matcher(in);
+
+        if (matcher.matches()) {
+            String name = matcher.group(1).trim();
+            String from = matcher.group(2).trim();
+            String to = matcher.group(3).trim();
+
+            if (name.isEmpty() || from.isEmpty() || to.isEmpty()) {
+                handleError(4); // Empty task description, from, or to fields
+            } else {
+                taskList.addEvent(name, Integer.valueOf(priority.trim()), from, to);
             }
         } else {
             handleError(4); // Invalid input

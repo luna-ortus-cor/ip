@@ -49,31 +49,34 @@ public class Storage {
             try (BufferedReader br = new BufferedReader(new FileReader(fp))) {
                 String line;
                 //DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                Pattern todoPattern = Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(.+)$");
-                Pattern deadlinePattern = Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
-                Pattern eventPattern = Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
+                Pattern todoPattern = Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+)$");
+                Pattern deadlinePattern = Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
+                Pattern eventPattern = Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
                 while ((line = br.readLine()) != null) {
                     Matcher todoMatcher = todoPattern.matcher(line);
                     Matcher deadlineMatcher = deadlinePattern.matcher(line);
                     Matcher eventMatcher = eventPattern.matcher(line);
                     if (todoMatcher.matches()) {
                         boolean isDone = todoMatcher.group(1).equals("1");
-                        String name = todoMatcher.group(2).trim();
-                        taskList.add(new Todo(name, isDone));
+                        String name = todoMatcher.group(3).trim();
+                        int priority = Integer.valueOf(todoMatcher.group(2));
+                        taskList.add(new Todo(name, isDone, priority));
                     } else if (deadlineMatcher.matches()) {
                         boolean isDone = deadlineMatcher.group(1).equals("1");
-                        String name = deadlineMatcher.group(2).trim();
-                        String by = deadlineMatcher.group(3).trim();
+                        String name = deadlineMatcher.group(3).trim();
+                        String by = deadlineMatcher.group(4).trim();
+                        int priority = Integer.valueOf(deadlineMatcher.group(2));
                         //LocalDateTime by = LocalDateTime.parse(deadlineMatcher.group(3).trim(), DATE_TIME_FORMATTER);
-                        taskList.add(new Deadline(name, isDone, by));
+                        taskList.add(new Deadline(name, isDone, priority, by));
                     } else if (eventMatcher.matches()) {
                         boolean isDone = eventMatcher.group(1).equals("1");
-                        String name = eventMatcher.group(2).trim();
-                        String from = eventMatcher.group(3).trim();
-                        String to = eventMatcher.group(4).trim();
+                        String name = eventMatcher.group(3).trim();
+                        String from = eventMatcher.group(4).trim();
+                        String to = eventMatcher.group(5).trim();
+                        int priority = Integer.valueOf(eventMatcher.group(2));
                         //LocalDateTime from = LocalDateTime.parse(eventMatcher.group(3).trim(), DATE_TIME_FORMATTER);
                         //LocalDateTime to = LocalDateTime.parse(eventMatcher.group(4).trim(), DATE_TIME_FORMATTER);
-                        taskList.add(new Event(name, isDone, from, to));
+                        taskList.add(new Event(name, isDone, priority, from, to));
                     } else {
                         //do nth
                     }

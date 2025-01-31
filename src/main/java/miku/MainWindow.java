@@ -40,6 +40,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Miku instance */
     public void setMiku(Miku m) {
         miku = m;
+        miku.init();
         miku.awaitResponse();
     }
 

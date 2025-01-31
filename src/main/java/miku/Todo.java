@@ -23,6 +23,14 @@ public class Todo extends Task {
         super(name, isDone);
     }
 
+    public Todo(String name, int priority) {
+        super(name, priority);
+    }
+
+    public Todo(String name, boolean isDone, int priority) {
+        super(name, isDone, priority);
+    }
+
     /**
      * Returns a string representation of the Todo for the UI.
      *

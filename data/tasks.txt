@@ -1,6 +1,2 @@
-T | 0 | sleep
-T | 0 | sleep
-T | 1 | sleepy
-D | 0 | eat | tonight
-E | 0 | sleep alot | tonight | next month
-T | 0 | eat
+T | 1 | 3 | sleep
+D | 0 | 5 | sleep | tonight

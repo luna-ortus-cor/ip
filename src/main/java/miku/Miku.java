@@ -17,7 +17,7 @@ public class Miku {
     public Miku() {
         this.ui = new Ui();
         this.p = new Parser(this.ui);
-        this.p.start();
+        //this.p.start();
     }
 
     /**
@@ -32,6 +32,13 @@ public class Miku {
             in = sc.nextLine();
             response = p.parse(in);
         }
+    }
+
+    /**
+     * Starts the parser (for GUI)
+     */
+    public void init() {
+        this.p.start();
     }
 
     /**

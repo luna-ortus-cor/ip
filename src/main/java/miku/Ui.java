@@ -129,6 +129,22 @@ public class Ui {
     }
 
     /**
+     * Prints the message when the user sets the priority of a task.
+     * 
+     * @param task the task whose priority is to be set
+     * @param response an int denoting if the task is already at the specified priority
+     */
+    public <T extends Task> void printSetPriorityMsg(T task, int response) {
+        if (response == 1) {
+            System.out.println(Constants.INDENT + Constants.TASK_SET_PRIORITY_SUCCESS);
+            System.out.println(Constants.INDENT + Constants.INDENT + task.toString());
+        } else {
+            System.out.println(Constants.INDENT + Constants.TASK_SET_PRIORITY_FAILURE);
+        }
+        System.out.println();
+    }
+
+    /**
      * Prints the message when the user asks to list all tasks.
      */
     public void printTaskListMsg() {

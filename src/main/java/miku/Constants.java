@@ -47,4 +47,6 @@ public class Constants {
                     "type \"event <name> /from <datetime> /to <datetime>\" to add an event",
                     "type \"games\" to see the list of games", "type \"track\" to track a statistic",
                     "type \"stats\" to see the list of statistics", "type \"chat\" to chat with Miku"));
+    public static final String TASK_SET_PRIORITY_SUCCESS = "YATTA! I've changed the priority of this task:";
+    public static final String TASK_SET_PRIORITY_FAILURE = "Task is already at that priority";
 }

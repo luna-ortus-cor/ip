@@ -48,6 +48,30 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline(String name, int priority, String by) {
+        super(name, priority);
+        try {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.byLdt = LocalDateTime.parse(by, inputFormat);
+            this.by = null;
+        } catch (DateTimeParseException e) {
+            this.by = by;
+            this.byLdt = null;
+        }
+    }
+
+    public Deadline(String name, boolean isDone, int priority, String by) {
+        super(name, isDone, priority);
+        try {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.byLdt = LocalDateTime.parse(by, inputFormat);
+            this.by = null;
+        } catch (DateTimeParseException e) {
+            this.by = by;
+            this.byLdt = null;
+        }
+    }
+
     private String getFormattedDateTime(String s, LocalDateTime ldt) {
         if (s == null) {
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mma");

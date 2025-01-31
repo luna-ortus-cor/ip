@@ -99,6 +99,15 @@ public class TaskList {
         ui.printDeleteAllMsg();
     }
 
+    public void setPriority(int idx, int priority) {
+        try {
+            int response = taskList.get(idx).setPriority(priority);
+            ui.printSetPriorityMsg(taskList.get(idx), response);
+        } catch (IndexOutOfBoundsException e) {
+            handleError(5);
+        }
+    }
+
     /**
      * Add a new Todo Task to the list.
      *
@@ -106,6 +115,12 @@ public class TaskList {
      */
     public void addTodo(String name) {
         Todo t = new Todo(name);
+        taskList.add(t);
+        ui.printAddMsg(t, taskList.size());
+    }
+
+    public void addTodo(String name, int priority) {
+        Todo t = new Todo(name, priority);
         taskList.add(t);
         ui.printAddMsg(t, taskList.size());
     }
@@ -122,6 +137,12 @@ public class TaskList {
         ui.printAddMsg(d, taskList.size());
     }
 
+    public void addDeadline(String name, int priority, String by) {
+        Deadline d = new Deadline(name, priority, by);
+        taskList.add(d);
+        ui.printAddMsg(d, taskList.size());
+    }
+
     /**
      * Add a new Event Task to the list.
      *
@@ -131,6 +152,12 @@ public class TaskList {
      */
     public void addEvent(String name, String from, String to) {
         Event e = new Event(name, from, to);
+        taskList.add(e);
+        ui.printAddMsg(e, taskList.size());
+    }
+
+    public void addEvent(String name, int priority, String from, String to) {
+        Event e = new Event(name, priority, from, to);
         taskList.add(e);
         ui.printAddMsg(e, taskList.size());
     }
