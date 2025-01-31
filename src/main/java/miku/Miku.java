@@ -17,10 +17,11 @@ public class Miku {
     public Miku() {
         this.ui = new Ui();
         this.p = new Parser(this.ui);
+        this.p.start();
     }
 
     /**
-     * Runs the Miku bot
+     * Runs the Miku bot (for text UI)
      */
     public void run() {
         this.p.start();
@@ -31,6 +32,24 @@ public class Miku {
             in = sc.nextLine();
             response = p.parse(in);
         }
+    }
+
+    /**
+     * Gets the response from a specified user input string (for GUI)
+     * 
+     * @param in user input string
+     */
+    public int getResponse(String in) {
+        //return "Miku heard: " + in;
+        int response = this.p.parse(in);
+        return response;
+    }
+
+    /**
+     * Prints the message prompting for user input (for GUI)
+     */
+    public void awaitResponse() {
+        ui.printNextInstrMsg();
     }
 
     public static void main(String[] args) {

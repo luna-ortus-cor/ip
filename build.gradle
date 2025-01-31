@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
@@ -31,8 +32,13 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-checkstyle{
+checkstyle {
     toolVersion = '10.2'
+}
+
+javafx {
+    version = '17.0.7'
+    modules = ['javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media']
 }
 
 test {
@@ -51,7 +57,8 @@ test {
 
 application {
     //mainClass.set("seedu.duke.Duke")
-    mainClass.set("miku.Miku")
+    //mainClass.set("miku.Miku")
+    mainClass.set("miku.Main")
 }
 
 shadowJar {
