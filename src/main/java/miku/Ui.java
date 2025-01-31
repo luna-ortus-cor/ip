@@ -16,6 +16,7 @@ public class Ui {
         System.out.println(Constants.MIKU_LOGO);
         System.out.println(Constants.INDENT + Constants.START_MSG_1);
         System.out.println(Constants.INDENT + Constants.START_MSG_2);
+        System.out.println();
     }
 
     /**
@@ -23,6 +24,7 @@ public class Ui {
      */
     public void printNextInstrMsg() {
         System.out.println(Constants.AWAIT_INSTR);
+        System.out.println();
     }
 
     /**
@@ -30,6 +32,7 @@ public class Ui {
      */
     public void printExitMsg() {
         System.out.println(Constants.INDENT + Constants.EXIT_MSG);
+        System.out.println();
     }
 
     /**
@@ -56,6 +59,7 @@ public class Ui {
         for (String s:Constants.HELP_LIST) {
             System.out.println(Constants.INDENT + s);
         }
+        System.out.println();
     }
 
     /**
@@ -71,6 +75,7 @@ public class Ui {
         } else {
             System.out.println(Constants.INDENT + Constants.TASK_MARK_DONE_FAILURE);
         }
+        System.out.println();
     }
 
     /**
@@ -86,6 +91,7 @@ public class Ui {
         } else {
             System.out.println(Constants.INDENT + Constants.TASK_MARK_NOT_DONE_FAILURE);
         }
+        System.out.println();
     }
 
     /**
@@ -98,6 +104,7 @@ public class Ui {
         System.out.println(Constants.INDENT + Constants.ADD_TASK);
         System.out.println(Constants.INDENT + Constants.INDENT + task.toString());
         System.out.println(Constants.INDENT + "now you have " + num + " tasks in the list.");
+        System.out.println();
     }
 
     /**
@@ -110,6 +117,7 @@ public class Ui {
         System.out.println(Constants.INDENT + "UwU i've removed this task:");
         System.out.println(Constants.INDENT + Constants.INDENT + task.toString());
         System.out.println(Constants.INDENT + "now you have " + num + " tasks in the list.");
+        System.out.println();
     }
 
     /**
@@ -117,6 +125,7 @@ public class Ui {
      */
     public void printDeleteAllMsg() {
         System.out.println(Constants.INDENT + "UwU i've removed all tasks");
+        System.out.println();
     }
 
     /**
@@ -145,6 +154,13 @@ public class Ui {
      */
     public void printStatsMsg() {
         System.out.println(Constants.INDENT + Constants.STATS_MSG);
+    }
+
+    /**
+     * Prints a delimiter.
+     */
+    public void printDelim() {
+        System.out.println();
     }
 
     /**
@@ -178,5 +194,6 @@ public class Ui {
         default:
             break;
         }
+        System.out.println();
     }
 }

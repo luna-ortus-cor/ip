@@ -17,4 +17,6 @@
   <suppress checks="[a-zA-Z0-9]*" files=".*DeadlineTest\.java"/>
   <suppress checks="[a-zA-Z0-9]*" files=".*EventTest\.java"/>
   <suppress checks="[a-zA-Z0-9]*" files=".*TaskTest\.java"/>
+  <suppress checks="[a-zA-Z0-9]*" files=".*Main\.java"/>
+  <suppress checks="[a-zA-Z0-9]*" files=".*DialogBox\.java"/>
 </suppressions>

@@ -135,6 +135,7 @@ public class Parser {
             ui.printListItem(idx, t);
             idx++;
         }
+        ui.printDelim();
     }
 
     private void handleHelp() {
