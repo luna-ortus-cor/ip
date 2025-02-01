@@ -130,7 +130,7 @@ public class Ui {
 
     /**
      * Prints the message when the user sets the priority of a task.
-     * 
+     *
      * @param task the task whose priority is to be set
      * @param response an int denoting if the task is already at the specified priority
      */
@@ -176,6 +176,25 @@ public class Ui {
      * Prints a delimiter.
      */
     public void printDelim() {
+        System.out.println();
+    }
+
+    /**
+     * Print individual game message.
+     *
+     * @param game int specifying game the user chose to play
+     */
+    public void printGameMsg(int game) {
+        switch (game) {
+        case 1:
+            System.out.println(Constants.INDENT + Constants.GAME_MATH_INTRO_MSG);
+            break;
+        case 2:
+            System.out.println(Constants.INDENT + Constants.GAME_WORDLE_INTRO_MSG);
+            break;
+        default:
+            break;
+        }
         System.out.println();
     }
 

@@ -1,12 +1,14 @@
 package miku;
 
 import java.io.OutputStream;
-import java.io.PrintStream;
+
 import javafx.application.Platform;
-import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
-
+/**
+ * Class to redirect System.out.println calls to the GUI
+ */
 public class MikuOutputStream extends OutputStream {
     private Image mikuImage = new Image(this.getClass().getResourceAsStream("/images/miku4.png"));
     private StringBuilder buffer = new StringBuilder();
@@ -19,7 +21,8 @@ public class MikuOutputStream extends OutputStream {
     @Override
     public void write(int b) {
         // Ensure thread safety for JavaFX UI updates
-        Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getMikuDialog(String.valueOf((char) b), mikuImage)));
+        Platform.runLater(() ->
+            dialogContainer.getChildren().add(DialogBox.getMikuDialog(String.valueOf((char) b), mikuImage)));
     }
 
     @Override
@@ -31,7 +34,10 @@ public class MikuOutputStream extends OutputStream {
         }
     }
 
-    private void flushBuffer(){
+    /**
+     * Flush the buffer and write the contents of buffer to GUI
+     */
+    private void flushBuffer() {
         String msg = buffer.toString();
         buffer.setLength(0);
         Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getMikuDialog(msg, mikuImage)));

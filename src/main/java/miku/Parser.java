@@ -116,19 +116,34 @@ public class Parser {
         return 1;
     }
 
+    /**
+     * Handle the user exit.
+     */
     private void handleExit() {
         saveTaskList();
         ui.printExitMsg();
     }
 
+    /**
+     * Load the task list from file.
+     */
     private void loadTaskList() {
         taskList.loadTasks(storage);
     }
 
+    /**
+     * Save the task list to file.
+     */
     private void saveTaskList() {
         taskList.saveTasks(storage);
     }
 
+    /**
+     * Print an arraylist, type specifies what message to print prior.
+     *
+     * @param list arraylist to be printed
+     * @param type int specifying message to be printed prior to arraylist print
+     */
     //type=0 is task, type=1 is game, type=2 is track, type=3 is stats, type=4 is search
     private <T> void printList(ArrayList<T> list, int type) {
         int idx = 1;
@@ -150,10 +165,19 @@ public class Parser {
         ui.printDelim();
     }
 
+    /**
+     * Handle the help message.
+     */
     private void handleHelp() {
         ui.printHelpMsg();
     }
 
+    /**
+     * Handle user mark task instruction.
+     *
+     * @param idx index of task to be marked
+     * @param mark int specifying if task is to be marked done or not done
+     */
     //mark done if mark=1, else mark not done if mark=0
     private void handleMark(String idx, int mark) {
         if (mark == 1) {
@@ -163,14 +187,28 @@ public class Parser {
         }
     }
 
+    /**
+     * Handle user delete task instruction.
+     *
+     * @param idx index of task to be deleted
+     */
     private void handleDelete(String idx) {
         taskList.delete(Integer.valueOf(idx.trim()) - 1);
     }
 
+    /**
+     * Handle user delete all tasks instruction.
+     */
     private void handleDeleteAll() {
         taskList.deleteAll();
     }
 
+    /**
+     * Handle user set task priority instruction.
+     *
+     * @param idx index of task to set priority of
+     * @param priority int specifying priority task is to be set to
+     */
     private void handleSetPriority(String idx, String priority) {
         taskList.setPriority(Integer.valueOf(idx.trim()) - 1, Integer.valueOf(priority));
     }
@@ -286,7 +324,7 @@ public class Parser {
         int choice = sc.nextInt();
         sc.nextLine();
         if (choice == 1) {
-            System.out.println("Welcome to Mental Math Game!");
+            ui.printGameMsg(choice);
             System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard, 4: Insane): ");
             int difficulty = sc.nextInt();
             sc.nextLine();
@@ -296,7 +334,7 @@ public class Parser {
             MentalMathGame game = new MentalMathGame(difficulty, length);
             game.startGame();
         } else if (choice == 2) {
-            System.out.println("Welcome to Wordle Game!");
+            ui.printGameMsg(choice);
             System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard): ");
             int difficulty = sc.nextInt();
             sc.nextLine();

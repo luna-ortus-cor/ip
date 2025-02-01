@@ -43,7 +43,7 @@ public class Miku {
 
     /**
      * Gets the response from a specified user input string (for GUI)
-     * 
+     *
      * @param in user input string
      */
     public int getResponse(String in) {

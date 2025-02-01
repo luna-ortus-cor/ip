@@ -49,4 +49,6 @@ public class Constants {
                     "type \"stats\" to see the list of statistics", "type \"chat\" to chat with Miku"));
     public static final String TASK_SET_PRIORITY_SUCCESS = "YATTA! I've changed the priority of this task:";
     public static final String TASK_SET_PRIORITY_FAILURE = "Task is already at that priority";
+    public static final String GAME_MATH_INTRO_MSG = "Welcome to Mental Math Game!";
+    public static final String GAME_WORDLE_INTRO_MSG = "Welcome to Wordle Game!";
 }

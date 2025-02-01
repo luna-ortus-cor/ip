@@ -24,6 +24,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates Dialogbox from specified xml
+     *
+     * @param s message to be displayed on dialogbox
+     * @param i image to be displayed on dialogbox
+     */
     private DialogBox(String s, Image i) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -37,7 +43,7 @@ public class DialogBox extends HBox {
         dialog.setText(s);
         displayPicture.setImage(i);
     }
-    
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -48,10 +54,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Get user dialogbox.
+     *
+     * @param s message to be displayed on dialogbox
+     * @param i image to be displayed on dialogbox
+     * @return dialogbox for the user
+     */
     public static DialogBox getUserDialog(String s, Image i) {
         return new DialogBox(s, i);
     }
 
+    /**
+     * Get miku dialogbox.
+     *
+     * @param s message to be displayed on dialogbox
+     * @param i image to be displayed on dialogbox
+     * @return dialogbox for miku
+     */
     public static DialogBox getMikuDialog(String s, Image i) {
         var db = new DialogBox(s, i);
         db.flip();
