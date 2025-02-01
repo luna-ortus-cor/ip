@@ -99,6 +99,12 @@ public class TaskList {
         ui.printDeleteAllMsg();
     }
 
+    /**
+     * Set the priority of the task at a specified index
+     *
+     * @param idx the index of the task in the list
+     * @param priority the priority to be set to
+     */
     public void setPriority(int idx, int priority) {
         try {
             int response = taskList.get(idx).setPriority(priority);
@@ -119,6 +125,12 @@ public class TaskList {
         ui.printAddMsg(t, taskList.size());
     }
 
+    /**
+     * Add a new Todo Task to the list.
+     *
+     * @param name desciption of the Todo
+     * @param priority priority of the Todo
+     */
     public void addTodo(String name, int priority) {
         Todo t = new Todo(name, priority);
         taskList.add(t);
@@ -137,6 +149,13 @@ public class TaskList {
         ui.printAddMsg(d, taskList.size());
     }
 
+    /**
+     * Add a new Deadline Task to the list.
+     *
+     * @param name description of the Deadline
+     * @param priority priority of the Deadline
+     * @param by a String representing either a colloquial time or valid date time formatted time
+     */
     public void addDeadline(String name, int priority, String by) {
         Deadline d = new Deadline(name, priority, by);
         taskList.add(d);
@@ -156,6 +175,14 @@ public class TaskList {
         ui.printAddMsg(e, taskList.size());
     }
 
+    /**
+     * Add a new Event Task to the list.
+     *
+     * @param name description of the Event
+     * @param priority priority of the Event
+     * @param from a String representing either a colloquial time or valid date time formmated time
+     * @param to a String representing either a colloquial time or valid date time formatted time
+     */
     public void addEvent(String name, int priority, String from, String to) {
         Event e = new Event(name, priority, from, to);
         taskList.add(e);

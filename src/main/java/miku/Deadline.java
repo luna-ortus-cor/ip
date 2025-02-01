@@ -48,6 +48,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Create a new Deadline instance specifying the priority of the Deadline.
+     *
+     * @param name description of the Deadline
+     * @param priority int denoting priority of the Deadline
+     * @param by a String representing either a colloquial time or valid date time formatted time
+     */
     public Deadline(String name, int priority, String by) {
         super(name, priority);
         try {
@@ -60,6 +67,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Create a new Deadline instance specifying the doneness and priority of the Deadline.
+     *
+     * @param name description of the Deadline
+     * @param isDone boolean denoting doneness of the Deadline
+     * @param priority int denoting priority of the Deadline
+     * @param by a String representing either a colloquial time or valid date time formatted time
+     */
     public Deadline(String name, boolean isDone, int priority, String by) {
         super(name, isDone, priority);
         try {
@@ -72,6 +87,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the formatted date time
+     *
+     * @param s string of the time to be formatted
+     * @param ldt local date time format to be formatted
+     * @return a string of the final formatted date time
+     */
     private String getFormattedDateTime(String s, LocalDateTime ldt) {
         if (s == null) {
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mma");
@@ -81,6 +103,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the unformatted date time
+     *
+     * @param s string of the time to be unformatted
+     * @param ldt local date time format to be unformatted
+     * @return a string of the final unformatted date time
+     */
     private String getUnformattedDateTime(String s, LocalDateTime ldt) {
         if (s == null) {
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyy-MM-dd HHmm");

@@ -51,7 +51,8 @@ public class Storage {
                 //DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 Pattern todoPattern = Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+)$");
                 Pattern deadlinePattern = Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
-                Pattern eventPattern = Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
+                Pattern eventPattern =
+                    Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+)$");
                 while ((line = br.readLine()) != null) {
                     Matcher todoMatcher = todoPattern.matcher(line);
                     Matcher deadlineMatcher = deadlinePattern.matcher(line);

@@ -42,6 +42,7 @@ public class Event extends Task {
      * @param name description of the Event
      * @param isDone boolean denoting doneness of the Event
      * @param from a String representing either a colloquial time or valid date time formatted time
+     * @param to a String representing either a colloquial time or valid date time formatted time
      */
     public Event(String name, boolean isDone, String from, String to) {
         super(name, isDone);
@@ -59,6 +60,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Create a new Event instance specifying the priority of the Deadline.
+     *
+     * @param name description of the Deadline
+     * @param priority int denoting priority of the Deadline
+     * @param from a String representing either a colloquial time or valid date time formatted time
+     * @param to a String representing either a colloquial time or valid date time formatted time
+     */
     public Event(String name, int priority, String from, String to) {
         super(name, priority);
         try {
@@ -75,6 +84,15 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Create a new Event instance specifying the priority of the Deadline.
+     *
+     * @param name description of the Deadline
+     * @param isDone boolean denoting doneness of the Deadline
+     * @param priority int denoting priority of the Deadline
+     * @param from a String representing either a colloquial time or valid date time formatted time
+     * @param to a String representing either a colloquial time or valid date time formatted time
+     */
     public Event(String name, boolean isDone, int priority, String from, String to) {
         super(name, isDone, priority);
         try {
@@ -91,6 +109,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the formatted date time
+     *
+     * @param s string of the time to be formatted
+     * @param ldt local date time format to be formatted
+     * @return a string of the final formatted date time
+     */
     private String getFormattedDateTime(String s, LocalDateTime ldt) {
         if (s == null) {
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mma");
@@ -100,6 +125,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the unformatted date time
+     *
+     * @param s string of the time to be unformatted
+     * @param ldt local date time format to be unformatted
+     * @return a string of the final unformatted date time
+     */
     private String getUnformattedDateTime(String s, LocalDateTime ldt) {
         if (s == null) {
             DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyy-MM-dd HHmm");

@@ -9,7 +9,7 @@ public class Task implements Comparable<Task> {
     private int priority; //priority values from 1 to 5, 1 least impt, 5 most impt
 
     /**
-     * Creates a new Task instance
+     * Creates a new Task instance.
      *
      * @param name description of Task
      */
@@ -20,7 +20,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Creates a new Task instance specifying the doneness of the Task
+     * Creates a new Task instance specifying the doneness of the Task.
      *
      * @param name description of Task
      * @param isDone boolean denoting if task is done
@@ -32,8 +32,8 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Creates a new Task instance specifying the priority of the Task
-     * 
+     * Creates a new Task instance specifying the priority of the Task.
+     *
      * @param name description of Task
      * @param priority int specifying priority of task
      */
@@ -43,6 +43,9 @@ public class Task implements Comparable<Task> {
         this.priority = priority;
     }
 
+    /**
+     * Creates a new Task instance specifying the doneness and priority of the Task.
+     */
     public Task(String name, boolean isDone, int priority) {
         this.name = name;
         this.isDone = isDone;
@@ -88,7 +91,7 @@ public class Task implements Comparable<Task> {
 
     /**
      * Set the priority of the task to a specified value
-     * 
+     *
      * @param priority int specifying the new priority of the task
      * @return an int denoting a successful change in priority
      */

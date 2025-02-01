@@ -1,5 +1,9 @@
 package miku;
 
+import java.io.PrintStream;
+
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,10 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.application.Platform;
-
-import java.io.PrintStream;
-
+import javafx.util.Duration;
 
 /**
  * Controller for the main GUI.
@@ -30,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/emu1.jpg"));
     private Image mikuImage = new Image(this.getClass().getResourceAsStream("/images/miku4.png"));
 
+    /**
+     * Initializes the javafx application.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -57,8 +61,10 @@ public class MainWindow extends AnchorPane {
         if (mikuResponse == 1) {
             miku.awaitResponse();
         } else {
-            Platform.exit();
-            System.exit(0);
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(event -> Platform.exit()); //Close the JavaFX app
+            delay.play();
+            System.exit(0); //Exit the app entirely
         }
     }
 }
