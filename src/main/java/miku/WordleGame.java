@@ -36,6 +36,7 @@ public class WordleGame {
             }
         } catch (IOException e){
             System.out.println("Error loading word list.");
+            System.out.println();
         }
         return words;
     }
@@ -56,25 +57,28 @@ public class WordleGame {
     }
 
     public void startGame() {
-        Scanner sc = new Scanner(System.in);
         int guessesUsed = 0;
         boolean guessedCorrectly = false;
 
         System.out.println("Welcome to Wordle!");
         System.out.println("You have " + maxGuesses + " guesses to find the word.");
         System.out.println("The word has " + targetWord.length() + " letters.");
+        System.out.println();
 
         while (guessesUsed < maxGuesses && !guessedCorrectly) {
             System.out.print("Enter your guess: ");
-            String guess = sc.nextLine().trim().toLowerCase();
+            System.out.println();
+            String guess = Constants.INPUT_STRING_BUILDER().toLowerCase();
 
             if (guess.length() != targetWord.length()) {
                 System.out.println("Invalid guess. Your guess must be " + targetWord.length() + " letters long.");
+                System.out.println();
                 continue;
             }
 
             if (!wordList.contains(guess)) {
                 System.out.println("Invalid guess. The word is not in the word list.");
+                System.out.println();
                 continue;
             }
 
@@ -88,6 +92,7 @@ public class WordleGame {
             System.out.println("Out of guesses! The correct word was: " + targetWord);
             System.out.println("Better luck next time!");
         }
+        System.out.println();
     }
 
     private boolean evaluateGuess(String guess) {
@@ -120,6 +125,7 @@ public class WordleGame {
         }
 
         System.out.println(feedback);
+        System.out.println();
         return guess.equals(targetWord);
     }
 }

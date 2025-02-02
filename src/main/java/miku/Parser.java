@@ -57,6 +57,7 @@ public class Parser {
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
         Pattern searchNamePattern = Pattern.compile("^find (.+)$");
         Pattern setPriorityPattern = Pattern.compile("^set (\\d+) (\\d)$");
+        Pattern sortPriorityPattern = Pattern.compile("^sort prio /(asc|desc)$");
         Matcher matcher;
 
         if (listPattern.matcher(in).matches()) {
@@ -85,6 +86,8 @@ public class Parser {
             handleSearchName(matcher.group(1));
         } else if ((matcher = setPriorityPattern.matcher(in)).matches()) {
             handleSetPriority(matcher.group(1), matcher.group(2));
+        } else if ((matcher = sortPriorityPattern.matcher(in)).matches()) {
+            handleSortPriority(matcher.group(1));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -144,7 +147,7 @@ public class Parser {
      * @param list arraylist to be printed
      * @param type int specifying message to be printed prior to arraylist print
      */
-    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats, type=4 is search
+    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats, type=4 is search, type=5 is sort
     private <T> void printList(ArrayList<T> list, int type) {
         int idx = 1;
         if (type == 0) {
@@ -155,8 +158,10 @@ public class Parser {
             ui.printTrackMsg();
         } else if (type == 3) {
             ui.printStatsMsg();
-        } else {
+        } else if (type == 4) {
             ui.printSearchMsg();
+        } else {
+            ui.printSortMsg();
         }
         for (T t:list) {
             ui.printListItem(idx, t);
@@ -321,23 +326,19 @@ public class Parser {
 
     private void handleGame() {
         printList(Constants.GAMES_LIST, 1);
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
         if (choice == 1) {
             ui.printGameMsg(choice);
-            System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard, 4: Insane): ");
-            int difficulty = sc.nextInt();
-            sc.nextLine();
-            System.out.print("Select length (1: Short, 2: Normal, 3: Long): ");
-            int length = sc.nextInt();
-            sc.nextLine();
+            ui.printDifficultyMsg(choice);
+            int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            ui.printLengthMsg(choice);
+            int length = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
             MentalMathGame game = new MentalMathGame(difficulty, length);
             game.startGame();
         } else if (choice == 2) {
             ui.printGameMsg(choice);
-            System.out.print("Select difficulty (1: Easy, 2: Normal, 3: Hard): ");
-            int difficulty = sc.nextInt();
-            sc.nextLine();
+            ui.printDifficultyMsg(choice);
+            int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
             WordleGame game = new WordleGame(difficulty);
             game.startGame();
         } else {
@@ -347,30 +348,32 @@ public class Parser {
 
     private void handleTrack() {
         printList(Constants.TRACK_LIST, 2);
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
         if (choice == 1) {
             System.out.print("Enter START DATE (YYYY-MM-DD): ");
-            String startDate = sc.nextLine();
+            String startDate = Constants.INPUT_STRING_BUILDER();
             System.out.print("Enter START TIME (HH:mm): ");
-            String startTime = sc.nextLine();
+            String startTime = Constants.INPUT_STRING_BUILDER();
             System.out.print("Enter END DATE (YYYY-MM-DD): ");
-            String endDate = sc.nextLine();
+            String endDate = Constants.INPUT_STRING_BUILDER();
             System.out.print("Enter END TIME (HH:mm): ");
-            String endTime = sc.nextLine();
+            String endTime = Constants.INPUT_STRING_BUILDER();
             System.out.print("Enter ACTIVITY: ");
-            String name = sc.nextLine();
+            String name = Constants.INPUT_STRING_BUILDER();
             Activity a = new Activity(startDate, startTime, endDate, endTime, name);
             TimeTracker.saveActivityToFile(a);
+        } else {
+            //go back
         }
     }
 
     private void handleStats() {
         printList(Constants.TRACK_LIST, 3);
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
         if (choice == 1) {
             TimeTracker.displayStatistics();
+        } else {
+            //go back
         }
     }
 
@@ -386,6 +389,18 @@ public class Parser {
         printList(searchList, 4);
     }
 
+    private void handleSortPriority(String in) {
+        ArrayList<Task> sortedTaskList = taskList.getList();
+        if (in.equals("asc")) {
+            sortedTaskList = taskList.sortPriorityTaskList(0);
+        } else if (in.equals("desc")) {
+            sortedTaskList = taskList.sortPriorityTaskList(1);
+        } else {
+            handleError(8);
+        }
+        printList(sortedTaskList, 5);
+    }
+
     //error codes
     //1:invalid instruction
     //2:name field of todo is empty or whitespace
@@ -394,6 +409,7 @@ public class Parser {
     //5:no such task exists or task number is empty or whitespace
     //6:error reading task list from file
     //7:error writing task list to file
+    //8:error sorting
     private void handleError(int code) {
         ui.printErrorMsg(code);
     }

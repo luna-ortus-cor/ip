@@ -53,6 +53,13 @@ public class Ui {
     }
 
     /**
+     * Prints the message when the user sorts.
+     */
+    public void printSortMsg() {
+        System.out.println(Constants.INDENT + Constants.TASK_LIST_SORTED_MSG);
+    }
+
+    /**
      * Prints the help message.
      */
     public void printHelpMsg() {
@@ -199,6 +206,41 @@ public class Ui {
     }
 
     /**
+     * Print individual game difficulty message.
+     *
+     * @param game int specifying game the user chose to play
+     */
+    public void printDifficultyMsg(int game) {
+        switch (game) {
+        case 1:
+            System.out.println(Constants.INDENT + Constants.GAME_MATH_DIFFICULTY_MSG);
+            break;
+        case 2:
+            System.out.println(Constants.INDENT + Constants.GAME_WORDLE_DIFFICULTY_MSG);
+            break;
+        default:
+            break;
+        }
+        System.out.println();
+    }
+
+    /**
+     * Print individual game length message.
+     *
+     * @param game int specifying game the user chose to play
+     */
+    public void printLengthMsg(int game) {
+        switch (game) {
+        case 1:
+            System.out.println(Constants.INDENT + Constants.GAME_MATH_LENGTH_MSG);
+            break;
+        default:
+            break;
+        }
+        System.out.println();
+    }
+
+    /**
      * Prints the relevant error message given an error code.
      *
      * @param code an int denoting the specific type of error
@@ -225,6 +267,9 @@ public class Ui {
             break;
         case 7:
             System.out.println(Constants.INDENT + Constants.WRITE_LIST_FILE_ERROR);
+            break;
+        case 8:
+            System.out.println(Constants.INDENT + Constants.SORT_LIST_ERROR);
             break;
         default:
             break;

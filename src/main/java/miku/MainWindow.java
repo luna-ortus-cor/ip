@@ -30,22 +30,37 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/emu1.jpg"));
     private Image mikuImage = new Image(this.getClass().getResourceAsStream("/images/miku4.png"));
+    private MikuOutputStream mikuOutputStream;
+    private MikuInputStream mikuInputStream;
 
     /**
      * Initializes the javafx application.
      */
     @FXML
     public void initialize() {
+        mikuOutputStream = new MikuOutputStream(dialogContainer);
+        mikuInputStream = new MikuInputStream();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        System.setOut(new PrintStream(new MikuOutputStream(dialogContainer)));
+        System.setOut(new PrintStream(mikuOutputStream));
+        System.setIn(mikuInputStream);
         //dialogContainer.getChildren().addAll(DialogBox.getMikuDialog("uwu", mikuImage));
+        this.miku = new Miku(mikuInputStream, mikuOutputStream); //Initialize Miku
+        Platform.runLater(() -> {
+            new Thread(() -> {
+                int response = this.miku.run();
+                if (response == 0) {
+                    PauseTransition delay = new PauseTransition(Duration.seconds(3));
+                    delay.setOnFinished(event -> Platform.exit()); //Close the JavaFX app
+                    //System.exit(0); //Exit the app entirely
+                    delay.play();
+                }
+            }).start(); //Start chatbot loop after UI is ready
+        });
     }
 
     /** Injects the Miku instance */
     public void setMiku(Miku m) {
         miku = m;
-        miku.init();
-        miku.awaitResponse();
     }
 
     /**
@@ -56,16 +71,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String userText = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
-        int mikuResponse = miku.getResponse(userText);
+        //int mikuResponse = miku.getResponse(userText);
+        mikuInputStream.add(userText);
         userInput.clear();
-        if (mikuResponse == 1) {
-            miku.awaitResponse();
-        } else {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(event -> Platform.exit()); //Close the JavaFX app
-            delay.play();
-            System.exit(0); //Exit the app entirely
-        }
     }
 }
 

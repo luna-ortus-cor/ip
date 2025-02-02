@@ -4,59 +4,61 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity"
+<AnchorPane fx:id="mainAnchorPane"
+            maxHeight="Infinity" maxWidth="Infinity"
+            minHeight="300.0" minWidth="400.0"
             prefHeight="600.0" prefWidth="400.0"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="miku.MainWindow"
             style="-fx-background-color: #ECE5DD;">
     <children>
-        <TextField fx:id="userInput"
-                   layoutX="10.0" layoutY="558.0"
-                   text="Type here"
-                   onAction="#handleUserInput"
-                   prefHeight="41.0"
-                   prefWidth="324.0"
-                   AnchorPane.bottomAnchor="1.0"
-                   style="-fx-background-radius: 15px;
-                          -fx-border-radius: 15px;
-                          -fx-padding: 10px;
-                          -fx-font-size: 14px;
-                          -fx-background-color: #FFFFFF;"/>
-        <Button fx:id="enterButton"
-                layoutX="324.0"
-                layoutY="558.0"
-                text="Enter"
-                mnemonicParsing="false"
-                onAction="#handleUserInput"
-                prefHeight="41.0"
-                prefWidth="76.0"
-                AnchorPane.bottomAnchor="1.0"
-                style="-fx-background-color: #25D366;
-                       -fx-text-fill: white;
-                       -fx-font-size: 14px;
-                       -fx-background-radius: 15px;"/>
+        <!-- ScrollPane for dialog container -->
         <ScrollPane fx:id="scrollPane"
                     vbarPolicy="ALWAYS"
                     hbarPolicy="NEVER"
                     fitToWidth="true"
-                    hvalue="1.0"
-                    prefHeight="557.0"
-                    prefWidth="400.0"
+                    fitToHeight="true"
                     vvalue="1.0"
-                    style="-fx-background: transparent;
-                           -fx-background-color: transparent;">
+                    prefHeight="500.0" prefWidth="400.0"
+                    style="-fx-background: transparent;"
+                    AnchorPane.topAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0"
+                    AnchorPane.bottomAnchor="50.0">
             <content>
                 <VBox fx:id="dialogContainer"
-                      prefHeight="552.0"
-                      prefWidth="388.0"
                       style="-fx-padding: 10px;"/>
             </content>
         </ScrollPane>
+
+        <HBox spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <!-- TextField for user input -->
+            <TextField fx:id="userInput"
+                    HBox.hgrow="ALWAYS"
+                    onAction="#handleUserInput"
+                    prefHeight="40.0"
+                    style="-fx-background-radius: 15px;
+                            -fx-border-radius: 15px;
+                            -fx-padding: 10px;
+                            -fx-font-size: 14px;
+                            -fx-background-color: #FFFFFF;"/>
+
+            <!-- Enter Button -->
+            <Button fx:id="enterButton"
+                    text="Enter"
+                    mnemonicParsing="false"
+                    onAction="#handleUserInput"
+                    prefHeight="40.0"
+                    prefWidth="75.0"
+                    style="-fx-background-color: #25D366;
+                        -fx-text-fill: white;
+                        -fx-font-size: 14px;
+                        -fx-background-radius: 15px;"/>
+        </HBox>
     </children>
 </AnchorPane>
-
-

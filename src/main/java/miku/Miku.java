@@ -1,14 +1,17 @@
 package miku;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * The miku class handles the initialization and running of the miku bot.
  */
 public class Miku {
-    private static Scanner sc = new Scanner(System.in);
+    private Scanner sc;
     private Ui ui;
     private Parser p;
+    private MikuInputStream mikuInputStream;
+    private MikuOutputStream mikuOutputStream;
 
     /**
      * Creates a new Miku instance with a new Ui to interact with the user, and
@@ -17,49 +20,39 @@ public class Miku {
     public Miku() {
         this.ui = new Ui();
         this.p = new Parser(this.ui);
+        this.sc = new Scanner(System.in);
         //this.p.start();
     }
 
+    public Miku(MikuInputStream mikuInputStream, MikuOutputStream mikuOutputStream) {
+        this.ui = new Ui();
+        this.p = new Parser(this.ui);
+        this.mikuInputStream = mikuInputStream;
+        this.mikuOutputStream = mikuOutputStream;
+        System.setIn(mikuInputStream);
+        this.sc = new Scanner(System.in);
+    }
+
     /**
-     * Runs the Miku bot (for text UI)
+     * Runs the Miku bot
      */
-    public void run() {
+    public int run() {
         this.p.start();
         String in;
         int response = 1;
         while (response == 1) {
             ui.printNextInstrMsg();
-            in = sc.nextLine();
+            synchronized (System.in) {
+                System.in.notify(); //Force wake-up
+            }
+            in = Constants.INPUT_STRING_BUILDER();
+            //in = sc.nextLine();
             response = p.parse(in);
         }
-    }
-
-    /**
-     * Starts the parser (for GUI)
-     */
-    public void init() {
-        this.p.start();
-    }
-
-    /**
-     * Gets the response from a specified user input string (for GUI)
-     *
-     * @param in user input string
-     */
-    public int getResponse(String in) {
-        //return "Miku heard: " + in;
-        int response = this.p.parse(in);
         return response;
     }
 
-    /**
-     * Prints the message prompting for user input (for GUI)
-     */
-    public void awaitResponse() {
-        ui.printNextInstrMsg();
-    }
-
     public static void main(String[] args) {
-        new Miku().run();
+        int response = new Miku().run();
     }
 }

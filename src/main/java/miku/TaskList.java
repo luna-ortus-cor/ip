@@ -1,6 +1,7 @@
 package miku;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,21 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return this.taskList;
+    }
+
+    /**
+     * Returns an arraylist of tasks in the TaskList, sorted by priority.
+     * 
+     * @param order int specifying order (ascending or descending) of the sort
+     * @return an arraylist of tasks in the TaskList sorted by priority
+     */
+    public ArrayList<Task> sortPriorityTaskList(int order) {
+        ArrayList<Task> sortedTaskList = new ArrayList<>(this.taskList);
+        Collections.sort(sortedTaskList);
+        if (order == 1) {
+            Collections.reverse(sortedTaskList);
+        }
+        return sortedTaskList;
     }
 
     /**
