@@ -100,13 +100,16 @@ public class MentalMathGame {
 
         for (int i = 0; i < questions.size(); i++) {
             System.out.println("Question " + (i + 1) + ": " + questions.get(i));
-            System.out.print("Your answer: ");
-            int userAnswer = sc.nextInt();sc.nextLine();
+            //System.out.print("Your answer: ");
+            System.out.println();
+            int userAnswer = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
             if (userAnswer == answers.get(i)) {
                 System.out.println("Correct!");
+                System.out.println();
                 score++;
             } else {
                 System.out.println("Wrong! The correct answer was: " + answers.get(i));
+                System.out.println();
             }
         }
 
@@ -116,5 +119,6 @@ public class MentalMathGame {
         System.out.println("\nGame Over!");
         System.out.println("Your score: " + score + "/" + length);
         System.out.println("Time taken: " + elapsedTime + " seconds");
+        System.out.println();
     }
 }

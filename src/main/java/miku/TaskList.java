@@ -92,6 +92,26 @@ public class TaskList {
         }
     }
 
+    public void addTags(int idx, String... tags) {
+        try {
+            for (String s:tags) {
+                taskList.get(idx).addTag(s);
+            }
+        } catch (IndexOutOfBoundsException e) {
+
+        }
+    }
+
+    public void removeTags(int idx, String... tags) {
+        try {
+            for (String s:tags) {
+                taskList.get(idx).removeTag(s);
+            }
+        } catch (IndexOutOfBoundsException e) {
+
+        }
+    }
+
     /**
      * Delete the task at a specified index.
      *

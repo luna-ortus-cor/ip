@@ -1,5 +1,8 @@
 package miku;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Task class that stores relevant task related properties
  */
@@ -7,6 +10,7 @@ public class Task implements Comparable<Task> {
     private String name;
     private boolean isDone;
     private int priority; //priority values from 1 to 5, 1 least impt, 5 most impt
+    private Set<String> tags;
 
     /**
      * Creates a new Task instance.
@@ -17,6 +21,7 @@ public class Task implements Comparable<Task> {
         this.name = name;
         this.isDone = false;
         this.priority = 3;
+        this.tags = new HashSet<>();
     }
 
     /**
@@ -29,6 +34,7 @@ public class Task implements Comparable<Task> {
         this.name = name;
         this.isDone = isDone;
         this.priority = 3;
+        this.tags = new HashSet<>();
     }
 
     /**
@@ -41,6 +47,7 @@ public class Task implements Comparable<Task> {
         this.name = name;
         this.isDone = false;
         this.priority = priority;
+        this.tags = new HashSet<>();
     }
 
     /**
@@ -50,6 +57,43 @@ public class Task implements Comparable<Task> {
         this.name = name;
         this.isDone = isDone;
         this.priority = priority;
+        this.tags = new HashSet<>();
+    }
+
+    /**
+     * Add a tag to the task.
+     * 
+     * @param tag tag to be added
+     */
+    public void addTag(String tag) {
+        tags.add(tag.toLowerCase());
+    }
+
+    /**
+     * Remove a tag from the task.
+     * 
+     * @param tag tag to be removed
+     */
+    public void removeTag(String tag) {
+        tags.remove(tag.toLowerCase());
+    }
+
+    /**
+     * Returns the tags associated with the task
+     * 
+     * @return a set of the tags associated with the task
+     */
+    public Set<String> getTags() {
+        return this.tags;
+    }
+
+    /**
+     * Returns the formatted tags for display.
+     * 
+     * @return a string of the formatted tags
+     */
+    public String getFormattedTags() {
+        return this.tags.isEmpty() ? "" : " #" + String.join(" #", this.tags);
     }
 
     /**
