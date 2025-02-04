@@ -148,8 +148,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (from: " + getFormattedDateTime(this.from, this.fromLdt)
-            + " to: " + getFormattedDateTime(this.to, this.toLdt) + ")";
+        return "[E] " + super.toString() + " (from: " + getFormattedDateTime(this.from, this.fromLdt) +
+            " to: " + getFormattedDateTime(this.to, this.toLdt) + ")" + super.getFormattedTags();
     }
 
     /**
@@ -158,7 +158,7 @@ public class Event extends Task {
      * @return a string representation of the Event
      */
     public String toSaveFormat() {
-        return "E | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.from, this.fromLdt)
-            + " | " + getUnformattedDateTime(this.to, this.toLdt);
+        return "E | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.from, this.fromLdt) +
+            " | " + getUnformattedDateTime(this.to, this.toLdt) + " |" + super.getUnformattedTags() + " |";
     }
 }

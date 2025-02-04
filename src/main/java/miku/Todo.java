@@ -38,7 +38,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T] " + super.toString();
+        return "[T] " + super.toString() + super.getFormattedTags();
     }
 
     /**
@@ -47,6 +47,6 @@ public class Todo extends Task {
      * @return a string representation of the Todo
      */
     public String toSaveFormat() {
-        return "T | " + super.toSaveFormat();
+        return "T | " + super.toSaveFormat() + " |" + super.getUnformattedTags() + " |";
     }
 }

@@ -155,8 +155,11 @@ public class TaskList {
      *
      * @param name description of the Todo
      */
-    public void addTodo(String name) {
+    public void addTodo(String name, String... tags) {
         Todo t = new Todo(name);
+        for (String s:tags) {
+            t.addTag(s);
+        }
         taskList.add(t);
         ui.printAddMsg(t, taskList.size());
     }
@@ -167,8 +170,11 @@ public class TaskList {
      * @param name desciption of the Todo
      * @param priority priority of the Todo
      */
-    public void addTodo(String name, int priority) {
+    public void addTodo(String name, int priority, String... tags) {
         Todo t = new Todo(name, priority);
+        for (String s:tags) {
+            t.addTag(s);
+        }
         taskList.add(t);
         ui.printAddMsg(t, taskList.size());
     }
@@ -179,8 +185,11 @@ public class TaskList {
      * @param name description of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
      */
-    public void addDeadline(String name, String by) {
+    public void addDeadline(String name, String by, String... tags) {
         Deadline d = new Deadline(name, by);
+        for (String s:tags) {
+            d.addTag(s);
+        }
         taskList.add(d);
         ui.printAddMsg(d, taskList.size());
     }
@@ -192,8 +201,11 @@ public class TaskList {
      * @param priority priority of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
      */
-    public void addDeadline(String name, int priority, String by) {
+    public void addDeadline(String name, int priority, String by, String... tags) {
         Deadline d = new Deadline(name, priority, by);
+        for (String s:tags) {
+            d.addTag(s);
+        }
         taskList.add(d);
         ui.printAddMsg(d, taskList.size());
     }
@@ -205,8 +217,11 @@ public class TaskList {
      * @param from a String representing either a colloquial time or valid date time formmated time
      * @param to a String representing either a colloquial time or valid date time formatted time
      */
-    public void addEvent(String name, String from, String to) {
+    public void addEvent(String name, String from, String to, String ... tags) {
         Event e = new Event(name, from, to);
+        for (String s:tags) {
+            e.addTag(s);
+        }
         taskList.add(e);
         ui.printAddMsg(e, taskList.size());
     }
@@ -219,8 +234,11 @@ public class TaskList {
      * @param from a String representing either a colloquial time or valid date time formmated time
      * @param to a String representing either a colloquial time or valid date time formatted time
      */
-    public void addEvent(String name, int priority, String from, String to) {
+    public void addEvent(String name, int priority, String from, String to, String... tags) {
         Event e = new Event(name, priority, from, to);
+        for (String s:tags) {
+            e.addTag(s);
+        }
         taskList.add(e);
         ui.printAddMsg(e, taskList.size());
     }

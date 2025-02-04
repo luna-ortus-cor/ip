@@ -25,6 +25,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button enterButton;
+    @FXML
+    private Button settingsButton;
 
     private Miku miku;
 
@@ -74,6 +76,11 @@ public class MainWindow extends AnchorPane {
         //int mikuResponse = miku.getResponse(userText);
         mikuInputStream.add(userText);
         userInput.clear();
+    }
+
+    @FXML
+    private void handleSettings() {
+        
     }
 }
 

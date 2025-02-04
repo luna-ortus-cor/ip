@@ -112,7 +112,7 @@ public class Deadline extends Task {
      */
     private String getUnformattedDateTime(String s, LocalDateTime ldt) {
         if (s == null) {
-            DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyy-MM-dd HHmm");
+            DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return ldt.format(outputFormat);
         } else {
             return s;
@@ -126,7 +126,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + getFormattedDateTime(this.by, this.byLdt) + ")";
+        return "[D] " + super.toString() + " (by: " + getFormattedDateTime(this.by, this.byLdt) + ")" +
+            super.getFormattedTags();
     }
 
     /**
@@ -135,6 +136,7 @@ public class Deadline extends Task {
      * @return a string representation of the Deadline
      */
     public String toSaveFormat() {
-        return "D | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.by, this.byLdt);
+        return "D | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.by, this.byLdt) +
+            " |" + super.getUnformattedTags() + " |";
     }
 }

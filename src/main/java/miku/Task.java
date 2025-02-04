@@ -97,6 +97,15 @@ public class Task implements Comparable<Task> {
     }
 
     /**
+     * Returns the unformatted tags for save file.
+     * 
+     * @return a string of the unformatted tags
+     */
+    public String getUnformattedTags() {
+        return this.tags.isEmpty() ? "" : " " + String.join(" ", this.tags);
+    }
+
+    /**
      * Marks the task as done if not done.
      *
      * @return an int denoting a successful change in doneness
