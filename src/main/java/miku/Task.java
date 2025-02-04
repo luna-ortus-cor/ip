@@ -102,7 +102,7 @@ public class Task implements Comparable<Task> {
      * @return a string of the unformatted tags
      */
     public String getUnformattedTags() {
-        return this.tags.isEmpty() ? "" : " " + String.join(" ", this.tags);
+        return this.tags.isEmpty() ? "" : String.join(" ", this.tags);
     }
 
     /**

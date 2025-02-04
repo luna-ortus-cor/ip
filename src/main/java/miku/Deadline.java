@@ -137,6 +137,6 @@ public class Deadline extends Task {
      */
     public String toSaveFormat() {
         return "D | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.by, this.byLdt) +
-            " |" + super.getUnformattedTags() + " |";
+            " | " + super.getUnformattedTags() + " |";
     }
 }

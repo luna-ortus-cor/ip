@@ -47,6 +47,6 @@ public class Todo extends Task {
      * @return a string representation of the Todo
      */
     public String toSaveFormat() {
-        return "T | " + super.toSaveFormat() + " |" + super.getUnformattedTags() + " |";
+        return "T | " + super.toSaveFormat() + " | " + super.getUnformattedTags() + " |";
     }
 }

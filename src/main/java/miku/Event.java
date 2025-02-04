@@ -159,6 +159,6 @@ public class Event extends Task {
      */
     public String toSaveFormat() {
         return "E | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.from, this.fromLdt) +
-            " | " + getUnformattedDateTime(this.to, this.toLdt) + " |" + super.getUnformattedTags() + " |";
+            " | " + getUnformattedDateTime(this.to, this.toLdt) + " | " + super.getUnformattedTags() + " |";
     }
 }
