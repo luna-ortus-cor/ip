@@ -59,6 +59,12 @@ public class Ui {
         System.out.println(Constants.INDENT + Constants.TASK_LIST_SORTED_MSG);
     }
 
+    public <T extends Task> void printEditTagsMsg(T task) {
+        System.out.println(Constants.INDENT + Constants.TASK_EDIT_TAG_MSG);
+        System.out.println(Constants.INDENT + Constants.INDENT + task.toString());
+        System.out.println();
+    }
+
     /**
      * Prints the help message.
      */

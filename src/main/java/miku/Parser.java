@@ -49,14 +49,19 @@ public class Parser {
         Pattern deletePattern = Pattern.compile("^delete (\\d+)$");
         Pattern deleteAllPattern = Pattern.compile("^delete /all$");
 
-        Pattern todoPattern = Pattern.compile("^todo\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
-        Pattern deadlinePattern = Pattern.compile("^deadline\\s+(.+?)\\s+/by\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
-        Pattern eventPattern = Pattern.compile("^event\\s+(.+?)\\s+/from\\s+(.+?)\\s+/to\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
+        Pattern todoPattern = Pattern.compile(
+            "^todo\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
+        Pattern deadlinePattern = Pattern.compile(
+            "^deadline\\s+(.+?)\\s+/by\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
+        Pattern eventPattern = Pattern.compile(
+            "^event\\s+(.+?)\\s+/from\\s+(.+?)\\s+/to\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
 
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
         Pattern searchNamePattern = Pattern.compile("^find (.+)$");
         Pattern setPriorityPattern = Pattern.compile("^set (\\d+) (\\d)$");
         Pattern sortPriorityPattern = Pattern.compile("^sort prio /(asc|desc)$");
+        Pattern addTagsPattern = Pattern.compile("^add tags (\\d+) ([\\w\\s+]+)");
+        Pattern deleteTagsPattern = Pattern.compile("^delete tags (\\d+) ([\\w\\s+]+)");
 
         Matcher matcher;
 
@@ -97,6 +102,10 @@ public class Parser {
             handleSetPriority(matcher.group(1), matcher.group(2));
         } else if ((matcher = sortPriorityPattern.matcher(in)).matches()) {
             handleSortPriority(matcher.group(1));
+        } else if ((matcher = addTagsPattern.matcher(in)).matches()) {
+            handleAddTags(matcher.group(1), matcher.group(2));
+        } else if ((matcher = deleteTagsPattern.matcher(in)).matches()) {
+            handleDeleteTags(matcher.group(1), matcher.group(2));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -374,6 +383,14 @@ public class Parser {
             handleError(8);
         }
         printList(sortedTaskList, 5);
+    }
+
+    private void handleAddTags(String idx, String tags) {
+        taskList.addTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
+    }
+
+    private void handleDeleteTags(String idx, String tags) {
+        taskList.removeTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
     }
 
     //error codes

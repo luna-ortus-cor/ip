@@ -97,8 +97,9 @@ public class TaskList {
             for (String s:tags) {
                 taskList.get(idx).addTag(s);
             }
+            ui.printEditTagsMsg(taskList.get(idx));
         } catch (IndexOutOfBoundsException e) {
-
+            handleError(5);
         }
     }
 
@@ -107,8 +108,9 @@ public class TaskList {
             for (String s:tags) {
                 taskList.get(idx).removeTag(s);
             }
+            ui.printEditTagsMsg(taskList.get(idx));
         } catch (IndexOutOfBoundsException e) {
-
+            handleError(5);
         }
     }
 
@@ -154,6 +156,7 @@ public class TaskList {
      * Add a new Todo Task to the list.
      *
      * @param name description of the Todo
+     * @param tags varargs of string tags
      */
     public void addTodo(String name, String... tags) {
         Todo t = new Todo(name);
@@ -169,6 +172,7 @@ public class TaskList {
      *
      * @param name desciption of the Todo
      * @param priority priority of the Todo
+     * @param tags varargs of string tags
      */
     public void addTodo(String name, int priority, String... tags) {
         Todo t = new Todo(name, priority);
@@ -184,6 +188,7 @@ public class TaskList {
      *
      * @param name description of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
+     * @param tags varargs of string tags
      */
     public void addDeadline(String name, String by, String... tags) {
         Deadline d = new Deadline(name, by);
@@ -200,6 +205,7 @@ public class TaskList {
      * @param name description of the Deadline
      * @param priority priority of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
+     * @param tags varargs of string tags
      */
     public void addDeadline(String name, int priority, String by, String... tags) {
         Deadline d = new Deadline(name, priority, by);
@@ -216,6 +222,7 @@ public class TaskList {
      * @param name description of the Event
      * @param from a String representing either a colloquial time or valid date time formmated time
      * @param to a String representing either a colloquial time or valid date time formatted time
+     * @param tags varargs of string tags
      */
     public void addEvent(String name, String from, String to, String ... tags) {
         Event e = new Event(name, from, to);
@@ -233,6 +240,7 @@ public class TaskList {
      * @param priority priority of the Event
      * @param from a String representing either a colloquial time or valid date time formmated time
      * @param to a String representing either a colloquial time or valid date time formatted time
+     * @param tags varargs of string tags
      */
     public void addEvent(String name, int priority, String from, String to, String... tags) {
         Event e = new Event(name, priority, from, to);

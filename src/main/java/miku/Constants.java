@@ -69,6 +69,7 @@ public class Constants {
     public static final String GAME_MATH_LENGTH_MSG =
         "Select length (1: Short, 2: Normal, 3: Long): ";
     public static final String SORT_LIST_ERROR = ":3 oops! error when sorting!";
+    public static final String TASK_EDIT_TAG_MSG = "Edited the following task:";
 
     public static String INPUT_STRING_BUILDER() {
         StringBuilder input = new StringBuilder();

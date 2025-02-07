@@ -75,6 +75,7 @@ public class Task implements Comparable<Task> {
      * @param tag tag to be removed
      */
     public void removeTag(String tag) {
+        //assert tag exists
         tags.remove(tag.toLowerCase());
     }
 
