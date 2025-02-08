@@ -58,7 +58,8 @@ test {
 application {
     //mainClass.set("seedu.duke.Duke")
     //mainClass.set("miku.Miku")
-    mainClass.set("miku.Main")
+    //mainClass.set("miku.Main")
+    mainClass.set("miku.Launcher")
 }
 
 shadowJar {

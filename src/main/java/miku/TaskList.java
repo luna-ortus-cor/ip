@@ -70,6 +70,7 @@ public class TaskList {
      * @param idx the index of the task in the list
      */
     public void markDone(int idx) {
+        assert idx >= 0: "Index must be non-negative";
         try {
             int response = taskList.get(idx).markDone();
             ui.printMarkDoneMsg(taskList.get(idx), response);
@@ -84,6 +85,7 @@ public class TaskList {
      * @param idx the index of the task in the list
      */
     public void markNotDone(int idx) {
+        assert idx >= 0: "Index must be non-negative";
         try {
             int response = taskList.get(idx).markNotDone();
             ui.printMarkNotDoneMsg(taskList.get(idx), response);
@@ -93,6 +95,7 @@ public class TaskList {
     }
 
     public void addTags(int idx, String... tags) {
+        assert idx >= 0: "Index must be non-negative";
         try {
             for (String s:tags) {
                 taskList.get(idx).addTag(s);
@@ -104,6 +107,7 @@ public class TaskList {
     }
 
     public void removeTags(int idx, String... tags) {
+        assert idx >= 0: "Index must be non-negative";
         try {
             for (String s:tags) {
                 taskList.get(idx).removeTag(s);
@@ -120,6 +124,7 @@ public class TaskList {
      * @param idx the index of the task in the list
      */
     public void delete(int idx) {
+        assert idx >= 0: "Index must be non-negative";
         try {
             Task t = taskList.get(idx);
             taskList.remove(idx);
@@ -144,6 +149,7 @@ public class TaskList {
      * @param priority the priority to be set to
      */
     public void setPriority(int idx, int priority) {
+        assert idx >= 0: "Index must be non-negative";
         try {
             int response = taskList.get(idx).setPriority(priority);
             ui.printSetPriorityMsg(taskList.get(idx), response);
