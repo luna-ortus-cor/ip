@@ -59,6 +59,11 @@ public class Ui {
         System.out.println(Constants.INDENT + Constants.TASK_LIST_SORTED_MSG);
     }
 
+    /**
+     * Prints the message when the user edits the tags of a task.
+     * 
+     * @param task the task to be edited
+     */
     public <T extends Task> void printEditTagsMsg(T task) {
         System.out.println(Constants.INDENT + Constants.TASK_EDIT_TAG_MSG);
         System.out.println(Constants.INDENT + Constants.INDENT + task.toString());
@@ -276,6 +281,9 @@ public class Ui {
             break;
         case 8:
             System.out.println(Constants.INDENT + Constants.SORT_LIST_ERROR);
+            break;
+        case 9:
+            System.out.println(Constants.INDENT + Constants.UNSPECIFIED_IO_ERROR);
             break;
         default:
             break;
