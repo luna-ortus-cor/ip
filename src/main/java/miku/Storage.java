@@ -6,6 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,6 +32,23 @@ public class Storage {
 
     //we should also include generic read and write methods for arbitrary files
 
+    public int checkFilePathExistsElseCreate(String fp) {
+        Path path = Paths.get(fp);
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+                return -1;
+                //System.out.println("File created: " + path);
+            } else {
+                return 1;
+                //System.out.println("File already exists: " + path);
+            }
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
     /**
      * Reads task from a file specified by a file path and returns an arraylist of the tasks.
      *
@@ -35,83 +57,88 @@ public class Storage {
      */
     public ArrayList<Task> readTasks(String fp) {
         ArrayList<Task> taskList = new ArrayList<>();
-        //ClassLoader classLoader = getClass().getClassLoader();
-        //File f = new File(fp);
-        //if (f.isFile()) {
-        //try (InputStream is = classLoader.getResourceAsStream(fp)) {
-        //    if (is == null) {
-        //        handleError(6); // File not found
-        //        return taskList;
-        //    }
+        int response = checkFilePathExistsElseCreate(fp);
+        if (response == -1) {
+            return taskList;
+        } else if (response == 0) {
+            handleError(9);
+        }
+
         File f = new File(fp);
-        if (f.isFile()) {
-            //try(BufferedReader br = new BufferedReader(new InputStreamReader(is))){
-            try (BufferedReader br = new BufferedReader(new FileReader(fp))) {
-                String line;
-                //DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                Pattern todoPattern =
-                    Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
-                Pattern deadlinePattern =
-                    Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
-                Pattern eventPattern =
-                    Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
-                while ((line = br.readLine()) != null) {
-                    Matcher todoMatcher = todoPattern.matcher(line);
-                    Matcher deadlineMatcher = deadlinePattern.matcher(line);
-                    Matcher eventMatcher = eventPattern.matcher(line);
-                    if (todoMatcher.matches()) {
-                        boolean isDone = todoMatcher.group(1).equals("1");
-                        String name = todoMatcher.group(3).trim();
-                        int priority = Integer.valueOf(todoMatcher.group(2));
-                        String tags = todoMatcher.group(4).trim();
-                        Todo t = new Todo(name, isDone, priority);
-                        if (!tags.isEmpty()) {
-                            for (String s:tags.split("\\s+")) {
-                                t.addTag(s);
-                            }
-                        }
-                        taskList.add(t);
-                    } else if (deadlineMatcher.matches()) {
-                        boolean isDone = deadlineMatcher.group(1).equals("1");
-                        String name = deadlineMatcher.group(3).trim();
-                        String by = deadlineMatcher.group(4).trim();
-                        int priority = Integer.valueOf(deadlineMatcher.group(2));
-                        //LocalDateTime by = LocalDateTime.parse(deadlineMatcher.group(3).trim(), DATE_TIME_FORMATTER);
-                        String tags = deadlineMatcher.group(5).trim();
-                        Deadline d = new Deadline(name, isDone, priority, by);
-                        if (!tags.isEmpty()) {
-                            for (String s:tags.split("\\s+")) {
-                                d.addTag(s);
-                            }
-                        }
-                        taskList.add(d);
-                    } else if (eventMatcher.matches()) {
-                        boolean isDone = eventMatcher.group(1).equals("1");
-                        String name = eventMatcher.group(3).trim();
-                        String from = eventMatcher.group(4).trim();
-                        String to = eventMatcher.group(5).trim();
-                        int priority = Integer.valueOf(eventMatcher.group(2));
-                        //LocalDateTime from = LocalDateTime.parse(eventMatcher.group(3).trim(), DATE_TIME_FORMATTER);
-                        //LocalDateTime to = LocalDateTime.parse(eventMatcher.group(4).trim(), DATE_TIME_FORMATTER);
-                        String tags = eventMatcher.group(6).trim();
-                        Event e = new Event(name, isDone, priority, from, to);
-                        if (!tags.isEmpty()) {
-                            for (String s:tags.split("\\s+")) {
-                                e.addTag(s);
-                            }
-                        }
-                        taskList.add(e);
-                    } else {
-                        //do nth
-                    }
+        try (BufferedReader br = new BufferedReader(new FileReader(fp))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Task t = parseTask(line);
+                if (t != null) {
+                    taskList.add(t);
                 }
-            } catch (IOException e) {
-                handleError(6);
             }
-        } //catch(IOException e){
-        //    handleError(6);
-        //}
+        } catch (IOException e) {
+            handleError(6);
+        }
         return taskList;
+    }
+
+    /**
+     * Parses a string specifying a task and returns a subclass instance of Task corresponding to the line.
+     * 
+     * @param line string representation of a task
+     */
+    private Task parseTask(String line) {
+        Pattern todoPattern =
+            Pattern.compile("^T\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
+        Pattern deadlinePattern =
+            Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
+        Pattern eventPattern =
+            Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
+        
+        Matcher todoMatcher = todoPattern.matcher(line);
+        Matcher deadlineMatcher = deadlinePattern.matcher(line);
+        Matcher eventMatcher = eventPattern.matcher(line);
+
+        if (todoMatcher.matches()) {
+            boolean isDone = todoMatcher.group(1).equals("1");
+            String name = todoMatcher.group(3).trim();
+            int priority = Integer.valueOf(todoMatcher.group(2));
+            String tags = todoMatcher.group(4).trim();
+            Todo t = new Todo(name, isDone, priority);
+            if (!tags.isEmpty()) {
+                for (String s:tags.split("\\s+")) {
+                    t.addTag(s);
+                }
+            }
+            return t;
+        } else if (deadlineMatcher.matches()) {
+            boolean isDone = deadlineMatcher.group(1).equals("1");
+            String name = deadlineMatcher.group(3).trim();
+            String by = deadlineMatcher.group(4).trim();
+            int priority = Integer.valueOf(deadlineMatcher.group(2));
+            String tags = deadlineMatcher.group(5).trim();
+            Deadline d = new Deadline(name, isDone, priority, by);
+            if (!tags.isEmpty()) {
+                for (String s:tags.split("\\s+")) {
+                    d.addTag(s);
+                }
+            }
+            return d;
+        } else if (eventMatcher.matches()) {
+            boolean isDone = eventMatcher.group(1).equals("1");
+            String name = eventMatcher.group(3).trim();
+            String from = eventMatcher.group(4).trim();
+            String to = eventMatcher.group(5).trim();
+            int priority = Integer.valueOf(eventMatcher.group(2));
+            String tags = eventMatcher.group(6).trim();
+            Event e = new Event(name, isDone, priority, from, to);
+            if (!tags.isEmpty()) {
+                for (String s:tags.split("\\s+")) {
+                    e.addTag(s);
+                }
+            }
+            return e;
+        } else {
+            return null;
+            //do nth
+        }
     }
 
     /**

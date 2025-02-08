@@ -368,11 +368,21 @@ public class Parser {
         chat.chat();
     }
 
+    /**
+     * Handle user search by task name (partial name acceptable).
+     * 
+     * @param in string to be searched for
+     */
     private void handleSearchName(String in) {
         ArrayList<Task> searchList = taskList.searchName(in);
         printList(searchList, 4);
     }
 
+    /**
+     * Handle user sort by priority (ascending or descending).
+     * 
+     * @param in string specifying order of sort (ascending or descending)
+     */
     private void handleSortPriority(String in) {
         ArrayList<Task> sortedTaskList = taskList.getList();
         if (in.equals("asc")) {
@@ -385,10 +395,22 @@ public class Parser {
         printList(sortedTaskList, 5);
     }
 
+    /**
+     * Handle user add tags to task.
+     * 
+     * @param idx index of task to add tags to
+     * @param tags whitespace delimited string of tags to be added
+     */
     private void handleAddTags(String idx, String tags) {
         taskList.addTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
     }
 
+    /**
+     * Handle user delete tags from task.
+     * 
+     * @param idx index of task to delete tags from
+     * @param tags whitespace delimited string of tags to be deleted
+     */
     private void handleDeleteTags(String idx, String tags) {
         taskList.removeTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
     }
@@ -402,6 +424,12 @@ public class Parser {
     //6:error reading task list from file
     //7:error writing task list to file
     //8:error sorting
+    //9:IO error (unspecified)
+    /**
+     * Handles error messages.
+     * 
+     * @param code int denoting the error generated
+     */
     private void handleError(int code) {
         ui.printErrorMsg(code);
     }
