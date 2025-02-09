@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="miku.EditContactWindow">
+    <children>
+        <VBox spacing="10.0" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+            <children>
+                <Label text="Add Contact" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                <ScrollPane fitToWidth="true" fitToHeight="true" prefHeight="400">
+                    <content>
+                        <VBox spacing="10.0">
+                            <GridPane hgap="10" vgap="10">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="150" />
+                                    <ColumnConstraints minWidth="250" />
+                                </columnConstraints>
+                                
+                                <!-- Name Fields -->
+                                <Label text="First Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="firstNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Middle Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="middleNameField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Last Name:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="lastNameField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                
+                                <!-- Phone Numbers -->
+                                <Label text="House Phone:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <HBox spacing="5" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                                    <TextField fx:id="houseExtensionField" promptText="Ext" prefWidth="50"/>
+                                    <TextField fx:id="housePhoneField" promptText="Number"/>
+                                </HBox>
+
+                                <Label text="Mobile Phone:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <HBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                                    <TextField fx:id="mobileExtensionField" promptText="Ext" prefWidth="50"/>
+                                    <TextField fx:id="mobilePhoneField" promptText="Number"/>
+                                </HBox>
+
+                                <Label text="Work Phone:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                <HBox spacing="5" GridPane.rowIndex="5" GridPane.columnIndex="1">
+                                    <TextField fx:id="workExtensionField" promptText="Ext" prefWidth="50"/>
+                                    <TextField fx:id="workPhoneField" promptText="Number"/>
+                                </HBox>
+
+                                <!-- Additional Details -->
+                                <Label text="Birthday:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                <DatePicker fx:id="birthdayPicker" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                
+                                <Label text="Blood Type:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                <TextField fx:id="bloodTypeField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                                <!-- Emails -->
+                                <Label text="Primary Email:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                                <TextField fx:id="primaryEmailField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                                <Label text="Secondary Email:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                                <TextField fx:id="secondaryEmailField" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                                <!-- Addresses -->
+                                <Label text="Primary Address:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                                <TextField fx:id="primaryAddressField" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+
+                                <Label text="Secondary Address:" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                                <TextField fx:id="secondaryAddressField" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+                            </GridPane>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <!-- Buttons -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel"/>
+                    <Button fx:id="saveButton" text="Save" onAction="#handleEdit"/>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+

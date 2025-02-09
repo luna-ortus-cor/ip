@@ -94,6 +94,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add tags to the task at a specified index.
+     * 
+     * @param idx the index of the task in the list
+     * @param tags varargs of string of tags to be added
+     */
     public void addTags(int idx, String... tags) {
         assert idx >= 0: "Index must be non-negative";
         try {
@@ -106,6 +112,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Remove tags from the task at a specified index.
+     * 
+     * @param idx the index of the task in the list
+     * @param tags varargs of string of tags to be removed
+     */
     public void removeTags(int idx, String... tags) {
         assert idx >= 0: "Index must be non-negative";
         try {
@@ -276,6 +288,11 @@ public class TaskList {
         return temp;
     }
 
+    /**
+     * Handles error messages.
+     * 
+     * @param code int denoting the error generated
+     */
     private void handleError(int code) {
         ui.printErrorMsg(code);
     }
