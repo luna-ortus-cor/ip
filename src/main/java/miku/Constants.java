@@ -19,6 +19,7 @@ public class Constants {
     public static final String INSTR_INVALID = ":3 oops! i don't understand that!";
     public static final String ADD_TASK = "got it! I've added this task desu:";
     public static final String TASK_LIST_MSG = "here are the tasks in your list desu:";
+    public static final String CONTACT_LIST_MSG = "here are the contacts you have desu:";
     public static final String TASK_LIST_SORTED_MSG = "here are the tasks in your list, sorted desu:";
     public static final String TODO_EMPTY_WS = ":3 oops! name field of todo cannot be empty!";
     public static final String DEADLINE_EMPTY_WS = ":3 oops! name and/or by field of deadline cannot be empty!";

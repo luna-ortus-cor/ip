@@ -170,6 +170,13 @@ public class Ui {
     }
 
     /**
+     * Prints the message when the user lists contacts.
+     */
+    public void printContactListMsg() {
+        System.out.println(Constants.INDENT + Constants.CONTACT_LIST_MSG);
+    }
+
+    /**
      * Prints the message when the user asks to play a game.
      */
     public void printGamesMsg() {

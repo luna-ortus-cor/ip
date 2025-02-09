@@ -1,15 +1,23 @@
 package miku;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 /**
  * Parser class to parse user instructions and take relevant action.
  */
-public class Parser {
+public class Parser implements ContactListener {
     private static TaskList taskList;
+    private static ContactList contactList;
     private static Storage storage;
     private static Ui ui;
     private Scanner sc = new Scanner(System.in);
@@ -22,6 +30,7 @@ public class Parser {
     public Parser(Ui ui) {
         this.ui = ui;
         this.taskList = new TaskList(ui);
+        this.contactList = new ContactList(ui);
         this.storage = new Storage(ui);
     }
 
@@ -60,8 +69,12 @@ public class Parser {
         Pattern searchNamePattern = Pattern.compile("^find (.+)$");
         Pattern setPriorityPattern = Pattern.compile("^set (\\d+) (\\d)$");
         Pattern sortPriorityPattern = Pattern.compile("^sort prio /(asc|desc)$");
-        Pattern addTagsPattern = Pattern.compile("^add tags (\\d+) ([\\w\\s+]+)");
-        Pattern deleteTagsPattern = Pattern.compile("^delete tags (\\d+) ([\\w\\s+]+)");
+        Pattern addTagsPattern = Pattern.compile("^add tags (\\d+) ([\\w\\s+]+)$");
+        Pattern deleteTagsPattern = Pattern.compile("^delete tags (\\d+) ([\\w\\s+]+)$");
+
+        Pattern addContactPattern = Pattern.compile("^add contact$");
+        Pattern editContactPattern = Pattern.compile("^edit contact (\\d+)$");
+        Pattern viewContactsPattern = Pattern.compile("^contacts$");
 
         Matcher matcher;
 
@@ -106,6 +119,12 @@ public class Parser {
             handleAddTags(matcher.group(1), matcher.group(2));
         } else if ((matcher = deleteTagsPattern.matcher(in)).matches()) {
             handleDeleteTags(matcher.group(1), matcher.group(2));
+        } else if ((matcher = addContactPattern.matcher(in)).matches()) {
+            handleAddContact();
+        } else if ((matcher = editContactPattern.matcher(in)).matches()) {
+            handleEditContact(matcher.group(1));
+        } else if ((matcher = viewContactsPattern.matcher(in)).matches()) {
+            printList(contactList.getList(), 6);
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -165,7 +184,8 @@ public class Parser {
      * @param list arraylist to be printed
      * @param type int specifying message to be printed prior to arraylist print
      */
-    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats, type=4 is search, type=5 is sort
+    //type=0 is task, type=1 is game, type=2 is track, type=3 is stats,
+    //type=4 is search, type=5 is sort, type=6 is contact
     private <T> void printList(ArrayList<T> list, int type) {
         int idx = 1;
         if (type == 0) {
@@ -178,8 +198,10 @@ public class Parser {
             ui.printStatsMsg();
         } else if (type == 4) {
             ui.printSearchMsg();
-        } else {
+        } else if (type == 5) {
             ui.printSortMsg();
+        } else {
+            ui.printContactListMsg();
         }
         for (T t:list) {
             ui.printListItem(idx, t);
@@ -413,6 +435,59 @@ public class Parser {
      */
     private void handleDeleteTags(String idx, String tags) {
         taskList.removeTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
+    }
+
+    private void handleAddContact() {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddContactWindow.fxml"));
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Add Contact");
+                stage.setScene(new Scene(loader.load()));
+                AddContactWindow controller = loader.getController();
+                controller.setContactListener(this);
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void onContactAdded(Contact contact) {
+        contactList.addContact(contact);
+        System.out.println("New contact added: " + contact);
+        System.out.println();
+    }
+
+    private void handleEditContact(String idx) {
+        Platform.runLater(() -> {
+            try {
+                Contact contact = contactList.getContact(Integer.valueOf(idx) - 1);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditContactWindow.fxml"));
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Add Contact");
+                stage.setScene(new Scene(loader.load()));
+                EditContactWindow controller = loader.getController();
+                controller.setContact(contact);
+                controller.setContactListener(this);
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void onContactEdited(Contact oldContact, Contact newContact) {
+        if (newContact != null) {
+            contactList.editContact(oldContact, newContact);
+            System.out.println("Existing contact edited: " + newContact);
+            System.out.println();
+        }
     }
 
     //error codes
