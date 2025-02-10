@@ -49,7 +49,7 @@ public class EditContactWindow {
     }
 
     @FXML
-    private void handleSave() {
+    private void handleEdit() {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String middleName = middleNameField.getText();

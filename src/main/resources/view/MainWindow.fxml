@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="Infinity" maxWidth="Infinity" minHeight="300.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #ECE5DD;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miku.MainWindow">
+<AnchorPane fx:id="mainAnchorPane" styleClass="main-root" maxHeight="Infinity" maxWidth="Infinity" minHeight="300.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #ECE5DD;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miku.MainWindow">
     <children>
       <HBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" alignment="CENTER">
          <children>

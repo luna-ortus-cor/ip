@@ -1,16 +1,23 @@
 package miku;
 
+import java.io.IOException;
 import java.io.PrintStream;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 /**
@@ -29,6 +36,7 @@ public class MainWindow extends AnchorPane {
     private Button settingsButton;
 
     private Miku miku;
+    private Settings settings = new Settings();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/emu1.jpg"));
     private Image mikuImage = new Image(this.getClass().getResourceAsStream("/images/miku4.png"));
@@ -47,6 +55,7 @@ public class MainWindow extends AnchorPane {
         System.setIn(mikuInputStream);
         //dialogContainer.getChildren().addAll(DialogBox.getMikuDialog("uwu", mikuImage));
         this.miku = new Miku(mikuInputStream, mikuOutputStream); //Initialize Miku
+
         Platform.runLater(() -> {
             new Thread(() -> {
                 int response = this.miku.run();
@@ -80,7 +89,21 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleSettings() {
-        
+        try {
+            // Load the settings UI from FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Settings.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // Create a new stage for the settings window
+            Stage stage = new Stage();
+            stage.setTitle("Settings");
+            stage.setScene(scene);
+
+            // Show the settings window
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

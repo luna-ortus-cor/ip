@@ -40,6 +40,7 @@ public class Parser implements ContactListener {
      */
     public void start() {
         loadTaskList();
+        loadContactList();
         ui.printStartMsg();
     }
 
@@ -161,6 +162,7 @@ public class Parser implements ContactListener {
      */
     private void handleExit() {
         saveTaskList();
+        saveContactList();
         ui.printExitMsg();
     }
 
@@ -176,6 +178,20 @@ public class Parser implements ContactListener {
      */
     private void saveTaskList() {
         taskList.saveTasks(storage);
+    }
+
+    /**
+     * Load the contact list from file.
+     */
+    private void loadContactList() {
+        contactList.loadContacts(storage);
+    }
+
+    /**
+     * Save the contact list to file.
+     */
+    private void saveContactList() {
+        contactList.saveContacts(storage);
     }
 
     /**

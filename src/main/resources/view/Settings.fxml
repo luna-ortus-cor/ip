@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane fx:id="settingsPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miku.SettingsController">
+<AnchorPane fx:id="settingsPane" styleClass="settings-root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="miku.SettingsWindow">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" spacing="10">
          <padding>
@@ -37,6 +38,12 @@
                <children>
                   <CheckBox fx:id="typingIndicatorToggle" text="Enable Typing Indicator" />
                </children>
+            </HBox>
+            <HBox>
+                <children>
+                    <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel" layoutX="150" layoutY="300"/>
+                    <Button fx:id="applyButton" text="Apply" onAction="#handleApply" layoutX="230" layoutY="300"/>
+                </children>
             </HBox>
          </children>
       </VBox>
