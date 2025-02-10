@@ -3,6 +3,7 @@ package miku;
 import java.util.ArrayList;
 
 public class ContactList {
+    private static final String FILE_PATH = Constants.FILEPATH_CONTACTLIST;
     private ArrayList<Contact> contactList = new ArrayList<Contact>();
     private Ui ui;
 
@@ -22,6 +23,24 @@ public class ContactList {
      */
     public ArrayList<Contact> getList() {
         return this.contactList;
+    }
+
+    /**
+     * Load contacts from a file given a Storage instance.
+     *
+     * @param s a Storage instance
+     */
+    public void loadContacts(Storage s) {
+        this.contactList = s.readContacts(FILE_PATH);
+    }
+
+    /**
+     * Save contacts to a file given a Storage instance.
+     *
+     * @param s a Storage instance
+     */
+    public void saveContacts(Storage s) {
+        s.writeContacts(this.contactList, FILE_PATH);
     }
 
     public Contact getContact(int idx) {

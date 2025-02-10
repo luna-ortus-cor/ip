@@ -35,6 +35,7 @@ public class Constants {
     public static final String FILEPATH_WORDLIST = "./data/words.txt";
     public static final String FILEPATH_TIME_TRACKER = "./data/time_tracker.txt";
     public static final String FILEPATH_TASKLIST = "./data/tasks.txt";
+    public static final String FILEPATH_CONTACTLIST = "./data/contacts.txt";
     public static final String READ_LIST_FILE_ERROR = ":3 oops! error reading list from file!";
     public static final String WRITE_LIST_FILE_ERROR = ":3 oops! error writing list to file!";
     public static final String READ_WORDLIST_FILE_ERROR = ":3 oops! error reading wordlist!";

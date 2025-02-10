@@ -1,0 +1,6 @@
+#Settings
+#Tue Feb 11 04:44:59 SGT 2025
+typingIndicatorEnabled=true
+theme=dark
+fontSize=17
+soundEnabled=true

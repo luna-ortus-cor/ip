@@ -14,9 +14,12 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Miku miku = new Miku();
 
+    private static Stage primaryStage;  // Store the primary stage
+    
     @Override
     public void start(Stage stage) {
         try {
+            Main.primaryStage = stage;
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -32,7 +35,11 @@ public class Main extends Application {
         }
     }
 
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

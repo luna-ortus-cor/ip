@@ -1,0 +1,88 @@
+/* Dark Theme */
+.main-root, .settings-root {
+    -fx-background-color: #2b2b2b; /* Dark background */
+}
+
+.button, .choice-box, .slider, .text-field, .toggle-button {
+    -fx-background-color: #555555; /* Dark background for interactive elements */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-border-color: #444444; /* Darker border color */
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial';
+}
+
+.button:hover {
+    -fx-background-color: #4CAF50; /* Green on hover */
+}
+
+.label {
+    -fx-text-fill: #FFFFFF; /* White text for labels */
+    -fx-font-size: 14px;
+}
+
+.text-area, .textarea {
+    -fx-background-color: #555555; /* Dark background for text areas */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-border-color: #444444; /* Darker border color */
+}
+
+.checkbox, .check-box > .check-box-label {
+    -fx-text-fill: #FFFFFF; /* White text for checkboxes */
+}
+
+.slider .track {
+    -fx-background-color: #555555; /* Dark track for sliders */
+}
+
+.slider .thumb {
+    -fx-background-color: #4CAF50; /* Green thumb for sliders */
+}
+
+/* Additional styles for contrast */
+.dialog {
+    -fx-background-color: #4CAF50; /* Green dialog */
+    -fx-text-fill: #FFFFFF; /* White text in dialogs */
+}
+
+.scroll-pane {
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+/* Scroll Pane */
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+
+/* TableView (if present in your UI) */
+.table-view, .table-cell {
+    -fx-background-color: #555555;
+    -fx-border-color: #444444;
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #4CAF50;
+}
+
+/* TextField Styling */
+.text-field {
+    -fx-background-color: #555555;
+    -fx-border-color: #444444;
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-field:focused {
+    -fx-border-color: #4CAF50;
+}
+
+/* ComboBox */
+.combo-box, .combo-box-popup {
+    -fx-background-color: #555555;
+    -fx-border-color: #444444;
+    -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #4CAF50;
+}

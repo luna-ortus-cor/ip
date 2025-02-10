@@ -176,22 +176,22 @@ public class Storage {
                 String[] parts = line.split(" \\| ");
                 if (parts.length < 14) continue; // Ignore malformed lines
 
-                String firstName = parts[0].trim();
-                String lastName = parts[1].trim();
-                String middleName = parts[2].trim();
-                String housePhone = parts[3].trim();
-                String housePhoneExt = parts[4].trim();
-                String mobilePhone = parts[5].trim();
-                String mobilePhoneExt = parts[6].trim();
-                String workPhone = parts[7].trim();
-                String workPhoneExt = parts[8].trim();
+                String firstName = toNull(parts[0].trim());
+                String lastName = toNull(parts[1].trim());
+                String middleName = toNull(parts[2].trim());
+                String housePhone = toNull(parts[3].trim());
+                String housePhoneExt = toNull(parts[4].trim());
+                String mobilePhone = toNull(parts[5].trim());
+                String mobilePhoneExt = toNull(parts[6].trim());
+                String workPhone = toNull(parts[7].trim());
+                String workPhoneExt = toNull(parts[8].trim());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate birthday = LocalDate.parse(parts[9].trim(), formatter);
-                String bloodType = parts[10].trim();
-                String primaryEmail = parts[11].trim();
-                String secondaryEmail = parts[12].trim();
-                String primaryAddress = parts[13].trim();
-                String secondaryAddress = parts[14].trim();
+                LocalDate birthday = parts[9].trim().equals("-") ? null : LocalDate.parse(parts[9].trim(), formatter);
+                String bloodType = toNull(parts[10].trim());
+                String primaryEmail = toNull(parts[11].trim());
+                String secondaryEmail = toNull(parts[12].trim());
+                String primaryAddress = toNull(parts[13].trim());
+                String secondaryAddress = toNull(parts[14].trim());
 
                 contactList.add(new Contact(firstName, lastName, middleName,
                                          housePhone, housePhoneExt,
@@ -208,6 +208,11 @@ public class Storage {
         }
         return contactList;
     }
+
+    private String toNull(String value) {
+        return (value == null || value.equals("-")) ? null : value;
+    }
+
 
     public void writeContacts(ArrayList<Contact> contactList, String fp) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp))) {
