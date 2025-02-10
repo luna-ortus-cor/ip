@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,7 +66,6 @@ public class Storage {
             handleError(9);
         }
 
-        File f = new File(fp);
         try (BufferedReader br = new BufferedReader(new FileReader(fp))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -153,8 +154,71 @@ public class Storage {
                 bw.write(t.toSaveFormat());
                 bw.newLine();
             }
+            //System.out.println("Tasks saved successfully to " + filename);
+            //System.out.println();
         } catch (IOException e) {
             handleError(7);
+        }
+    }
+
+    public ArrayList<Contact> readContacts(String fp) {
+        ArrayList<Contact> contactList = new ArrayList<>();
+        int response = checkFilePathExistsElseCreate(fp);
+        if (response == -1) {
+            return contactList;
+        } else if (response == 0) {
+            handleError(9);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fp))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" \\| ");
+                if (parts.length < 14) continue; // Ignore malformed lines
+
+                String firstName = parts[0].trim();
+                String lastName = parts[1].trim();
+                String middleName = parts[2].trim();
+                String housePhone = parts[3].trim();
+                String housePhoneExt = parts[4].trim();
+                String mobilePhone = parts[5].trim();
+                String mobilePhoneExt = parts[6].trim();
+                String workPhone = parts[7].trim();
+                String workPhoneExt = parts[8].trim();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate birthday = LocalDate.parse(parts[9].trim(), formatter);
+                String bloodType = parts[10].trim();
+                String primaryEmail = parts[11].trim();
+                String secondaryEmail = parts[12].trim();
+                String primaryAddress = parts[13].trim();
+                String secondaryAddress = parts[14].trim();
+
+                contactList.add(new Contact(firstName, lastName, middleName,
+                                         housePhone, housePhoneExt,
+                                         mobilePhone, mobilePhoneExt,
+                                         workPhone, workPhoneExt,
+                                         birthday, bloodType,
+                                         primaryEmail, secondaryEmail,
+                                         primaryAddress, secondaryAddress));
+            }
+            //System.out.println("Contacts loaded successfully from " + filename);
+            //System.out.println();
+        } catch (IOException e) {
+            //handleError(6);
+        }
+        return contactList;
+    }
+
+    public void writeContacts(ArrayList<Contact> contactList, String fp) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp))) {
+            for (Contact c:contactList) {
+                writer.write(c.toString());
+                writer.newLine();
+            }
+            //System.out.println("Contacts saved successfully to " + filename);
+            //System.out.println();
+        } catch (IOException e) {
+            //handleError(7);
         }
     }
 
