@@ -36,8 +36,10 @@ public class Constants {
     public static final String FILEPATH_TIME_TRACKER = "./data/time_tracker.txt";
     public static final String FILEPATH_TASKLIST = "./data/tasks.txt";
     public static final String FILEPATH_CONTACTLIST = "./data/contacts.txt";
-    public static final String READ_LIST_FILE_ERROR = ":3 oops! error reading list from file!";
-    public static final String WRITE_LIST_FILE_ERROR = ":3 oops! error writing list to file!";
+    public static final String READ_TASK_LIST_FILE_ERROR = ":3 oops! error reading task list from file!";
+    public static final String WRITE_TASK_LIST_FILE_ERROR = ":3 oops! error writing task list to file!";
+    public static final String READ_CONTACT_LIST_FILE_ERROR = ":3 oops! error reading contact list from file!";
+    public static final String WRITE_CONTACT_LIST_FILE_ERROR = ":3 oops! error writing contact list to file!";
     public static final String READ_WORDLIST_FILE_ERROR = ":3 oops! error reading wordlist!";
     public static final String TASK_MARK_DONE_SUCCESS = "YATTA! I've marked this task as done:";
     public static final String TASK_MARK_DONE_FAILURE = "Task is already done";

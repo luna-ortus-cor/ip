@@ -87,8 +87,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Opens the settings menu.
+     */
     @FXML
-    private void handleSettings() {
+    private void handleSettings() { //to use Platform.runLater? or stage.showAndWait?
         try {
             // Load the settings UI from FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Settings.fxml"));

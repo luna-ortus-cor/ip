@@ -157,7 +157,13 @@ public class Contact {
         }
     }
 
-    public boolean validateEmail(String email) {
+    /**
+     * Validate email, check email follows a valid standard email format.
+     * 
+     * @param email string of email to be validated
+     * @return boolean specifying if email is valid or not
+     */
+    private boolean validateEmail(String email) {
         Pattern validEmailPattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
         return validEmailPattern.matcher(email).matches();
     }

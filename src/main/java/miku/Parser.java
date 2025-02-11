@@ -76,6 +76,9 @@ public class Parser implements ContactListener {
         Pattern addContactPattern = Pattern.compile("^add contact$");
         Pattern editContactPattern = Pattern.compile("^edit contact (\\d+)$");
         Pattern viewContactsPattern = Pattern.compile("^contacts$");
+        Pattern searchContactNamePattern = Pattern.compile("^find name (.+)$");
+        Pattern searchContactEmailPattern = Pattern.compile("^find email (.+)$");
+        Pattern searchContactAddressPattern = Pattern.compile("^find address (.+)$");
 
         Matcher matcher;
 
@@ -453,6 +456,9 @@ public class Parser implements ContactListener {
         taskList.removeTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
     }
 
+    /**
+     * Handle user add contact.
+     */
     private void handleAddContact() {
         Platform.runLater(() -> {
             try {
@@ -477,6 +483,9 @@ public class Parser implements ContactListener {
         System.out.println();
     }
 
+    /**
+     * Handle user edit contact.
+     */
     private void handleEditContact(String idx) {
         Platform.runLater(() -> {
             try {

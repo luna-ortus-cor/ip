@@ -52,7 +52,7 @@ public class Storage {
     }
 
     /**
-     * Reads task from a file specified by a file path and returns an arraylist of the tasks.
+     * Reads tasks from a file specified by a file path and returns an arraylist of the tasks.
      *
      * @param fp a String containing the file path
      * @return an ArrayList of Tasks
@@ -161,6 +161,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads contacts from a file specified by a file path and returns an arraylist of the contacts.
+     *
+     * @param fp a String containing the file path
+     * @return an ArrayList of Contacts
+     */
     public ArrayList<Contact> readContacts(String fp) {
         ArrayList<Contact> contactList = new ArrayList<>();
         int response = checkFilePathExistsElseCreate(fp);
@@ -204,16 +210,27 @@ public class Storage {
             //System.out.println("Contacts loaded successfully from " + filename);
             //System.out.println();
         } catch (IOException e) {
-            //handleError(6);
+            handleError(10);
         }
         return contactList;
     }
 
+    /**
+     * Helper method to handle null/empty value representations of fields in Contact
+     * 
+     * @param value string of a field in a Contact object
+     * @return null if the string is the empty representation, else value
+     */
     private String toNull(String value) {
         return (value == null || value.equals("-")) ? null : value;
     }
 
-
+    /**
+     * Write contacts from an arraylist of contacts to a file specified by a file path.
+     *
+     * @param taskList an ArrayList of Contacts
+     * @param fp a String containing the file path
+     */
     public void writeContacts(ArrayList<Contact> contactList, String fp) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp))) {
             for (Contact c:contactList) {
@@ -223,7 +240,7 @@ public class Storage {
             //System.out.println("Contacts saved successfully to " + filename);
             //System.out.println();
         } catch (IOException e) {
-            //handleError(7);
+            handleError(11);
         }
     }
 

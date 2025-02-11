@@ -281,16 +281,22 @@ public class Ui {
             System.out.println(Constants.INDENT + Constants.LIST_IDX_INVALID);
             break;
         case 6:
-            System.out.println(Constants.INDENT + Constants.READ_LIST_FILE_ERROR);
+            System.out.println(Constants.INDENT + Constants.READ_TASK_LIST_FILE_ERROR);
             break;
         case 7:
-            System.out.println(Constants.INDENT + Constants.WRITE_LIST_FILE_ERROR);
+            System.out.println(Constants.INDENT + Constants.WRITE_TASK_LIST_FILE_ERROR);
             break;
         case 8:
             System.out.println(Constants.INDENT + Constants.SORT_LIST_ERROR);
             break;
         case 9:
             System.out.println(Constants.INDENT + Constants.UNSPECIFIED_IO_ERROR);
+            break;
+        case 10:
+            System.out.println(Constants.INDENT + Constants.READ_CONTACT_LIST_FILE_ERROR);
+            break;
+        case 11:
+            System.out.println(Constants.INDENT + Constants.WRITE_CONTACT_LIST_FILE_ERROR);
             break;
         default:
             break;

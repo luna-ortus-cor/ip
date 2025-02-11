@@ -43,14 +43,71 @@ public class ContactList {
         s.writeContacts(this.contactList, FILE_PATH);
     }
 
+    /**
+     * Get contact based on index in contact list.
+     * 
+     * @param idx index of contact in contact list
+     * @return contact object at specified index
+     */
     public Contact getContact(int idx) {
         return this.contactList.get(idx); //need try catch on idx
     }
 
+    /**
+     * Search contacts by name, allowing partial matches in any of the name fields.
+     * 
+     * @param searchString the search string to be matched (either partially or fully)
+     * @return an arraylist of contact objects containing the search string
+     */
+    public ArrayList<Contact> findContactByName(String searchString) {
+        return new ArrayList<Contact>(contacts.stream()
+                .filter(contact -> contact.getFirstName().toLowerCase().contains(searchString.toLowerCase()) ||
+                                   contact.getMiddleName().toLowerCase().contains(searchString.toLowerCase()) ||
+                                   contact.getLastName().toLowerCase().contains(searchString.toLowerCase()))
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Search contacts by email, allowing partial matches in any of the email fields.
+     * 
+     * @param searchString the search string to be matched (either partially or fully)
+     * @return an arraylist of contact objects containing the search string
+     */
+    public ArrayList<Contact> findContactsByEmail(String searchString) {
+        return new ArrayList<Contact>(contacts.stream()
+                .filter(contact -> contact.getPrimaryEmail().toLowerCase().contains(searchString.toLowerCase()) ||
+                                   contact.getSecondaryEmail().toLowerCase().contains(searchString.toLowerCase()))
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Search contacts by address, allowing partial matches in any of the address fields.
+     * 
+     * @param searchString the search string to be matched (either partially or fully)
+     * @return an arraylist of contact objects containing the search string
+     */
+    public ArrayList<Contact> findContactsByAddress(String searchString) {
+        return new ArrayList<Contact>(contacts.stream()
+                .filter(contact -> contact.getPrimaryAddress().toLowerCase().contains(searchString.toLowerCase()) ||
+                                   contact.getSecondaryAddress().toLowerCase().contains(searchString.toLowerCase()))
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Add a contact object to the list of contacts.
+     * 
+     * @param c a contact object to be added to the list of contacts
+     */
     public void addContact(Contact c) {
         this.contactList.add(c);
     }
 
+    /**
+     * Edit an existing contact object in the list of contacts.
+     * 
+     * @param c1 old contact to be edited
+     * @param c2 new contact to replace the old contact
+     */
     public void editContact(Contact c1, Contact c2) {
         int idx = this.contactList.indexOf(c1);
         this.contactList.set(idx, c2);
@@ -73,7 +130,7 @@ public class ContactList {
     }
 
     /**
-     * Delete all tasks in the list.
+     * Delete all contacts in the list.
      */
     public void deleteAll() {
         contactList.clear();
