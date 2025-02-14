@@ -376,6 +376,9 @@ public class Parser implements ContactListener {
             int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
             WordleGame game = new WordleGame(difficulty);
             game.startGame();
+        } else if (choice == 3) {
+            BlackjackGame game = new BlackjackGame();
+            game.startGame();
         } else {
             //go back
         }
