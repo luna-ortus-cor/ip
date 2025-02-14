@@ -72,6 +72,7 @@ public class TimeTracker {
         for (Map.Entry<String, Integer> entry : activityCount.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " times");
         }
+        System.out.println();
 
         // Display total time spent
         System.out.println("Total time spent on activities: " + totalMinutes + " minutes");
@@ -87,5 +88,6 @@ public class TimeTracker {
         for (Map.Entry<String, Long> entry : activityTime.entrySet()) {
             System.out.printf("%s%s: %d minutes\n", Constants.INDENT, entry.getKey(), entry.getValue());
         }
+        System.out.println();
     }
 }

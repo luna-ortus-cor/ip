@@ -34,6 +34,8 @@ public class Constants {
     public static final String STATS_MSG = "^~^ sure! which stats would you like to see?";
     public static final String FILEPATH_WORDLIST = "./data/words.txt";
     public static final String FILEPATH_TIME_TRACKER = "./data/time_tracker.txt";
+    public static final String FILEPATH_MOOD_TRACKER = "./data/mood_tracker.txt";
+    public static final String FILEPATH_ALCOHOL_TRACKER = "./data/alcohol_tracker.txt";
     public static final String FILEPATH_TASKLIST = "./data/tasks.txt";
     public static final String FILEPATH_CONTACTLIST = "./data/contacts.txt";
     public static final String READ_TASK_LIST_FILE_ERROR = ":3 oops! error reading task list from file!";
@@ -72,6 +74,7 @@ public class Constants {
         "Select difficulty (1: Easy, 2: Normal, 3: Hard): ";
     public static final String GAME_MATH_LENGTH_MSG =
         "Select length (1: Short, 2: Normal, 3: Long): ";
+    public static final String GAME_TERMINATED = "T_T game stopped";
     public static final String SORT_LIST_ERROR = ":3 oops! error when sorting!";
     public static final String UNSPECIFIED_IO_ERROR = ":3 oops! an unknown IO error occurred";
     public static final String TASK_EDIT_TAG_MSG = "Edited the following task:";

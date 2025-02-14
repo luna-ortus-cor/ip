@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class Parser implements ContactListener {
     private static TaskList taskList;
     private static ContactList contactList;
+    private static LocationList locationList;
     private static Storage storage;
     private static Ui ui;
     private Scanner sc = new Scanner(System.in);
@@ -79,6 +80,10 @@ public class Parser implements ContactListener {
         Pattern searchContactNamePattern = Pattern.compile("^find name (.+)$");
         Pattern searchContactEmailPattern = Pattern.compile("^find email (.+)$");
         Pattern searchContactAddressPattern = Pattern.compile("^find address (.+)$");
+
+        Pattern addPlacePattern = Pattern.compile("^add place (.+)$");
+        Pattern addWebsitePattern = Pattern.compile("^add website (.+)$");
+        Pattern searchLocationPattern = Pattern.compile("find location (.+)$");
 
         Matcher matcher;
 
@@ -201,6 +206,14 @@ public class Parser implements ContactListener {
      */
     private void saveContactList() {
         contactList.saveContacts(storage);
+    }
+
+    private void loadLocationList() {
+
+    }
+
+    private void saveLocationList() {
+
     }
 
     /**
@@ -375,18 +388,47 @@ public class Parser implements ContactListener {
         printList(Constants.TRACK_LIST, 2);
         int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
         if (choice == 1) {
-            System.out.print("Enter START DATE (YYYY-MM-DD): ");
+            System.out.println("Enter START DATE (YYYY-MM-DD): ");
+            System.out.println();
             String startDate = Constants.INPUT_STRING_BUILDER();
-            System.out.print("Enter START TIME (HH:mm): ");
+            System.out.println("Enter START TIME (HH:mm): ");
+            System.out.println();
             String startTime = Constants.INPUT_STRING_BUILDER();
-            System.out.print("Enter END DATE (YYYY-MM-DD): ");
+            System.out.println("Enter END DATE (YYYY-MM-DD): ");
+            System.out.println();
             String endDate = Constants.INPUT_STRING_BUILDER();
-            System.out.print("Enter END TIME (HH:mm): ");
+            System.out.println("Enter END TIME (HH:mm): ");
+            System.out.println();
             String endTime = Constants.INPUT_STRING_BUILDER();
-            System.out.print("Enter ACTIVITY: ");
+            System.out.println("Enter ACTIVITY: ");
+            System.out.println();
             String name = Constants.INPUT_STRING_BUILDER();
             Activity a = new Activity(startDate, startTime, endDate, endTime, name);
             TimeTracker.saveActivityToFile(a);
+        } else if (choice == 2) {
+            System.out.println("Enter DATE (YYYY-MM-DD): ");
+            System.out.println();
+            String date = Constants.INPUT_STRING_BUILDER();
+            System.out.println("Enter MOOD: ");
+            System.out.println();
+            String mood = Constants.INPUT_STRING_BUILDER();
+            //Mood m = new Mood(date, mood);
+            MoodTracker.trackMood(date, mood);
+        } else if (choice == 3) {
+            System.out.println("Enter DATE (YYYY-MM-DD): ");
+            System.out.println();
+            String date = Constants.INPUT_STRING_BUILDER();
+            System.out.println("Enter DRINK TYPE: ");
+            System.out.println();
+            String drink = Constants.INPUT_STRING_BUILDER();
+            System.out.println("Enter DRINK NAME: ");
+            System.out.println();
+            String name = Constants.INPUT_STRING_BUILDER();
+            System.out.println("Enter DRINK QTY (in standard drinks): ");
+            System.out.println();
+            int qty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            //Alcohol a = new Alcohol(date, drink, name, qty);
+            AlcoholTracker.trackAlcohol(date, drink, name, qty);
         } else {
             //go back
         }
@@ -400,6 +442,10 @@ public class Parser implements ContactListener {
         int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
         if (choice == 1) {
             TimeTracker.displayStatistics();
+        } else if (choice == 2) {
+            MoodTracker.displayStatistics();
+        } else if (choice == 3) {
+            AlcoholTracker.displayStatistics();
         } else {
             //go back
         }
