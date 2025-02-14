@@ -67,7 +67,7 @@ public class Parser implements ContactListener {
             "^event\\s+(.+?)\\s+/from\\s+(.+?)\\s+/to\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
 
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
-        Pattern searchNamePattern = Pattern.compile("^find (.+)$");
+        Pattern searchNamePattern = Pattern.compile("^find task (.+)$");
         Pattern setPriorityPattern = Pattern.compile("^set (\\d+) (\\d)$");
         Pattern sortPriorityPattern = Pattern.compile("^sort prio /(asc|desc)$");
         Pattern addTagsPattern = Pattern.compile("^add tags (\\d+) ([\\w\\s+]+)$");
@@ -129,6 +129,12 @@ public class Parser implements ContactListener {
             handleEditContact(matcher.group(1));
         } else if ((matcher = viewContactsPattern.matcher(in)).matches()) {
             printList(contactList.getList(), 6);
+        } else if ((matcher = searchContactNamePattern.matcher(in)).matches()) {
+            handleSearchContactName(matcher.group(1));
+        } else if ((matcher = searchContactEmailPattern.matcher(in)).matches()) {
+            handleSearchContactEmail(matcher.group(1));
+        } else if ((matcher = searchContactAddressPattern.matcher(in)).matches()) {
+            handleSearchContactAddress(matcher.group(1));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -513,6 +519,36 @@ public class Parser implements ContactListener {
             System.out.println("Existing contact edited: " + newContact);
             System.out.println();
         }
+    }
+
+    /**
+     * Handle user search for contact by name (partial name acceptable).
+     * 
+     * @param in string to be searched for
+     */
+    private void handleSearchContactName(String in) {
+        ArrayList<Contact> searchList = contactList.findContactByName(in);
+        printList(searchList, 4);
+    }
+
+    /**
+     * Handle user search for contact by email (partial email acceptable).
+     * 
+     * @param in string to be searched for
+     */
+    private void handleSearchContactEmail(String in) {
+        ArrayList<Contact> searchList = contactList.findContactsByEmail(in);
+        printList(searchList, 4);
+    }
+
+    /**
+     * Handle user search for contact by address (partial address acceptable).
+     * 
+     * @param in string to be searched for
+     */
+    private void handleSearchContactAddress(String in) {
+        ArrayList<Contact> searchList = contactList.findContactsByAddress(in);
+        printList(searchList, 4);
     }
 
     //error codes

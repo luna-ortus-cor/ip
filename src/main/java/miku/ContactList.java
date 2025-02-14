@@ -1,6 +1,7 @@
 package miku;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ContactList {
     private static final String FILE_PATH = Constants.FILEPATH_CONTACTLIST;
@@ -60,10 +61,13 @@ public class ContactList {
      * @return an arraylist of contact objects containing the search string
      */
     public ArrayList<Contact> findContactByName(String searchString) {
-        return new ArrayList<Contact>(contacts.stream()
-                .filter(contact -> contact.getFirstName().toLowerCase().contains(searchString.toLowerCase()) ||
-                                   contact.getMiddleName().toLowerCase().contains(searchString.toLowerCase()) ||
-                                   contact.getLastName().toLowerCase().contains(searchString.toLowerCase()))
+        return new ArrayList<Contact>(contactList.stream()
+                .filter(contact -> (contact.getFirstName() != null &&
+                                    contact.getFirstName().toLowerCase().contains(searchString.toLowerCase())) ||
+                                   (contact.getMiddleName() != null &&
+                                    contact.getMiddleName().toLowerCase().contains(searchString.toLowerCase())) ||
+                                   (contact.getLastName() != null &&
+                                    contact.getLastName().toLowerCase().contains(searchString.toLowerCase())))
                 .collect(Collectors.toList()));
     }
 
@@ -74,9 +78,11 @@ public class ContactList {
      * @return an arraylist of contact objects containing the search string
      */
     public ArrayList<Contact> findContactsByEmail(String searchString) {
-        return new ArrayList<Contact>(contacts.stream()
-                .filter(contact -> contact.getPrimaryEmail().toLowerCase().contains(searchString.toLowerCase()) ||
-                                   contact.getSecondaryEmail().toLowerCase().contains(searchString.toLowerCase()))
+        return new ArrayList<Contact>(contactList.stream()
+                .filter(contact -> (contact.getPrimaryEmail() != null &&
+                                    contact.getPrimaryEmail().toLowerCase().contains(searchString.toLowerCase())) ||
+                                   (contact.getSecondaryEmail() != null &&
+                                    contact.getSecondaryEmail().toLowerCase().contains(searchString.toLowerCase())))
                 .collect(Collectors.toList()));
     }
 
@@ -87,9 +93,11 @@ public class ContactList {
      * @return an arraylist of contact objects containing the search string
      */
     public ArrayList<Contact> findContactsByAddress(String searchString) {
-        return new ArrayList<Contact>(contacts.stream()
-                .filter(contact -> contact.getPrimaryAddress().toLowerCase().contains(searchString.toLowerCase()) ||
-                                   contact.getSecondaryAddress().toLowerCase().contains(searchString.toLowerCase()))
+        return new ArrayList<Contact>(contactList.stream()
+                .filter(contact -> (contact.getPrimaryAddress() != null &&
+                                    contact.getPrimaryAddress().toLowerCase().contains(searchString.toLowerCase())) ||
+                                   (contact.getSecondaryAddress() != null &&
+                                    contact.getSecondaryAddress().toLowerCase().contains(searchString.toLowerCase())))
                 .collect(Collectors.toList()));
     }
 
