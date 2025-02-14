@@ -11,9 +11,10 @@ public class BlackjackGame {
     private static final Random random = new Random();
     private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     private static final Map<String, Integer> CARD_VALUES = new HashMap<>();
+    private Ui ui;
 
-    public BlackjackGame() {
-
+    public BlackjackGame(Ui ui) {
+        this.ui = ui;
     }
 
     static {
@@ -52,7 +53,12 @@ public class BlackjackGame {
             while (currentHand.size() == 2 && currentHand.get(0).equals(currentHand.get(1))) {
                 System.out.println("You have a pair! Do you want to (s)plit or (n)o? ");
                 System.out.println();
-                String splitChoice = Constants.INPUT_STRING_BUILDER();
+                String splitChoice = Constants.INPUT_STRING_BUILDER().toLowerCase();
+                if(splitChoice.equals("exit")) {
+                    ui.printGameTerminatedMsg();
+                    return;
+                }
+
                 if (!splitChoice.equals("s")) {
                     break;
                 }
@@ -81,7 +87,11 @@ public class BlackjackGame {
             while (true) {
                 System.out.println("Do you want to (h)it or (s)tand? ");
                 System.out.println();
-                String choice = Constants.INPUT_STRING_BUILDER();
+                String choice = Constants.INPUT_STRING_BUILDER().toLowerCase();
+                if (choice.equals("exit")) {
+                    ui.printGameTerminatedMsg();
+                    return;
+                }
 
                 if (choice.equals("h")) {
                     hand.add(drawCard());

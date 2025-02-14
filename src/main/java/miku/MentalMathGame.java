@@ -8,8 +8,9 @@ public class MentalMathGame {
     private ArrayList<String> questions;
     private ArrayList<Integer> answers;
     private int score;
+    private Ui ui;
 
-    public MentalMathGame(int difficulty, int length) {
+    public MentalMathGame(int difficulty, int length, Ui ui) {
         this.difficulty = difficulty;
         switch (length) {
             case 1: this.length=10;
@@ -24,6 +25,7 @@ public class MentalMathGame {
         this.answers = new ArrayList<Integer>();
         this.score = 0;
         generateQuestions();
+        this.ui = ui;
     }
 
     private void generateQuestions() {
@@ -102,7 +104,14 @@ public class MentalMathGame {
             System.out.println("Question " + (i + 1) + ": " + questions.get(i));
             //System.out.print("Your answer: ");
             System.out.println();
-            int userAnswer = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            String in = Constants.INPUT_STRING_BUILDER().toLowerCase();
+
+            if (in.equals("exit")) {
+                ui.printGameTerminatedMsg();
+                return;
+            }
+            
+            int userAnswer = Integer.valueOf(in);
             if (userAnswer == answers.get(i)) {
                 System.out.println("Correct!");
                 System.out.println();

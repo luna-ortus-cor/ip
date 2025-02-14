@@ -258,6 +258,11 @@ public class Ui {
         System.out.println();
     }
 
+    public void printGameTerminatedMsg() {
+        System.out.println(Constants.INDENT + Constants.GAME_TERMINATED);
+        System.out.println();
+    }
+
     /**
      * Prints the relevant error message given an error code.
      *

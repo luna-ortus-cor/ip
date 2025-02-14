@@ -9,8 +9,9 @@ public class WordleGame {
     private ArrayList<String> wordList;
     private String targetWord;
     private static final String FILE_NAME = Constants.FILEPATH_WORDLIST;
+    private Ui ui;
 
-    public WordleGame(int difficulty) {
+    public WordleGame(int difficulty, Ui ui) {
         this.difficulty = difficulty;
         this.wordList = loadWordList();
         this.targetWord = selectTargetWord();
@@ -22,6 +23,7 @@ public class WordleGame {
             case 3: this.maxGuesses=10;
                     break;
         };
+        this.ui = ui;
     }
 
     private ArrayList<String> loadWordList() {
@@ -53,7 +55,12 @@ public class WordleGame {
 
     private String selectTargetWord() {
         Random random = new Random();
-        return wordList.get(random.nextInt(wordList.size()));
+        String word = "exit";
+        while(word.equals("exit")) {
+            word = wordList.get(random.nextInt(wordList.size()));
+        }
+        assert !word.equals("exit");
+        return word;
     }
 
     public void startGame() {
@@ -69,6 +76,11 @@ public class WordleGame {
             System.out.print("Enter your guess: ");
             System.out.println();
             String guess = Constants.INPUT_STRING_BUILDER().toLowerCase();
+
+            if (guess.equals("exit")) {
+                ui.printGameTerminatedMsg();
+                return;
+            }
 
             if (guess.length() != targetWord.length()) {
                 System.out.println("Invalid guess. Your guess must be " + targetWord.length() + " letters long.");

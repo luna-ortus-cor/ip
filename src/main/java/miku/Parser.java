@@ -368,16 +368,16 @@ public class Parser implements ContactListener {
             int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
             ui.printLengthMsg(choice);
             int length = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
-            MentalMathGame game = new MentalMathGame(difficulty, length);
+            MentalMathGame game = new MentalMathGame(difficulty, length, this.ui);
             game.startGame();
         } else if (choice == 2) {
             ui.printGameMsg(choice);
             ui.printDifficultyMsg(choice);
             int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
-            WordleGame game = new WordleGame(difficulty);
+            WordleGame game = new WordleGame(difficulty, this.ui);
             game.startGame();
         } else if (choice == 3) {
-            BlackjackGame game = new BlackjackGame();
+            BlackjackGame game = new BlackjackGame(ui);
             game.startGame();
         } else {
             //go back
