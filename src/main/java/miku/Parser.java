@@ -32,6 +32,7 @@ public class Parser implements ContactListener {
         this.ui = ui;
         this.taskList = new TaskList(ui);
         this.contactList = new ContactList(ui);
+        this.locationList = new LocationList(ui);
         this.storage = new Storage(ui);
     }
 
@@ -42,6 +43,7 @@ public class Parser implements ContactListener {
     public void start() {
         loadTaskList();
         loadContactList();
+        loadLocationList();
         ui.printStartMsg();
     }
 
@@ -80,10 +82,19 @@ public class Parser implements ContactListener {
         Pattern searchContactNamePattern = Pattern.compile("^find name (.+)$");
         Pattern searchContactEmailPattern = Pattern.compile("^find email (.+)$");
         Pattern searchContactAddressPattern = Pattern.compile("^find address (.+)$");
+        Pattern deleteContactPattern = Pattern.compile("^delete contact (\\d+)$");
 
-        Pattern addPlacePattern = Pattern.compile("^add place (.+)$");
-        Pattern addWebsitePattern = Pattern.compile("^add website (.+)$");
+        Pattern addPlacePattern = Pattern.compile(
+            "^add place (.+?) /desc (.+?) /address (.+?)\\s+"+
+            "/lat (-?\\d+(\\.\\d+)?) /lon (-?\\d+(\\.\\d+)?)$");
+        Pattern addWebsitePattern = Pattern.compile(
+            "^add website (.+?) /desc (.+?) /url\\s+" +
+            "(https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*))$");
         Pattern searchLocationPattern = Pattern.compile("find location (.+)$");
+        Pattern viewLocationPattern = Pattern.compile("^locations$");
+        Pattern deleteLocationPattern = Pattern.compile("^delete location (\\d+)$");
+
+        //TODO delete all contacts, delete all locations
 
         Matcher matcher;
 
@@ -140,6 +151,19 @@ public class Parser implements ContactListener {
             handleSearchContactEmail(matcher.group(1));
         } else if ((matcher = searchContactAddressPattern.matcher(in)).matches()) {
             handleSearchContactAddress(matcher.group(1));
+        } else if ((matcher = deleteContactPattern.matcher(in)).matches()) {
+            handleDeleteContact(matcher.group(1));
+        } else if ((matcher = addPlacePattern.matcher(in)).matches()) {
+            handleAddPlace(matcher.group(1), matcher.group(2), matcher.group(3),
+                    matcher.group(4), matcher.group(6));
+        } else if ((matcher = addWebsitePattern.matcher(in)).matches()) {
+            handleAddWebsite(matcher.group(1), matcher.group(2), matcher.group(3));
+        } else if ((matcher = searchLocationPattern.matcher(in)).matches()) {
+            handleSearchLocation(matcher.group(1));
+        } else if ((matcher = viewLocationPattern.matcher(in)).matches()) {
+            printList(locationList.getList(), 7);
+        } else if ((matcher = deleteLocationPattern.matcher(in)).matches()) {
+            handleDeleteLocation(matcher.group(1));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -177,6 +201,7 @@ public class Parser implements ContactListener {
     private void handleExit() {
         saveTaskList();
         saveContactList();
+        saveLocationList();
         ui.printExitMsg();
     }
 
@@ -208,12 +233,18 @@ public class Parser implements ContactListener {
         contactList.saveContacts(storage);
     }
 
+    /**
+     * Load the location list from file.
+     */
     private void loadLocationList() {
-
+        locationList.loadLocations(storage);
     }
 
+    /**
+     * Save the location list to file.
+     */
     private void saveLocationList() {
-
+        locationList.saveLocations(storage);
     }
 
     /**
@@ -223,7 +254,7 @@ public class Parser implements ContactListener {
      * @param type int specifying message to be printed prior to arraylist print
      */
     //type=0 is task, type=1 is game, type=2 is track, type=3 is stats,
-    //type=4 is search, type=5 is sort, type=6 is contact
+    //type=4 is search, type=5 is sort, type=6 is contact, type=7 is location
     private <T> void printList(ArrayList<T> list, int type) {
         int idx = 1;
         if (type == 0) {
@@ -238,8 +269,12 @@ public class Parser implements ContactListener {
             ui.printSearchMsg();
         } else if (type == 5) {
             ui.printSortMsg();
-        } else {
+        } else if (type == 6) {
             ui.printContactListMsg();
+        } else if (type == 7) {
+            ui.printLocationListMsg();
+        } else {
+            //do nothing
         }
         for (T t:list) {
             ui.printListItem(idx, t);
@@ -598,6 +633,29 @@ public class Parser implements ContactListener {
     private void handleSearchContactAddress(String in) {
         ArrayList<Contact> searchList = contactList.findContactsByAddress(in);
         printList(searchList, 4);
+    }
+
+    private void handleDeleteContact(String idx) {
+        contactList.delete(Integer.valueOf(idx.trim()) - 1);
+    }
+
+    private void handleAddPlace(String name, String desc, String address, String lat, String lon) {
+        Place p = new Place(name, desc, address, Double.parseDouble(lat), Double.parseDouble(lon));
+        locationList.addLocation(p);
+    }
+
+    private void handleAddWebsite(String name, String desc, String url) {
+        Website w = new Website(name, desc, url);
+        locationList.addLocation(w);
+    }
+
+    private void handleSearchLocation(String in) {
+        ArrayList<Location> searchList = locationList.findLocation(in);
+        printList(searchList, 4);
+    }
+
+    private void handleDeleteLocation(String idx) {
+        locationList.delete(Integer.valueOf(idx.trim()) - 1);
     }
 
     //error codes

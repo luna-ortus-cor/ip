@@ -232,7 +232,7 @@ public class Storage {
      * @param fp a String containing the file path
      */
     public void writeContacts(ArrayList<Contact> contactList, String fp) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp, false))) {
             for (Contact c:contactList) {
                 writer.write(c.toString());
                 writer.newLine();
@@ -241,6 +241,54 @@ public class Storage {
             //System.out.println();
         } catch (IOException e) {
             handleError(11);
+        }
+    }
+
+    public ArrayList<Location> readLocations(String fp) {
+        ArrayList<Location> locationList = new ArrayList<>();
+        int response = checkFilePathExistsElseCreate(fp);
+        if (response == -1) {
+            return locationList;
+        } else if (response == 0) {
+            handleError(9);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fp))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length == 6 && parts[0].trim().equals("Place")) {
+                    String name = parts[1].trim();
+                    String description = parts[2].trim();
+                    String address = parts[3].trim();
+                    double latitude = Double.parseDouble(parts[4].trim());
+                    double longitude = Double.parseDouble(parts[5].trim());
+                    locationList.add(new Place(name, description, address, latitude, longitude));
+                } else if (parts.length == 4 && parts[0].trim().equals("Website")) {
+                    String name = parts[1].trim();
+                    String description = parts[2].trim();
+                    String url = parts[3].trim();
+                    locationList.add(new Website(name, description, url));
+                }
+            }
+            //System.out.println("Locations loaded successfully from " + filename);
+            //System.out.println();
+        } catch (IOException e) {
+            handleError(12);
+        }
+        return locationList;
+    }
+
+    public void writeLocations(ArrayList<Location> locationList, String fp) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp, false))) {
+            for (Location l:locationList) {
+                writer.write(l.toString());
+                writer.newLine();
+            }
+            //System.out.println("Locations saved successfully to " + filename);
+            //System.out.println();
+        } catch (IOException e) {
+            handleError(13);
         }
     }
 

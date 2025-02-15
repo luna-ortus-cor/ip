@@ -126,6 +126,19 @@ public class Ui {
     }
 
     /**
+     * Prints the message when the user adds a location.
+     * 
+     * @param loc the location to be added
+     * @param num the number of locations in the task list after the addition
+     */
+    public void printAddLocationMsg(Location loc, int num) {
+        System.out.println(Constants.INDENT + Constants.ADD_LOCATION);
+        System.out.println(Constants.INDENT + Constants.INDENT + loc.toString());
+        System.out.println(Constants.INDENT + "now you have " + num + " locations in the list.");
+        System.out.println();
+    }
+
+    /**
      * Prints the message when the user deletes a task.
      *
      * @param task the task to be deleted
@@ -138,11 +151,35 @@ public class Ui {
         System.out.println();
     }
 
+    public void printDeleteContactMsg(Contact contact, int num) {
+        System.out.println(Constants.INDENT + "UwU i've removed this contact:");
+        System.out.println(Constants.INDENT + Constants.INDENT + contact.toString());
+        System.out.println(Constants.INDENT + "now you have " + num + " contacts in the list.");
+        System.out.println();
+    }
+
+    public void printDeleteLocationMsg(Location location, int num) {
+        System.out.println(Constants.INDENT + "UwU i've removed this location:");
+        System.out.println(Constants.INDENT + Constants.INDENT + location.toString());
+        System.out.println(Constants.INDENT + "now you have " + num + " locations in the list.");
+        System.out.println();
+    }
+
     /**
      * Prints the message when the user deletes all tasks.
      */
     public void printDeleteAllMsg() {
         System.out.println(Constants.INDENT + "UwU i've removed all tasks");
+        System.out.println();
+    }
+
+    public void printDeleteAllContactsMsg() {
+        System.out.println(Constants.INDENT + "UwU i've removed all contacts");
+        System.out.println();
+    }
+
+    public void printDeleteAllLocationsMsg() {
+        System.out.println(Constants.INDENT + "UwU i've removed all locations");
         System.out.println();
     }
 
@@ -174,6 +211,13 @@ public class Ui {
      */
     public void printContactListMsg() {
         System.out.println(Constants.INDENT + Constants.CONTACT_LIST_MSG);
+    }
+
+    /**
+     * Prints the message when the user lists locations.
+     */
+    public void printLocationListMsg() {
+        System.out.println(Constants.INDENT + Constants.LOCATION_LIST_MSG);
     }
 
     /**
@@ -302,6 +346,12 @@ public class Ui {
             break;
         case 11:
             System.out.println(Constants.INDENT + Constants.WRITE_CONTACT_LIST_FILE_ERROR);
+            break;
+        case 12:
+            System.out.println(Constants.INDENT + Constants.READ_LOCATION_LIST_FILE_ERROR);
+            break;
+        case 13:
+            System.out.println(Constants.INDENT + Constants.WRITE_LOCATION_LIST_FILE_ERROR);
             break;
         default:
             break;

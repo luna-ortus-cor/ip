@@ -131,7 +131,7 @@ public class ContactList {
         try {
             Contact c = contactList.get(idx);
             contactList.remove(idx);
-            //ui.printDeleteMsg(c, contactList.size()); //check message
+            ui.printDeleteContactMsg(c, contactList.size());
         } catch (IndexOutOfBoundsException e) {
             handleError(5);
         }
@@ -142,7 +142,7 @@ public class ContactList {
      */
     public void deleteAll() {
         contactList.clear();
-        ui.printDeleteAllMsg(); //check message
+        ui.printDeleteAllContactsMsg();
     }
 
     /**

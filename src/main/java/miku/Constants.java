@@ -18,13 +18,15 @@ public class Constants {
     public static final String EXIT_MSG = "byee~ hope to see you again soon!";
     public static final String INSTR_INVALID = ":3 oops! i don't understand that!";
     public static final String ADD_TASK = "got it! I've added this task desu:";
+    public static final String ADD_LOCATION = "got it! I've added this location desu:";
     public static final String TASK_LIST_MSG = "here are the tasks in your list desu:";
     public static final String CONTACT_LIST_MSG = "here are the contacts you have desu:";
+    public static final String LOCATION_LIST_MSG = "here are the locations you have desu:";
     public static final String TASK_LIST_SORTED_MSG = "here are the tasks in your list, sorted desu:";
     public static final String TODO_EMPTY_WS = ":3 oops! name field of todo cannot be empty!";
     public static final String DEADLINE_EMPTY_WS = ":3 oops! name and/or by field of deadline cannot be empty!";
     public static final String EVENT_EMPTY_WS = ":3 oops! name and/or from and/or to field of event cannot be empty!";
-    public static final String LIST_IDX_INVALID = ":3 oops! no such task exists or task number is empty!";
+    public static final String LIST_IDX_INVALID = ":3 oops! no such list item exists or list index is empty!";
     public static final String GAMES_MSG = "yay~ here are the list of games available!";
     public static final ArrayList<String> GAMES_LIST =
         new ArrayList<String>(Arrays.asList("Mental Math", "Wordle", "Blackjack", "Back"));
@@ -38,10 +40,13 @@ public class Constants {
     public static final String FILEPATH_ALCOHOL_TRACKER = "./data/alcohol_tracker.txt";
     public static final String FILEPATH_TASKLIST = "./data/tasks.txt";
     public static final String FILEPATH_CONTACTLIST = "./data/contacts.txt";
+    public static final String FILEPATH_LOCATIONLIST = "./data/locations.txt";
     public static final String READ_TASK_LIST_FILE_ERROR = ":3 oops! error reading task list from file!";
     public static final String WRITE_TASK_LIST_FILE_ERROR = ":3 oops! error writing task list to file!";
     public static final String READ_CONTACT_LIST_FILE_ERROR = ":3 oops! error reading contact list from file!";
     public static final String WRITE_CONTACT_LIST_FILE_ERROR = ":3 oops! error writing contact list to file!";
+    public static final String READ_LOCATION_LIST_FILE_ERROR = ":3 oops! error reading location list from file!";
+    public static final String WRITE_LOCATION_LIST_FILE_ERROR = ":3 oops! error writing location list to file!";
     public static final String READ_WORDLIST_FILE_ERROR = ":3 oops! error reading wordlist!";
     public static final String TASK_MARK_DONE_SUCCESS = "YATTA! I've marked this task as done:";
     public static final String TASK_MARK_DONE_FAILURE = "Task is already done";

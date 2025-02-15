@@ -26,6 +26,9 @@ public class WordleGame {
         this.ui = ui;
     }
 
+    /**
+     * Load wordlist from wordlist file. 
+     */
     private ArrayList<String> loadWordList() {
         ArrayList<String> words = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
@@ -43,6 +46,12 @@ public class WordleGame {
         return words;
     }
 
+    /**
+     * Check if word is of correct difficulty.
+     * 
+     * @param word string of the word proposed
+     * @return boolean indicating if the proposed word is of correct difficulty
+     */
     private boolean isWordOfDifficulty(String word) {
         int length = word.trim().length();
         switch(this.difficulty){
@@ -53,6 +62,9 @@ public class WordleGame {
         }
     }
 
+    /**
+     * Select a random word from the wordlist.
+     */
     private String selectTargetWord() {
         Random random = new Random();
         String word = "exit";
@@ -107,6 +119,14 @@ public class WordleGame {
         System.out.println();
     }
 
+    /**
+     * Evaluate the user guess.
+     * Also prints the output of the user guess indicating correct letters,
+     * correct letters but wrong position, and wrong letters.
+     * 
+     * @param guess string of the user guess
+     * @return boolean indicating if the user guess is correct
+     */
     private boolean evaluateGuess(String guess) {
         StringBuilder feedback = new StringBuilder();
         boolean[] usedInTarget = new boolean[targetWord.length()];

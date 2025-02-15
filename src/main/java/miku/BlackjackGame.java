@@ -146,13 +146,22 @@ public class BlackjackGame {
         }
     }
 
-    // Draws a random card
+    /**
+     * Draw a random card (this card is not subject to the usual one-deck probability).
+     * 
+     * @return string of the card
+     */
     private static String drawCard() {
         return RANKS[random.nextInt(RANKS.length)];
     }
 
-    // Calculates the total score of a hand
-    private static int calculateScore(List<String> hand) {
+    /**
+     * Calculate the total score of a hand.
+     * 
+     * @param hand arraylist of cards in hand
+     * @param int score of the hand
+     */
+    private static int calculateScore(ArrayList<String> hand) {
         int total = 0;
         int aceCount = 0;
 

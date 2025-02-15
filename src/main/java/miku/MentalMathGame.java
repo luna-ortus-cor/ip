@@ -28,6 +28,9 @@ public class MentalMathGame {
         this.ui = ui;
     }
 
+    /**
+     * Generate questions. Also ensures all answers to questions are integers, 
+     */
     private void generateQuestions() {
         Random random = new Random();
         int maxDigit = (int) Math.pow(10, difficulty) - 1;
@@ -110,7 +113,7 @@ public class MentalMathGame {
                 ui.printGameTerminatedMsg();
                 return;
             }
-            
+
             int userAnswer = Integer.valueOf(in);
             if (userAnswer == answers.get(i)) {
                 System.out.println("Correct!");
