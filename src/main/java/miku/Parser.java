@@ -85,11 +85,12 @@ public class Parser implements ContactListener {
         Pattern deleteContactPattern = Pattern.compile("^delete contact (\\d+)$");
 
         Pattern addPlacePattern = Pattern.compile(
-            "^add place (.+?) /desc (.+?) /address (.+?)\\s+"+
-            "/lat (-?\\d+(\\.\\d+)?) /lon (-?\\d+(\\.\\d+)?)$");
+            "^add place (.+?) /desc (.+?) /address (.+?)\\s+"
+            + "/lat (-?\\d+(\\.\\d+)?) /lon (-?\\d+(\\.\\d+)?)$");
         Pattern addWebsitePattern = Pattern.compile(
-            "^add website (.+?) /desc (.+?) /url\\s+" +
-            "(https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*))$");
+            "^add website (.+?) /desc (.+?) /url\\s+"
+            + "(https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\."
+            + "[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*))$");
         Pattern searchLocationPattern = Pattern.compile("find location (.+)$");
         Pattern viewLocationPattern = Pattern.compile("^locations$");
         Pattern deleteLocationPattern = Pattern.compile("^delete location (\\d+)$");
@@ -333,7 +334,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user add Todo Task instruction.
-     * 
+     *
      * @param in string input arguments of the todo
      * @param priority string of the priority of the todo
      */
@@ -353,7 +354,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user add Deadline Task instruction.
-     * 
+     *
      * @param in string input arguments of the deadline
      * @param priority string of the priority of the deadline
      */
@@ -373,7 +374,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user add Event Task instruction.
-     * 
+     *
      * @param in string input arguments of the event
      * @param priority string of the priority of the event
      */
@@ -501,7 +502,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user search by task name (partial name acceptable).
-     * 
+     *
      * @param in string to be searched for
      */
     private void handleSearchName(String in) {
@@ -511,7 +512,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user sort by priority (ascending or descending).
-     * 
+     *
      * @param in string specifying order of sort (ascending or descending)
      */
     private void handleSortPriority(String in) {
@@ -528,7 +529,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user add tags to task.
-     * 
+     *
      * @param idx index of task to add tags to
      * @param tags whitespace delimited string of tags to be added
      */
@@ -538,7 +539,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user delete tags from task.
-     * 
+     *
      * @param idx index of task to delete tags from
      * @param tags whitespace delimited string of tags to be deleted
      */
@@ -575,6 +576,8 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user edit contact.
+     * 
+     * @param idx index of original contact to be edited
      */
     private void handleEditContact(String idx) {
         Platform.runLater(() -> {
@@ -607,7 +610,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user search for contact by name (partial name acceptable).
-     * 
+     *
      * @param in string to be searched for
      */
     private void handleSearchContactName(String in) {
@@ -617,7 +620,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user search for contact by email (partial email acceptable).
-     * 
+     *
      * @param in string to be searched for
      */
     private void handleSearchContactEmail(String in) {
@@ -627,7 +630,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user search for contact by address (partial address acceptable).
-     * 
+     *
      * @param in string to be searched for
      */
     private void handleSearchContactAddress(String in) {
@@ -635,25 +638,56 @@ public class Parser implements ContactListener {
         printList(searchList, 4);
     }
 
+    /**
+     * Handle user delete contact instruction.
+     *
+     * @param idx index of contact to be deleted
+     */
     private void handleDeleteContact(String idx) {
         contactList.delete(Integer.valueOf(idx.trim()) - 1);
     }
 
+    /**
+     * Handle user add place.
+     * 
+     * @param name place name
+     * @param desc place description
+     * @param address place address
+     * @param lat place address latitude
+     * @param lon place address longitude
+     */
     private void handleAddPlace(String name, String desc, String address, String lat, String lon) {
         Place p = new Place(name, desc, address, Double.parseDouble(lat), Double.parseDouble(lon));
         locationList.addLocation(p);
     }
 
+    /**
+     * Handle user add website.
+     * 
+     * @param name website name
+     * @param desc website description
+     * @param url website url
+     */
     private void handleAddWebsite(String name, String desc, String url) {
         Website w = new Website(name, desc, url);
         locationList.addLocation(w);
     }
 
+    /**
+     * Handle user search for location by name (partial name acceptable).
+     *
+     * @param in string to be searched for
+     */
     private void handleSearchLocation(String in) {
         ArrayList<Location> searchList = locationList.findLocation(in);
         printList(searchList, 4);
     }
 
+    /**
+     * Handle user delete location instruction.
+     *
+     * @param idx index of location to be deleted
+     */
     private void handleDeleteLocation(String idx) {
         locationList.delete(Integer.valueOf(idx.trim()) - 1);
     }

@@ -53,13 +53,10 @@ public class AddContactWindow {
                 mobilePhone, mobileExtension, workPhone, workExtension, birthday, bloodType,
                 primaryEmail, secondaryEmail, primaryAddress, secondaryAddress);
 
-        //System.out.println("Contact added: " + firstNameField.getText());
-        //System.out.println();
-
         if (contactListener != null) {
             contactListener.onContactAdded(newContact);
         }
-        
+
         closeWindow();
     }
 

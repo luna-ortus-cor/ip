@@ -61,7 +61,7 @@ public class Ui {
 
     /**
      * Prints the message when the user edits the tags of a task.
-     * 
+     *
      * @param task the task to be edited
      */
     public <T extends Task> void printEditTagsMsg(T task) {
@@ -127,7 +127,7 @@ public class Ui {
 
     /**
      * Prints the message when the user adds a location.
-     * 
+     *
      * @param loc the location to be added
      * @param num the number of locations in the task list after the addition
      */
@@ -151,6 +151,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints the message when the user deletes a contact.
+     *
+     * @param contact the contact to be deleted
+     * @param num the number of contacts in the contact list after the deletion
+     */
     public void printDeleteContactMsg(Contact contact, int num) {
         System.out.println(Constants.INDENT + "UwU i've removed this contact:");
         System.out.println(Constants.INDENT + Constants.INDENT + contact.toString());
@@ -158,6 +164,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints the message when the user deletes a location.
+     *
+     * @param location the location to be deleted
+     * @param num the number of locations in the location list after the deletion
+     */
     public void printDeleteLocationMsg(Location location, int num) {
         System.out.println(Constants.INDENT + "UwU i've removed this location:");
         System.out.println(Constants.INDENT + Constants.INDENT + location.toString());
@@ -173,11 +185,17 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints the message when the user deletes all contacts.
+     */
     public void printDeleteAllContactsMsg() {
         System.out.println(Constants.INDENT + "UwU i've removed all contacts");
         System.out.println();
     }
 
+    /**
+     * Prints the message when the user deletes all locations.
+     */
     public void printDeleteAllLocationsMsg() {
         System.out.println(Constants.INDENT + "UwU i've removed all locations");
         System.out.println();
@@ -302,6 +320,9 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints the message when the user terminates the game abruptly.
+     */
     public void printGameTerminatedMsg() {
         System.out.println(Constants.INDENT + Constants.GAME_TERMINATED);
         System.out.println();

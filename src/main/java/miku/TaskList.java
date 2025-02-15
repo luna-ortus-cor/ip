@@ -33,7 +33,7 @@ public class TaskList {
 
     /**
      * Returns an arraylist of tasks in the TaskList, sorted by priority.
-     * 
+     *
      * @param order int specifying order (ascending or descending) of the sort
      * @return an arraylist of tasks in the TaskList sorted by priority
      */
@@ -70,7 +70,7 @@ public class TaskList {
      * @param idx the index of the task in the list
      */
     public void markDone(int idx) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             int response = taskList.get(idx).markDone();
             ui.printMarkDoneMsg(taskList.get(idx), response);
@@ -85,7 +85,7 @@ public class TaskList {
      * @param idx the index of the task in the list
      */
     public void markNotDone(int idx) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             int response = taskList.get(idx).markNotDone();
             ui.printMarkNotDoneMsg(taskList.get(idx), response);
@@ -96,12 +96,12 @@ public class TaskList {
 
     /**
      * Add tags to the task at a specified index.
-     * 
+     *
      * @param idx the index of the task in the list
      * @param tags varargs of string of tags to be added
      */
     public void addTags(int idx, String... tags) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             for (String s:tags) {
                 taskList.get(idx).addTag(s);
@@ -114,12 +114,12 @@ public class TaskList {
 
     /**
      * Remove tags from the task at a specified index.
-     * 
+     *
      * @param idx the index of the task in the list
      * @param tags varargs of string of tags to be removed
      */
     public void removeTags(int idx, String... tags) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             for (String s:tags) {
                 taskList.get(idx).removeTag(s);
@@ -136,7 +136,7 @@ public class TaskList {
      * @param idx the index of the task in the list
      */
     public void delete(int idx) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             Task t = taskList.get(idx);
             taskList.remove(idx);
@@ -161,7 +161,7 @@ public class TaskList {
      * @param priority the priority to be set to
      */
     public void setPriority(int idx, int priority) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             int response = taskList.get(idx).setPriority(priority);
             ui.printSetPriorityMsg(taskList.get(idx), response);
@@ -290,7 +290,7 @@ public class TaskList {
 
     /**
      * Handles error messages.
-     * 
+     *
      * @param code int denoting the error generated
      */
     private void handleError(int code) {

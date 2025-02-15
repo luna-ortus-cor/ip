@@ -12,10 +12,9 @@ import javafx.stage.Stage;
  * A GUI for Miku using FXML.
  */
 public class Main extends Application {
+    private static Stage primaryStage;
     private Miku miku = new Miku();
 
-    private static Stage primaryStage;  // Store the primary stage
-    
     @Override
     public void start(Stage stage) {
         try {

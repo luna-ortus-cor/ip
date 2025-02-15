@@ -3,6 +3,9 @@ package miku;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Class to store array of contacts and handle operations on contacts in list.
+ */
 public class ContactList {
     private static final String FILE_PATH = Constants.FILEPATH_CONTACTLIST;
     private ArrayList<Contact> contactList = new ArrayList<Contact>();

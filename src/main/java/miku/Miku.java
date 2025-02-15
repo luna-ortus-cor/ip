@@ -1,6 +1,5 @@
 package miku;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -24,6 +23,11 @@ public class Miku {
         //this.p.start();
     }
 
+    /**
+     * Creates a new Miku instance with specified input and output streams for interaction with the user,
+     * with a new Ui to display interaction with the user, and a new Parser to parse messages/instructions
+     * from the user
+     */
     public Miku(MikuInputStream mikuInputStream, MikuOutputStream mikuOutputStream) {
         this.ui = new Ui();
         this.p = new Parser(this.ui);

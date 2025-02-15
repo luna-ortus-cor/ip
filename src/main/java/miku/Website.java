@@ -1,8 +1,18 @@
 package miku;
 
+/**
+ * Website class that stores relevant website related properties
+ */
 public class Website extends Location {
     private String url;
 
+    /**
+     * Creates a new Website instance.
+     *
+     * @param name website name
+     * @param description website description
+     * @param url website url
+     */
     public Website(String name, String description, String url) {
         super(name, description);
         this.url = url;

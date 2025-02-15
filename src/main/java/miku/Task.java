@@ -62,7 +62,7 @@ public class Task implements Comparable<Task> {
 
     /**
      * Add a tag to the task.
-     * 
+     *
      * @param tag tag to be added
      */
     public void addTag(String tag) {
@@ -71,17 +71,17 @@ public class Task implements Comparable<Task> {
 
     /**
      * Remove a tag from the task.
-     * 
+     *
      * @param tag tag to be removed
      */
     public void removeTag(String tag) {
-        assert tags.contains(tag.toLowerCase()): "No such tag associated with this task";
+        assert tags.contains(tag.toLowerCase()) : "No such tag associated with this task"; //what if tag DNE?
         tags.remove(tag.toLowerCase());
     }
 
     /**
      * Returns the tags associated with the task
-     * 
+     *
      * @return a set of the tags associated with the task
      */
     public Set<String> getTags() {
@@ -90,7 +90,7 @@ public class Task implements Comparable<Task> {
 
     /**
      * Returns the formatted tags for display.
-     * 
+     *
      * @return a string of the formatted tags
      */
     public String getFormattedTags() {
@@ -99,7 +99,7 @@ public class Task implements Comparable<Task> {
 
     /**
      * Returns the unformatted tags for save file.
-     * 
+     *
      * @return a string of the unformatted tags
      */
     public String getUnformattedTags() {

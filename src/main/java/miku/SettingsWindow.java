@@ -1,40 +1,42 @@
 package miku;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Controller for settings
+ */
 public class SettingsWindow {
+    @FXML
+    private ChoiceBox<String> themeSelector;
+    @FXML
+    private Slider fontSizeSlider;
+    @FXML
+    private CheckBox soundToggle;
+    @FXML
+    private CheckBox typingIndicatorToggle;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button applyButton;
 
-    @FXML
-    private ChoiceBox<String> themeSelector;  // For selecting theme (light/dark)
-    @FXML
-    private Slider fontSizeSlider;  // For selecting font size
-    @FXML
-    private CheckBox soundToggle;  // Toggle for sound
-    @FXML
-    private CheckBox typingIndicatorToggle;  // Toggle for typing indicator
-    @FXML
-    private Button cancelButton;  // Cancel button
-    @FXML
-    private Button applyButton;   // Apply button
+    private Settings settings;
 
-    private Settings settings;  // Assuming a Settings class to hold the preferences
-    
     @FXML
     private void initialize() {
         this.settings = new Settings();
         // Apply settings to the UI elements
         themeSelector.getItems().clear();
         themeSelector.getItems().addAll("light", "dark");
-        themeSelector.setValue(settings.getTheme());  // Set the theme
+        themeSelector.setValue(settings.getTheme());
 
-        fontSizeSlider.setValue(settings.getFontSize());  // Set the font size
-        soundToggle.setSelected(settings.isSoundEnabled());  // Set the sound toggle
-        typingIndicatorToggle.setSelected(settings.isTypingIndicatorEnabled());  // Set the typing indicator toggle
+        fontSizeSlider.setValue(settings.getFontSize());
+        soundToggle.setSelected(settings.isSoundEnabled());
+        typingIndicatorToggle.setSelected(settings.isTypingIndicatorEnabled());
     }
 
     public void setSettings(Settings settings) {
@@ -49,7 +51,7 @@ public class SettingsWindow {
 
         // Cast fontSizeSlider value to int and then save it
         settings.setFontSize((int) fontSizeSlider.getValue());
-        
+
         settings.setSoundEnabled(soundToggle.isSelected());
         settings.setTypingIndicatorEnabled(typingIndicatorToggle.isSelected());
 

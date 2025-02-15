@@ -3,11 +3,19 @@ package miku;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Class to store array of locations and handle operations on locations in list.
+ */
 public class LocationList {
     private static final String FILE_PATH = Constants.FILEPATH_LOCATIONLIST;
     private ArrayList<Location> locationList = new ArrayList<Location>();
     private Ui ui;
 
+    /**
+     * Instantiates a new LocationList instance taking in a Ui ui.
+     *
+     * @param ui a Ui instance
+     */
     public LocationList(Ui ui) {
         this.ui = ui;
     }
