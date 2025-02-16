@@ -57,10 +57,10 @@ public class Parser implements ContactListener {
     public int parse(String in) {
         in = in.trim();
         Pattern listPattern = Pattern.compile("^list$");
-        Pattern markPattern = Pattern.compile("^mark (\\d+)$");
-        Pattern unmarkPattern = Pattern.compile("^unmark (\\d+)$");
-        Pattern deletePattern = Pattern.compile("^delete (\\d+)$");
-        Pattern deleteAllPattern = Pattern.compile("^delete /all$");
+        Pattern markPattern = Pattern.compile("^mark\\s+(\\d+)$");
+        Pattern unmarkPattern = Pattern.compile("^unmark\\s+(\\d+)$");
+        Pattern deletePattern = Pattern.compile("^delete\\s+(\\d+)$");
+        Pattern deleteAllPattern = Pattern.compile("^delete\\s+all$");
 
         Pattern todoPattern = Pattern.compile(
             "^todo\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
@@ -70,34 +70,34 @@ public class Parser implements ContactListener {
             "^event\\s+(.+?)\\s+/from\\s+(.+?)\\s+/to\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
 
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
-        Pattern searchNamePattern = Pattern.compile("^find task (.+)$");
-        Pattern setPriorityPattern = Pattern.compile("^set (\\d+) (\\d)$");
-        Pattern sortPriorityPattern = Pattern.compile("^sort prio /(asc|desc)$");
-        Pattern addTagsPattern = Pattern.compile("^add tags (\\d+) ([\\w\\s+]+)$");
-        Pattern deleteTagsPattern = Pattern.compile("^delete tags (\\d+) ([\\w\\s+]+)$");
+        Pattern searchNamePattern = Pattern.compile("^find\\s+task\\s+(.+)$");
+        Pattern setPriorityPattern = Pattern.compile("^set\\s+(\\d+)\\s+(\\d)$");
+        Pattern sortPriorityPattern = Pattern.compile("^sort\\s+prio\\s+/(asc|desc)$");
+        Pattern addTagsPattern = Pattern.compile("^add\\s+tags\\s+(\\d+)\\s+([\\w\\s+]+)$");
+        Pattern deleteTagsPattern = Pattern.compile("^delete\\s+tags\\s+(\\d+)\\s+([\\w\\s+]+)$");
 
-        Pattern addContactPattern = Pattern.compile("^add contact$");
-        Pattern editContactPattern = Pattern.compile("^edit contact (\\d+)$");
+        Pattern addContactPattern = Pattern.compile("^add\\s+contact$");
+        Pattern editContactPattern = Pattern.compile("^edit\\s+contact\\s+(\\d+)$");
         Pattern viewContactsPattern = Pattern.compile("^contacts$");
-        Pattern searchContactNamePattern = Pattern.compile("^find name (.+)$");
-        Pattern searchContactEmailPattern = Pattern.compile("^find email (.+)$");
-        Pattern searchContactAddressPattern = Pattern.compile("^find address (.+)$");
-        Pattern deleteContactPattern = Pattern.compile("^delete contact (\\d+)$");
-        Pattern deleteAllContactsPattern = Pattern.compile("^delete all contacts$");
+        Pattern searchContactNamePattern = Pattern.compile("^find\\s+name\\s+(.+)$");
+        Pattern searchContactEmailPattern = Pattern.compile("^find\\s+email\\s+(.+)$");
+        Pattern searchContactAddressPattern = Pattern.compile("^find\\s+address\\s+(.+)$");
+        Pattern deleteContactPattern = Pattern.compile("^delete\\s+contact\\s+(\\d+)$");
+        Pattern deleteAllContactsPattern = Pattern.compile("^delete\\s+all\\s+contacts$");
 
         Pattern addPlacePattern = Pattern.compile(
-            "^add place (.+?) /desc (.+?) /address (.+?)\\s+"
-            + "/lat (-?\\d+(\\.\\d+)?) /lon (-?\\d+(\\.\\d+)?)$");
+            "^add\\s+place\\s+(.+?)\\s+/desc\\s+(.+?)\\s+/address\\s+(.+?)\\s+"
+            + "/lat\\s+(-?\\d+(\\.\\d+)?)\\s+/lon\\s+(-?\\d+(\\.\\d+)?)$");
         Pattern addWebsitePattern = Pattern.compile(
-            "^add website (.+?) /desc (.+?) /url\\s+"
+            "^add\\s+website\\s+(.+?)\\s+/desc\\s+(.+?)\\s+/url\\s+"
             + "(https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\."
             + "[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*))$");
-        Pattern searchLocationPattern = Pattern.compile("find location (.+)$");
+        Pattern searchLocationPattern = Pattern.compile("find\\s+location\\s+(.+)$");
         Pattern viewLocationPattern = Pattern.compile("^locations$");
-        Pattern deleteLocationPattern = Pattern.compile("^delete location (\\d+)$");
-        Pattern deleteAllLocationsPattern = Pattern.compile("^delete all locations$");
+        Pattern deleteLocationPattern = Pattern.compile("^delete\\s+location\\s+(\\d+)$");
+        Pattern deleteAllLocationsPattern = Pattern.compile("^delete\\s+all\\s+locations$");
 
-        //TODO delete all contacts, delete all locations
+        //TODO association
 
         Matcher matcher;
 
