@@ -22,7 +22,7 @@ public class AlcoholTracker {
      * @param date string of date
      * @param drink string of drink type
      * @param name string of drink name
-     * @param qty number of standard drinks
+     * @param quantity number of standard drinks
      */
     public static void trackAlcohol(String date, String drink, String name, int quantity) {
         Alcohol newLog = new Alcohol(date, drink, name, quantity);

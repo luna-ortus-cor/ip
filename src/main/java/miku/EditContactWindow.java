@@ -1,22 +1,32 @@
 package miku;
 
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-
+/**
+ * Controller for Edit Contact Window
+ */
 public class EditContactWindow {
-    @FXML private TextField firstNameField, middleNameField, lastNameField;
-    @FXML private TextField houseExtensionField, housePhoneField;
-    @FXML private TextField mobileExtensionField, mobilePhoneField;
-    @FXML private TextField workExtensionField, workPhoneField;
+    @FXML private TextField firstNameField;
+    @FXML private TextField middleNameField;
+    @FXML private TextField lastNameField;
+    @FXML private TextField houseExtensionField;
+    @FXML private TextField housePhoneField;
+    @FXML private TextField mobileExtensionField;
+    @FXML private TextField mobilePhoneField;
+    @FXML private TextField workExtensionField;
+    @FXML private TextField workPhoneField;
     @FXML private DatePicker birthdayPicker;
     @FXML private TextField bloodTypeField;
-    @FXML private TextField primaryEmailField, secondaryEmailField;
-    @FXML private TextField primaryAddressField, secondaryAddressField;
+    @FXML private TextField primaryEmailField;
+    @FXML private TextField secondaryEmailField;
+    @FXML private TextField primaryAddressField;
+    @FXML private TextField secondaryAddressField;
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
 

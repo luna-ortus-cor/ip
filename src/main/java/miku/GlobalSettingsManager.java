@@ -5,9 +5,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * Class to manage settings globally and update all windows when settings are changed
+ */
 public class GlobalSettingsManager {
-    private static String currentTheme = "light";  // Default theme
-    private static int fontSize = 14;  // Default font size
+    private static String currentTheme = "light"; // Default theme
+    private static int fontSize = 14; // Default font size
 
     // Getters and setters for the settings
     public static String getCurrentTheme() {
@@ -35,10 +38,12 @@ public class GlobalSettingsManager {
         // Apply theme (Dark or Light)
         if (currentTheme.equals("dark")) {
             stage.getScene().getStylesheets().clear();
-            stage.getScene().getStylesheets().add(GlobalSettingsManager.class.getResource("/css/dark-theme.css").toExternalForm());
+            stage.getScene().getStylesheets().add(
+                GlobalSettingsManager.class.getResource("/css/dark-theme.css").toExternalForm());
         } else {
             stage.getScene().getStylesheets().clear();
-            stage.getScene().getStylesheets().add(GlobalSettingsManager.class.getResource("/css/light-theme.css").toExternalForm());
+            stage.getScene().getStylesheets().add(
+                GlobalSettingsManager.class.getResource("/css/light-theme.css").toExternalForm());
         }
 
         // Apply font size globally to all text components (buttons, labels, etc.)

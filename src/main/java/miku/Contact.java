@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Contact class to store related details about a contact.
  */
 public class Contact {
-    private String DELIMITER = " | "; //should put in constants or see if better solution
+    private static final String DELIMITER = " | "; //should put in constants or see if better solution
     private static final String EMPTY = "-"; //placeholder for missing values
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -28,6 +28,9 @@ public class Contact {
     private String addressPrimary = null;
     private String addressSecondary = null;
 
+    /**
+     * Initialize a Contact instance with relevant fields.
+     */
     public Contact(String firstName, String lastName, String middleName, String housePhone, String houseExtension,
             String mobilePhone, String mobileExtension, String workPhone, String workExtension, LocalDate birthday,
             String bloodType, String emailPrimary, String emailSecondary, String addressPrimary,
@@ -160,7 +163,7 @@ public class Contact {
 
     /**
      * Validate email, check email follows a valid standard email format.
-     * 
+     *
      * @param email string of email to be validated
      * @return boolean specifying if email is valid or not
      */
@@ -198,6 +201,12 @@ public class Contact {
         return (value == null || value.isEmpty()) ? EMPTY : value.replace("|", "\\|");
     }
 
+    /**
+     * Convert a string representation of Contact object back to Contact object.
+     *
+     * @param line string representation of contact object
+     * @return contact object from its string representation
+     */
     public static Contact fromString(String line) {
         String[] parts = line.split(" \\| ", -1); // -1 keeps trailing empty fields
         if (parts.length < 16) {

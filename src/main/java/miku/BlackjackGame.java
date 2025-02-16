@@ -1,6 +1,12 @@
 package miku;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Random;
 
 /**
  * Simple implementation of a blackjack game.
@@ -18,18 +24,22 @@ public class BlackjackGame {
     }
 
     static {
-        for (int i = 0; i < 9; i++) CARD_VALUES.put(RANKS[i], i + 2);
+        for (int i = 0; i < 9; i++) {
+            CARD_VALUES.put(RANKS[i], i + 2);
+        }
         CARD_VALUES.put("J", 10);
         CARD_VALUES.put("Q", 10);
         CARD_VALUES.put("K", 10);
         CARD_VALUES.put("A", 11);
     }
 
+    /**
+     * Starts the game enegine.
+     */
     public void startGame() {
-        Scanner scanner = new Scanner(System.in);
         ArrayList<ArrayList<String>> playerHands = new ArrayList<>();
         ArrayList<String> botHand = new ArrayList<>();
-        
+
         // Deal initial hands
         ArrayList<String> initialHand = new ArrayList<>();
         initialHand.add(drawCard());
@@ -54,7 +64,7 @@ public class BlackjackGame {
                 System.out.println("You have a pair! Do you want to (s)plit or (n)o? ");
                 System.out.println();
                 String splitChoice = Constants.INPUT_STRING_BUILDER().toLowerCase();
-                if(splitChoice.equals("exit")) {
+                if (splitChoice.equals("exit")) {
                     ui.printGameTerminatedMsg();
                     return;
                 }
@@ -148,7 +158,7 @@ public class BlackjackGame {
 
     /**
      * Draw a random card (this card is not subject to the usual one-deck probability).
-     * 
+     *
      * @return string of the card
      */
     private static String drawCard() {
@@ -157,7 +167,7 @@ public class BlackjackGame {
 
     /**
      * Calculate the total score of a hand.
-     * 
+     *
      * @param hand arraylist of cards in hand
      * @param int score of the hand
      */
@@ -167,7 +177,9 @@ public class BlackjackGame {
 
         for (String card : hand) {
             total += CARD_VALUES.get(card);
-            if (card.equals("A")) aceCount++;
+            if (card.equals("A")) {
+                aceCount++;
+            }
         }
 
         // Convert Aces from 11 to 1 if needed

@@ -65,10 +65,10 @@ public class Constants {
                     "type \"sort prio <order>\" to sort the task list in order of priority",
                     "type \"games\" to see the list of games", "type \"track\" to track a statistic",
                     "type \"stats\" to see the list of statistics", "type \"chat\" to chat with Miku",
-                    "fields in [square brackets] are optional", "priority is a number from 1 to 5 " +
-                    "with 1 the lowest priority and 5 the highest priority, defaults to 3",
-                    "order is one of \"/asc\" or \"/desc\" specifying if the sort should be in " +
-                    "ascending or descending order respectively"));
+                    "fields in [square brackets] are optional", "priority is a number from 1 to 5 "
+                    + "with 1 the lowest priority and 5 the highest priority, defaults to 3",
+                    "order is one of \"/asc\" or \"/desc\" specifying if the sort should be in "
+                    + "ascending or descending order respectively"));
     public static final String TASK_SET_PRIORITY_SUCCESS = "YATTA! I've changed the priority of this task:";
     public static final String TASK_SET_PRIORITY_FAILURE = "Task is already at that priority";
     public static final String GAME_MATH_INTRO_MSG = "Welcome to Mental Math Game!";
@@ -84,7 +84,10 @@ public class Constants {
     public static final String UNSPECIFIED_IO_ERROR = ":3 oops! an unknown IO error occurred";
     public static final String TASK_EDIT_TAG_MSG = "Edited the following task:";
 
-    public static String INPUT_STRING_BUILDER() {
+    /**
+     * Builds input string character by character from the user input to the GUI.
+     */
+    public static final String INPUT_STRING_BUILDER() {
         StringBuilder input = new StringBuilder();
         try {
             int c;

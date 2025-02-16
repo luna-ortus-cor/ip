@@ -65,12 +65,15 @@ public class ContactList {
      */
     public ArrayList<Contact> findContactByName(String searchString) {
         return new ArrayList<Contact>(contactList.stream()
-                .filter(contact -> (contact.getFirstName() != null &&
-                                    contact.getFirstName().toLowerCase().contains(searchString.toLowerCase())) ||
-                                   (contact.getMiddleName() != null &&
-                                    contact.getMiddleName().toLowerCase().contains(searchString.toLowerCase())) ||
-                                   (contact.getLastName() != null &&
-                                    contact.getLastName().toLowerCase().contains(searchString.toLowerCase())))
+                .filter(contact -> (contact.getFirstName() != null
+                                    && contact.getFirstName().toLowerCase().contains(
+                                        searchString.toLowerCase()))
+                                    || (contact.getMiddleName() != null
+                                    && contact.getMiddleName().toLowerCase().contains(
+                                        searchString.toLowerCase()))
+                                    || (contact.getLastName() != null
+                                    && contact.getLastName().toLowerCase().contains(
+                                        searchString.toLowerCase())))
                 .collect(Collectors.toList()));
     }
 
@@ -82,10 +85,12 @@ public class ContactList {
      */
     public ArrayList<Contact> findContactsByEmail(String searchString) {
         return new ArrayList<Contact>(contactList.stream()
-                .filter(contact -> (contact.getPrimaryEmail() != null &&
-                                    contact.getPrimaryEmail().toLowerCase().contains(searchString.toLowerCase())) ||
-                                   (contact.getSecondaryEmail() != null &&
-                                    contact.getSecondaryEmail().toLowerCase().contains(searchString.toLowerCase())))
+                .filter(contact -> (contact.getPrimaryEmail() != null
+                                    && contact.getPrimaryEmail().toLowerCase().contains(
+                                        searchString.toLowerCase()))
+                                    || (contact.getSecondaryEmail() != null
+                                    && contact.getSecondaryEmail().toLowerCase().contains(
+                                        searchString.toLowerCase())))
                 .collect(Collectors.toList()));
     }
 
@@ -97,10 +102,12 @@ public class ContactList {
      */
     public ArrayList<Contact> findContactsByAddress(String searchString) {
         return new ArrayList<Contact>(contactList.stream()
-                .filter(contact -> (contact.getPrimaryAddress() != null &&
-                                    contact.getPrimaryAddress().toLowerCase().contains(searchString.toLowerCase())) ||
-                                   (contact.getSecondaryAddress() != null &&
-                                    contact.getSecondaryAddress().toLowerCase().contains(searchString.toLowerCase())))
+                .filter(contact -> (contact.getPrimaryAddress() != null
+                                    && contact.getPrimaryAddress().toLowerCase().contains(
+                                        searchString.toLowerCase()))
+                                    || (contact.getSecondaryAddress() != null
+                                    && contact.getSecondaryAddress().toLowerCase().contains(
+                                        searchString.toLowerCase())))
                 .collect(Collectors.toList()));
     }
 
@@ -130,7 +137,7 @@ public class ContactList {
      * @param idx the index of the contact in the list
      */
     public void delete(int idx) {
-        assert idx >= 0: "Index must be non-negative";
+        assert idx >= 0 : "Index must be non-negative";
         try {
             Contact c = contactList.get(idx);
             contactList.remove(idx);
