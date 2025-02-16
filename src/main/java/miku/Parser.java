@@ -38,12 +38,16 @@ public class Parser implements ContactListener {
 
     /**
      * Starts the parser and initializes relevant variables,
-     * such as the TaskList
+     * such as the TaskList, ContactList, LocationList, and
+     * the Alcohol, Mood, Time trackers
      */
     public void start() {
         loadTaskList();
         loadContactList();
         loadLocationList();
+        AlcoholTracker.initializeTracker();
+        MoodTracker.initializeTracker();
+        TimeTracker.initializeTracker();
         ui.printStartMsg();
     }
 

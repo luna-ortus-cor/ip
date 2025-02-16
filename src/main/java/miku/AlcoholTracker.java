@@ -17,6 +17,14 @@ public class AlcoholTracker {
     private static ArrayList<Alcohol> alcoholLogs = new ArrayList<>();
 
     /**
+     * Initialize the alcohol tracking file.
+     */
+    public static void initializeTracker() {
+        Storage s = new Storage(new Ui());
+        s.checkFilePathExistsElseCreate(FILE_NAME);
+    }
+
+    /**
      * Create and save an alcohol instance given inputs.
      *
      * @param date string of date

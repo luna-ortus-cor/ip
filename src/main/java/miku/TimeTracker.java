@@ -17,6 +17,14 @@ public class TimeTracker {
     private static ArrayList<Activity> activities = new ArrayList<>();
 
     /**
+     * Initialize the time tracking file.
+     */
+    public static void initializeTracker() {
+        Storage s = new Storage(new Ui());
+        s.checkFilePathExistsElseCreate(FILE_NAME);
+    }
+
+    /**
      * Save activity to file.
      *
      * @param activity activity to be saved

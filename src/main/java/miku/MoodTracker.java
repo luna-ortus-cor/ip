@@ -17,6 +17,14 @@ public class MoodTracker {
     private static ArrayList<Mood> moods = new ArrayList<>();
 
     /**
+     * Initialize the mood tracking file.
+     */
+    public static void initializeTracker() {
+        Storage s = new Storage(new Ui());
+        s.checkFilePathExistsElseCreate(FILE_NAME);
+    }
+
+    /**
      * Create and save a mood instance given inputs.
      *
      * @param date string of date
