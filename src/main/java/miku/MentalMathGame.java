@@ -128,7 +128,7 @@ public class MentalMathGame {
             System.out.println("Question " + (i + 1) + ": " + questions.get(i));
             //System.out.print("Your answer: ");
             System.out.println();
-            String in = Constants.INPUT_STRING_BUILDER().toLowerCase();
+            String in = Constants.buildInputString().toLowerCase();
 
             if (in.equals("exit")) {
                 ui.printGameTerminatedMsg();

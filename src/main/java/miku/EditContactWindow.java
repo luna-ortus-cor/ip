@@ -3,6 +3,8 @@ package miku;
 import java.time.LocalDate;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -75,6 +77,20 @@ public class EditContactWindow {
         String secondaryEmail = secondaryEmailField.getText();
         String primaryAddress = primaryAddressField.getText();
         String secondaryAddress = secondaryAddressField.getText();
+
+        boolean isValidPrimaryEmail = true;
+        boolean isValidSecondaryEmail = true;
+        if (!primaryEmail.isEmpty() && !Contact.validateEmail(primaryEmail)) {
+            isValidPrimaryEmail = false;
+        }
+        if (!secondaryEmail.isEmpty() && !Contact.validateEmail(secondaryEmail)) {
+            isValidSecondaryEmail = false;
+        }
+        if (!isValidPrimaryEmail || !isValidSecondaryEmail) {
+            Alert alert = new Alert(AlertType.ERROR, Constants.INVALID_EMAIL_ERROR);
+            alert.showAndWait();
+            return;
+        }
 
         Contact updatedContact = new Contact(firstName, lastName, middleName, housePhone, houseExtension,
                 mobilePhone, mobileExtension, workPhone, workExtension, birthday, bloodType,

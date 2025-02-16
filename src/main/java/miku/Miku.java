@@ -49,7 +49,7 @@ public class Miku {
             synchronized (System.in) {
                 System.in.notify(); //Force wake-up
             }
-            in = Constants.INPUT_STRING_BUILDER();
+            in = Constants.buildInputString();
             //in = sc.nextLine();
             response = p.parse(in);
         }

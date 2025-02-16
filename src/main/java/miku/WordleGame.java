@@ -111,7 +111,7 @@ public class WordleGame {
         while (guessesUsed < maxGuesses && !guessedCorrectly) {
             System.out.print("Enter your guess: ");
             System.out.println();
-            String guess = Constants.INPUT_STRING_BUILDER().toLowerCase();
+            String guess = Constants.buildInputString().toLowerCase();
 
             if (guess.equals("exit")) {
                 ui.printGameTerminatedMsg();

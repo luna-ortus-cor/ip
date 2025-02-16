@@ -63,7 +63,7 @@ public class BlackjackGame {
             while (currentHand.size() == 2 && currentHand.get(0).equals(currentHand.get(1))) {
                 System.out.println("You have a pair! Do you want to (s)plit or (n)o? ");
                 System.out.println();
-                String splitChoice = Constants.INPUT_STRING_BUILDER().toLowerCase();
+                String splitChoice = Constants.buildInputString().toLowerCase();
                 if (splitChoice.equals("exit")) {
                     ui.printGameTerminatedMsg();
                     return;
@@ -97,7 +97,7 @@ public class BlackjackGame {
             while (true) {
                 System.out.println("Do you want to (h)it or (s)tand? ");
                 System.out.println();
-                String choice = Constants.INPUT_STRING_BUILDER().toLowerCase();
+                String choice = Constants.buildInputString().toLowerCase();
                 if (choice.equals("exit")) {
                     ui.printGameTerminatedMsg();
                     return;

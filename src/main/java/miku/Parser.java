@@ -83,6 +83,7 @@ public class Parser implements ContactListener {
         Pattern searchContactEmailPattern = Pattern.compile("^find email (.+)$");
         Pattern searchContactAddressPattern = Pattern.compile("^find address (.+)$");
         Pattern deleteContactPattern = Pattern.compile("^delete contact (\\d+)$");
+        Pattern deleteAllContactsPattern = Pattern.compile("^delete all contacts$");
 
         Pattern addPlacePattern = Pattern.compile(
             "^add place (.+?) /desc (.+?) /address (.+?)\\s+"
@@ -94,6 +95,7 @@ public class Parser implements ContactListener {
         Pattern searchLocationPattern = Pattern.compile("find location (.+)$");
         Pattern viewLocationPattern = Pattern.compile("^locations$");
         Pattern deleteLocationPattern = Pattern.compile("^delete location (\\d+)$");
+        Pattern deleteAllLocationsPattern = Pattern.compile("^delete all locations$");
 
         //TODO delete all contacts, delete all locations
 
@@ -154,6 +156,8 @@ public class Parser implements ContactListener {
             handleSearchContactAddress(matcher.group(1));
         } else if ((matcher = deleteContactPattern.matcher(in)).matches()) {
             handleDeleteContact(matcher.group(1));
+        } else if ((matcher = deleteAllContactsPattern.matcher(in)).matches()) {
+            handleDeleteAllContacts();
         } else if ((matcher = addPlacePattern.matcher(in)).matches()) {
             handleAddPlace(matcher.group(1), matcher.group(2), matcher.group(3),
                     matcher.group(4), matcher.group(6));
@@ -165,6 +169,8 @@ public class Parser implements ContactListener {
             printList(locationList.getList(), 7);
         } else if ((matcher = deleteLocationPattern.matcher(in)).matches()) {
             handleDeleteLocation(matcher.group(1));
+        } else if ((matcher = deleteAllLocationsPattern.matcher(in)).matches()) {
+            handleDeleteAllLocations();
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -397,19 +403,19 @@ public class Parser implements ContactListener {
      */
     private void handleGame() {
         printList(Constants.GAMES_LIST, 1);
-        int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+        int choice = Integer.valueOf(Constants.buildInputString());
         if (choice == 1) {
             ui.printGameMsg(choice);
             ui.printDifficultyMsg(choice);
-            int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            int difficulty = Integer.valueOf(Constants.buildInputString());
             ui.printLengthMsg(choice);
-            int length = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            int length = Integer.valueOf(Constants.buildInputString());
             MentalMathGame game = new MentalMathGame(difficulty, length, this.ui);
             game.startGame();
         } else if (choice == 2) {
             ui.printGameMsg(choice);
             ui.printDifficultyMsg(choice);
-            int difficulty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            int difficulty = Integer.valueOf(Constants.buildInputString());
             WordleGame game = new WordleGame(difficulty, this.ui);
             game.startGame();
         } else if (choice == 3) {
@@ -425,47 +431,47 @@ public class Parser implements ContactListener {
      */
     private void handleTrack() {
         printList(Constants.TRACK_LIST, 2);
-        int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+        int choice = Integer.valueOf(Constants.buildInputString());
         if (choice == 1) {
             System.out.println("Enter START DATE (YYYY-MM-DD): ");
             System.out.println();
-            String startDate = Constants.INPUT_STRING_BUILDER();
+            String startDate = Constants.buildInputString();
             System.out.println("Enter START TIME (HH:mm): ");
             System.out.println();
-            String startTime = Constants.INPUT_STRING_BUILDER();
+            String startTime = Constants.buildInputString();
             System.out.println("Enter END DATE (YYYY-MM-DD): ");
             System.out.println();
-            String endDate = Constants.INPUT_STRING_BUILDER();
+            String endDate = Constants.buildInputString();
             System.out.println("Enter END TIME (HH:mm): ");
             System.out.println();
-            String endTime = Constants.INPUT_STRING_BUILDER();
+            String endTime = Constants.buildInputString();
             System.out.println("Enter ACTIVITY: ");
             System.out.println();
-            String name = Constants.INPUT_STRING_BUILDER();
+            String name = Constants.buildInputString();
             Activity a = new Activity(startDate, startTime, endDate, endTime, name);
             TimeTracker.saveActivityToFile(a);
         } else if (choice == 2) {
             System.out.println("Enter DATE (YYYY-MM-DD): ");
             System.out.println();
-            String date = Constants.INPUT_STRING_BUILDER();
+            String date = Constants.buildInputString();
             System.out.println("Enter MOOD: ");
             System.out.println();
-            String mood = Constants.INPUT_STRING_BUILDER();
+            String mood = Constants.buildInputString();
             //Mood m = new Mood(date, mood);
             MoodTracker.trackMood(date, mood);
         } else if (choice == 3) {
             System.out.println("Enter DATE (YYYY-MM-DD): ");
             System.out.println();
-            String date = Constants.INPUT_STRING_BUILDER();
+            String date = Constants.buildInputString();
             System.out.println("Enter DRINK TYPE: ");
             System.out.println();
-            String drink = Constants.INPUT_STRING_BUILDER();
+            String drink = Constants.buildInputString();
             System.out.println("Enter DRINK NAME: ");
             System.out.println();
-            String name = Constants.INPUT_STRING_BUILDER();
+            String name = Constants.buildInputString();
             System.out.println("Enter DRINK QTY (in standard drinks): ");
             System.out.println();
-            int qty = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+            int qty = Integer.valueOf(Constants.buildInputString());
             //Alcohol a = new Alcohol(date, drink, name, qty);
             AlcoholTracker.trackAlcohol(date, drink, name, qty);
         } else {
@@ -478,7 +484,7 @@ public class Parser implements ContactListener {
      */
     private void handleStats() {
         printList(Constants.TRACK_LIST, 3);
-        int choice = Integer.valueOf(Constants.INPUT_STRING_BUILDER());
+        int choice = Integer.valueOf(Constants.buildInputString());
         if (choice == 1) {
             TimeTracker.displayStatistics();
         } else if (choice == 2) {
@@ -648,6 +654,13 @@ public class Parser implements ContactListener {
     }
 
     /**
+     * Handle user delete all contacts instruction.
+     */
+    private void handleDeleteAllContacts() {
+        contactList.deleteAll();
+    }
+
+    /**
      * Handle user add place.
      *
      * @param name place name
@@ -690,6 +703,13 @@ public class Parser implements ContactListener {
      */
     private void handleDeleteLocation(String idx) {
         locationList.delete(Integer.valueOf(idx.trim()) - 1);
+    }
+
+    /**
+     * Handle user delete all locations instruction.
+     */
+    private void handleDeleteAllLocations() {
+        locationList.deleteAll();
     }
 
     //error codes

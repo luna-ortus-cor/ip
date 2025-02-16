@@ -83,11 +83,12 @@ public class Constants {
     public static final String SORT_LIST_ERROR = ":3 oops! error when sorting!";
     public static final String UNSPECIFIED_IO_ERROR = ":3 oops! an unknown IO error occurred";
     public static final String TASK_EDIT_TAG_MSG = "Edited the following task:";
+    public static final String INVALID_EMAIL_ERROR = "One or more of the emails provided is invalid.";
 
     /**
      * Builds input string character by character from the user input to the GUI.
      */
-    public static final String INPUT_STRING_BUILDER() {
+    public static final String buildInputString() {
         StringBuilder input = new StringBuilder();
         try {
             int c;
