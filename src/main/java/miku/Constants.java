@@ -63,6 +63,7 @@ public class Constants {
                     "type \"(un)mark <num>\" to mark the task <num> (not) done",
                     "type \"set <num1> <num2>\" to set the priority of task <num1> to <num2>",
                     "type \"sort prio <order>\" to sort the task list in order of priority",
+                    "type \"delete <num>\" to delete the task <num>", "type \"delete all\" to delete all tasks",
                     "type \"games\" to see the list of games", "type \"track\" to track a statistic",
                     "type \"stats\" to see the list of statistics", "type \"chat\" to chat with Miku",
                     "fields in [square brackets] are optional", "priority is a number from 1 to 5 "

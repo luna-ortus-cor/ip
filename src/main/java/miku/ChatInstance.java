@@ -1,25 +1,34 @@
 package miku;
 
-import java.util.Scanner;
-
+/**
+ * Class to handle chat instances with the user
+ */
 public class ChatInstance {
     private Chatbot chatbot;
 
+    /**
+     * Initialize a new Chat instance.
+     */
     public ChatInstance() {
         this.chatbot = new Chatbot();
     }
 
+    /**
+     * Start chat with LLM.
+     */
     public void chat() {
-        Scanner sc = new Scanner(System.in);
         System.out.println(Constants.INDENT + "Yahallo! I'm Miku! ^~^");
+        System.out.println();
         while (true) {
-            String in = sc.nextLine();
+            String in = Constants.buildInputString();
             if (in.trim().equals("exit")) {
                 System.out.println(Constants.INDENT + "Miku says bye! :3");
+                System.out.println();
                 break;
             }
             String response = this.chatbot.getResponse(0, in);
             System.out.println(Constants.INDENT + response);
+            System.out.println();
         }
     }
 }
