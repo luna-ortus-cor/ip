@@ -1,14 +1,26 @@
 package miku;
 
-import java.io.*;
-import java.text.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Class to track time spent on different activities.
+ */
 public class TimeTracker {
     private static final String FILE_NAME = Constants.FILEPATH_TIME_TRACKER;
-    private static List<Activity> activities = new ArrayList<>();
+    private static ArrayList<Activity> activities = new ArrayList<>();
 
-    // Method to save activity to file
+    /**
+     * Save activity to file.
+     *
+     * @param activity activity to be saved
+     */
     public static void saveActivityToFile(Activity activity) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(activity.toString());
@@ -18,7 +30,9 @@ public class TimeTracker {
         }
     }
 
-    // Method to load activities from file
+    /**
+     * Load activities from file.
+     */
     private static void loadActivitiesFromFile() {
         activities.clear(); // Clear the current list to avoid duplication
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
@@ -51,7 +65,9 @@ public class TimeTracker {
         }
     }
 
-    // Method to display statistics
+    /**
+     * Display statistics.
+     */
     public static void displayStatistics() {
         loadActivitiesFromFile();
         System.out.println("\nStatistics:");

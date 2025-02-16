@@ -126,8 +126,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + getFormattedDateTime(this.by, this.byLdt) + ")" +
-            super.getFormattedTags();
+        return "[D] " + super.toString() + " (by: " + getFormattedDateTime(this.by, this.byLdt) + ")"
+            + super.getFormattedTags();
     }
 
     /**
@@ -136,7 +136,7 @@ public class Deadline extends Task {
      * @return a string representation of the Deadline
      */
     public String toSaveFormat() {
-        return "D | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.by, this.byLdt) +
-            " | " + super.getUnformattedTags() + " |";
+        return "D | " + super.toSaveFormat() + " | " + getUnformattedDateTime(this.by, this.byLdt)
+            + " | " + super.getUnformattedTags() + " |";
     }
 }

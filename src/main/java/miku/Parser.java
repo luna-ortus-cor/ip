@@ -381,9 +381,9 @@ public class Parser implements ContactListener {
     private void handleEvent(String name, String from, String to, String priority, String tags) {
         if (name != null && from != null && to != null && priority != null && tags != null) {
             taskList.addEvent(name, Integer.valueOf(priority), from, to, tags.split("\\s+"));
-        } else if (name!= null && from != null && to != null && priority != null) {
+        } else if (name != null && from != null && to != null && priority != null) {
             taskList.addEvent(name, Integer.valueOf(priority), from, to);
-        } else if (name!= null && from != null && to != null && tags != null) {
+        } else if (name != null && from != null && to != null && tags != null) {
             taskList.addEvent(name, from, to, tags.split("\\s+"));
         } else if (name != null && from != null && to != null) {
             taskList.addEvent(name, from, to);
@@ -576,7 +576,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user edit contact.
-     * 
+     *
      * @param idx index of original contact to be edited
      */
     private void handleEditContact(String idx) {
@@ -649,7 +649,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user add place.
-     * 
+     *
      * @param name place name
      * @param desc place description
      * @param address place address
@@ -663,7 +663,7 @@ public class Parser implements ContactListener {
 
     /**
      * Handle user add website.
-     * 
+     *
      * @param name website name
      * @param desc website description
      * @param url website url
@@ -702,9 +702,13 @@ public class Parser implements ContactListener {
     //7:error writing task list to file
     //8:error sorting
     //9:IO error (unspecified)
+    //10:error reading contact list from file
+    //11:error writing contact list to file
+    //12:error reading location list from file
+    //13:error writing location list to file
     /**
      * Handles error messages.
-     * 
+     *
      * @param code int denoting the error generated
      */
     private void handleError(int code) {

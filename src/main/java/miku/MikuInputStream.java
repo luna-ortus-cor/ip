@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Class to redirect System.in to user input in the GUI.
+ */
 public class MikuInputStream extends InputStream {
     private final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
 
@@ -19,6 +22,11 @@ public class MikuInputStream extends InputStream {
         }
     }
 
+    /**
+     * Add a string to the input queue.
+     *
+     * @param text string to be added
+     */
     public void add(String text) {
         for (char c:text.toCharArray()) {
             queue.add((int) c);
@@ -26,7 +34,7 @@ public class MikuInputStream extends InputStream {
         queue.add((int) '\n');
 
         synchronized (this) {
-            this.notify();  //Wake up any waiting thread
+            this.notify(); //Wake up any waiting thread
         }
     }
 }

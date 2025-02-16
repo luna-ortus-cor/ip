@@ -2,10 +2,11 @@ package miku;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Contact class to store related details about a contact.
+ */
 public class Contact {
     private String DELIMITER = " | "; //should put in constants or see if better solution
     private static final String EMPTY = "-"; //placeholder for missing values
@@ -170,23 +171,29 @@ public class Contact {
 
     @Override
     public String toString() {
-        return escape(firstName) + DELIMITER +
-               escape(lastName) + DELIMITER +
-               escape(middleName) + DELIMITER +
-               escape(housePhone) + DELIMITER +
-               escape(houseExtension) + DELIMITER +
-               escape(mobilePhone) + DELIMITER +
-               escape(mobileExtension) + DELIMITER +
-               escape(workPhone) + DELIMITER +
-               escape(workExtension) + DELIMITER +
-               (birthday != null ? birthday.format(DATE_FORMATTER) : EMPTY) + DELIMITER +
-               escape(bloodType) + DELIMITER +
-               escape(emailPrimary) + DELIMITER +
-               escape(emailSecondary) + DELIMITER +
-               escape(addressPrimary) + DELIMITER +
-               escape(addressSecondary) + DELIMITER;
+        return escape(firstName) + DELIMITER
+               + escape(lastName) + DELIMITER
+               + escape(middleName) + DELIMITER
+               + escape(housePhone) + DELIMITER
+               + escape(houseExtension) + DELIMITER
+               + escape(mobilePhone) + DELIMITER
+               + escape(mobileExtension) + DELIMITER
+               + escape(workPhone) + DELIMITER
+               + escape(workExtension) + DELIMITER
+               + (birthday != null ? birthday.format(DATE_FORMATTER) : EMPTY) + DELIMITER
+               + escape(bloodType) + DELIMITER
+               + escape(emailPrimary) + DELIMITER
+               + escape(emailSecondary) + DELIMITER
+               + escape(addressPrimary) + DELIMITER
+               + escape(addressSecondary) + DELIMITER;
     }
 
+    /**
+     * Return a formatted string for each field in the Contact instance, handling empty/null values correctly.
+     *
+     * @param value string of a field value in the contact instance
+     * @return a formatted string of the field value
+     */
     private String escape(String value) {
         return (value == null || value.isEmpty()) ? EMPTY : value.replace("|", "\\|");
     }

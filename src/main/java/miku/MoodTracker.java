@@ -1,18 +1,38 @@
 package miku;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Class to track moods by day.
+ */
 public class MoodTracker {
     private static final String FILE_NAME = Constants.FILEPATH_MOOD_TRACKER;
     private static ArrayList<Mood> moods = new ArrayList<>();
 
+    /**
+     * Create and save a mood instance given inputs.
+     *
+     * @param date string of date
+     * @param moodDescription string of mood
+     */
     public static void trackMood(String date, String moodDescription) {
         Mood newMood = new Mood(date, moodDescription);
         moods.add(newMood);
         saveToFile(newMood);
     }
 
+    /**
+     * Save mood to file.
+     *
+     * @param mood mood to be saved
+     */
     private static void saveToFile(Mood mood) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(mood.toString());
@@ -22,6 +42,9 @@ public class MoodTracker {
         }
     }
 
+    /**
+     * Load moods from file.
+     */
     private static void loadMoodsFromFile() {
         moods.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
@@ -37,6 +60,9 @@ public class MoodTracker {
         }
     }
 
+    /**
+     * Display statistics.
+     */
     public static void displayStatistics() {
         loadMoodsFromFile();
         System.out.println("\nMood Statistics:");

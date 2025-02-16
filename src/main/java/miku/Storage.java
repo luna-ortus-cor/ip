@@ -2,15 +2,12 @@ package miku;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,6 +31,12 @@ public class Storage {
 
     //we should also include generic read and write methods for arbitrary files
 
+    /**
+     * Check if filepath pointing to a file exists, if it does not then create the filepath and file.
+     *
+     * @param fp filepath to check
+     * @return int specifying status of the file
+     */
     public int checkFilePathExistsElseCreate(String fp) {
         Path path = Paths.get(fp);
         try {
@@ -82,7 +85,7 @@ public class Storage {
 
     /**
      * Parses a string specifying a task and returns a subclass instance of Task corresponding to the line.
-     * 
+     *
      * @param line string representation of a task
      */
     private Task parseTask(String line) {
@@ -91,8 +94,9 @@ public class Storage {
         Pattern deadlinePattern =
             Pattern.compile("^D\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
         Pattern eventPattern =
-            Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
-        
+            Pattern.compile("^E\\s\\|\\s(\\d)\\s\\|\\s(\\d)\\s\\|\\s(.+?)\\s"
+                            + "\\|\\s(.+?)\\s\\|\\s(.+?)\\s\\|\\s(.*)\\s\\|$");
+
         Matcher todoMatcher = todoPattern.matcher(line);
         Matcher deadlineMatcher = deadlinePattern.matcher(line);
         Matcher eventMatcher = eventPattern.matcher(line);
@@ -180,7 +184,9 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(" \\| ");
-                if (parts.length < 14) continue; // Ignore malformed lines
+                if (parts.length < 14) {
+                    continue; // Ignore malformed lines
+                }
 
                 String firstName = toNull(parts[0].trim());
                 String lastName = toNull(parts[1].trim());
@@ -217,7 +223,7 @@ public class Storage {
 
     /**
      * Helper method to handle null/empty value representations of fields in Contact
-     * 
+     *
      * @param value string of a field in a Contact object
      * @return null if the string is the empty representation, else value
      */
@@ -228,7 +234,7 @@ public class Storage {
     /**
      * Write contacts from an arraylist of contacts to a file specified by a file path.
      *
-     * @param taskList an ArrayList of Contacts
+     * @param contactList an ArrayList of Contacts
      * @param fp a String containing the file path
      */
     public void writeContacts(ArrayList<Contact> contactList, String fp) {
@@ -244,6 +250,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads locations from a file specified by a file path and returns an arraylist of the locations.
+     *
+     * @param fp a String containing the file path
+     * @return an ArrayList of Locations
+     */
     public ArrayList<Location> readLocations(String fp) {
         ArrayList<Location> locationList = new ArrayList<>();
         int response = checkFilePathExistsElseCreate(fp);
@@ -279,6 +291,12 @@ public class Storage {
         return locationList;
     }
 
+    /**
+     * Write locations from an arraylist of locations to a file specified by a file path.
+     *
+     * @param locationList an ArrayList of Locations
+     * @param fp a String containing the file path
+     */
     public void writeLocations(ArrayList<Location> locationList, String fp) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fp, false))) {
             for (Location l:locationList) {
@@ -292,6 +310,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Prints the relevant error message given an error code.
+     *
+     * @param code an int denoting the specific type of error
+     */
     private void handleError(int code) {
         ui.printErrorMsg(code);
     }

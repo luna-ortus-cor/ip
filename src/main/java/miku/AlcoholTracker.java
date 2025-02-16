@@ -1,18 +1,40 @@
 package miku;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Class to track alochol consumption by day.
+ */
 public class AlcoholTracker {
     private static final String FILE_NAME = Constants.FILEPATH_ALCOHOL_TRACKER;
     private static ArrayList<Alcohol> alcoholLogs = new ArrayList<>();
 
+    /**
+     * Create and save an alcohol instance given inputs.
+     *
+     * @param date string of date
+     * @param drink string of drink type
+     * @param name string of drink name
+     * @param qty number of standard drinks
+     */
     public static void trackAlcohol(String date, String drink, String name, int quantity) {
         Alcohol newLog = new Alcohol(date, drink, name, quantity);
         alcoholLogs.add(newLog);
         saveToFile(newLog);
     }
 
+    /**
+     * Save alcohol to file.
+     *
+     * @param alcohol alcohol to be saved
+     */
     private static void saveToFile(Alcohol alcohol) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(alcohol.toString());
@@ -22,6 +44,9 @@ public class AlcoholTracker {
         }
     }
 
+    /**
+     * Load alcohol from file.
+     */
     private static void loadAlcoholLogsFromFile() {
         alcoholLogs.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
@@ -42,6 +67,9 @@ public class AlcoholTracker {
         }
     }
 
+    /**
+     * Display statistics.
+     */
     public static void displayStatistics() {
         loadAlcoholLogsFromFile();
         System.out.println("\nAlcohol Consumption Statistics:");

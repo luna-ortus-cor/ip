@@ -1,33 +1,50 @@
 package miku;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
+/**
+ * Wordle game class
+ */
 public class WordleGame {
+    private static final String FILE_NAME = Constants.FILEPATH_WORDLIST;
     private int difficulty;
     private int maxGuesses;
     private ArrayList<String> wordList;
     private String targetWord;
-    private static final String FILE_NAME = Constants.FILEPATH_WORDLIST;
     private Ui ui;
 
+    /**
+     * Initializes new wordle game instance.
+     *
+     * @param difficulty int specifying game difficulty
+     * @param ui a Ui instance
+     */
     public WordleGame(int difficulty, Ui ui) {
         this.difficulty = difficulty;
         this.wordList = loadWordList();
         this.targetWord = selectTargetWord();
-        switch(difficulty){
-            case 1: this.maxGuesses=6;
-                    break;
-            case 2: this.maxGuesses=8;
-                    break;
-            case 3: this.maxGuesses=10;
-                    break;
+        switch(difficulty) {
+        case 1:
+            this.maxGuesses = 6;
+            break;
+        case 2:
+            this.maxGuesses = 8;
+            break;
+        case 3:
+            this.maxGuesses = 10;
+            break;
+        default:
+            break;
         };
         this.ui = ui;
     }
 
     /**
-     * Load wordlist from wordlist file. 
+     * Load wordlist from wordlist file.
      */
     private ArrayList<String> loadWordList() {
         ArrayList<String> words = new ArrayList<>();
@@ -39,7 +56,7 @@ public class WordleGame {
                     words.add(line);
                 }
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error loading word list.");
             System.out.println();
         }
@@ -48,17 +65,21 @@ public class WordleGame {
 
     /**
      * Check if word is of correct difficulty.
-     * 
+     *
      * @param word string of the word proposed
      * @return boolean indicating if the proposed word is of correct difficulty
      */
     private boolean isWordOfDifficulty(String word) {
         int length = word.trim().length();
-        switch(this.difficulty){
-            case 1: return(length >= 5 && length <= 7);
-            case 2: return(length >= 8 && length <= 10);
-            case 3: return(length >= 11 && length <= 13);
-            default: return false;
+        switch(this.difficulty) {
+        case 1:
+            return (length >= 5 && length <= 7);
+        case 2:
+            return (length >= 8 && length <= 10);
+        case 3:
+            return (length >= 11 && length <= 13);
+        default:
+            return false;
         }
     }
 
@@ -68,13 +89,16 @@ public class WordleGame {
     private String selectTargetWord() {
         Random random = new Random();
         String word = "exit";
-        while(word.equals("exit")) {
+        while (word.equals("exit")) {
             word = wordList.get(random.nextInt(wordList.size()));
         }
         assert !word.equals("exit");
         return word;
     }
 
+    /**
+     * Starts the game engine.
+     */
     public void startGame() {
         int guessesUsed = 0;
         boolean guessedCorrectly = false;
@@ -123,7 +147,7 @@ public class WordleGame {
      * Evaluate the user guess.
      * Also prints the output of the user guess indicating correct letters,
      * correct letters but wrong position, and wrong letters.
-     * 
+     *
      * @param guess string of the user guess
      * @return boolean indicating if the user guess is correct
      */

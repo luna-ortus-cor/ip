@@ -11,11 +11,11 @@ public class Activity{
     private String name;
 
     public Activity(String startDate,String startTime,String endDate,String endTime,String name){
-        this.name=name;
-        this.startDate=startDate;
-        this.endDate=endDate;
-        this.startTime=startTime;
-        this.endTime=endTime;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
@@ -31,8 +31,8 @@ public class Activity{
        try {
             // Combine date and time into a single format for parsing
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Date start = format.parse(this.startDate+" "+this.startTime);
-            Date end = format.parse(this.endDate+" "+this.endTime);
+            Date start = format.parse(this.startDate + " " + this.startTime);
+            Date end = format.parse(this.endDate + " " + this.endTime);
 
             // Calculate the time difference in milliseconds
            long diff = end.getTime() - start.getTime();

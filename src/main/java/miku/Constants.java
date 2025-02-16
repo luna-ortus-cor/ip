@@ -90,7 +90,9 @@ public class Constants {
             int c;
             while ((c = System.in.read()) != -1) {
                 input.append((char) c);
-                if (c == '\n') break;
+                if (c == '\n') {
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

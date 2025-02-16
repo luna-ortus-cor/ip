@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class GlobalSettingsManager {
-
     private static String currentTheme = "light";  // Default theme
     private static int fontSize = 14;  // Default font size
 
@@ -27,7 +26,11 @@ public class GlobalSettingsManager {
         fontSize = size;
     }
 
-    // Apply the settings globally to the primary stage (or any new stage)
+    /**
+     * Apply the settings globally to the primary stage (or any new stage).
+     *
+     * @param stage stage to apply settings to
+     */
     public static void applyGlobalSettings(Stage stage) {
         // Apply theme (Dark or Light)
         if (currentTheme.equals("dark")) {
@@ -46,7 +49,11 @@ public class GlobalSettingsManager {
         applySettingsToAllNodes(stage.getScene());
     }
 
-    // Apply font size and theme to all nodes (buttons, labels, text fields, etc.)
+    /**
+     * Apply font size and theme to all nodes (buttons, labels, text fields, etc.).
+     *
+     * @param scene scene to apply settings to
+     */
     private static void applySettingsToAllNodes(Scene scene) {
         scene.getRoot().getStylesheets().forEach(sheet -> {
             // Force CSS refresh
@@ -58,12 +65,14 @@ public class GlobalSettingsManager {
         scene.getRoot().setStyle("-fx-font-size: " + fontSize + "px;");
     }
 
-    // Apply settings to all open windows (also handles new windows)
+    /**
+     * Apply settings to all open windows (also handles new windows)
+     */
     public static void applySettingsToAllWindows() {
         Platform.runLater(() -> {
             Stage primaryStage = Main.getPrimaryStage();
             if (primaryStage != null) {
-                applyGlobalSettings(primaryStage);  // Apply to the main window
+                applyGlobalSettings(primaryStage); // Apply to the main window
             }
 
             // Apply to any other open windows (settings, dialogs, etc.)

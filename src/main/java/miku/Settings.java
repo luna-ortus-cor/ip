@@ -1,21 +1,34 @@
 package miku;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
+/**
+ * Settings class to handle settings options.
+ */
 public class Settings {
-
     private String theme;
     private int fontSize;
     private boolean soundEnabled;
     private boolean typingIndicatorEnabled;
     private final String settingsFilePath = "settings.txt";
 
+    /**
+     * Initializes a settings instance and loads settings (creates default settings if none exists yet).
+     */
     public Settings() {
         // Initialize settings and load from file or set defaults if file is missing
         loadOrCreateSettings();
     }
 
+    /**
+     * Create settings file if it does not exist, else load settings from file.
+     */
     private void loadOrCreateSettings() {
         File settingsFile = new File(settingsFilePath);
         if (!settingsFile.exists()) {
@@ -27,6 +40,9 @@ public class Settings {
         }
     }
 
+    /**
+     * Set default settings if no current settings found.
+     */
     private void setDefaultSettings() {
         this.theme = "light";
         this.fontSize = 14;
@@ -34,6 +50,9 @@ public class Settings {
         this.typingIndicatorEnabled = true;
     }
 
+    /**
+     * Load settings from file.
+     */
     private void loadSettings() {
         Properties properties = new Properties();
         try (InputStream input = new FileInputStream(settingsFilePath)) {
@@ -41,12 +60,16 @@ public class Settings {
             this.theme = properties.getProperty("theme", "light");
             this.fontSize = Integer.parseInt(properties.getProperty("fontSize", "14"));
             this.soundEnabled = Boolean.parseBoolean(properties.getProperty("soundEnabled", "true"));
-            this.typingIndicatorEnabled = Boolean.parseBoolean(properties.getProperty("typingIndicatorEnabled", "true"));
+            this.typingIndicatorEnabled =
+                Boolean.parseBoolean(properties.getProperty("typingIndicatorEnabled", "true"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Save settings to file.
+     */
     public void saveSettings() {
         Properties properties = new Properties();
         properties.setProperty("theme", theme);
