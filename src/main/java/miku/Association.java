@@ -23,7 +23,7 @@ public class Association {
 
     /**
      * Initializes a new Association instance.
-     * 
+     *
      * @param ui a Ui instance
      */
     public Association(Ui ui) {

@@ -7,8 +7,4 @@
 <suppressions>
   <suppress checks="JavadocType" files=".*Test\.java"/>
   <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
-  <suppress checks="[a-zA-Z0-9]*" files=".*TodoTest\.java"/>
-  <suppress checks="[a-zA-Z0-9]*" files=".*DeadlineTest\.java"/>
-  <suppress checks="[a-zA-Z0-9]*" files=".*EventTest\.java"/>
-  <suppress checks="[a-zA-Z0-9]*" files=".*TaskTest\.java"/>
 </suppressions>
