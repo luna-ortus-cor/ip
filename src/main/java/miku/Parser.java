@@ -2,7 +2,6 @@ package miku;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +20,7 @@ public class Parser implements ContactListener {
     private static LocationList locationList;
     private static Storage storage;
     private static Ui ui;
-    private Scanner sc = new Scanner(System.in);
+    private static Association association;
 
     /**
      * Instantiates a new Parser instance taking in a Ui ui.
@@ -34,6 +33,7 @@ public class Parser implements ContactListener {
         this.contactList = new ContactList(ui);
         this.locationList = new LocationList(ui);
         this.storage = new Storage(ui);
+        this.association = new Association(ui);
     }
 
     /**
@@ -101,6 +101,11 @@ public class Parser implements ContactListener {
         Pattern deleteLocationPattern = Pattern.compile("^delete\\s+location\\s+(\\d+)$");
         Pattern deleteAllLocationsPattern = Pattern.compile("^delete\\s+all\\s+locations$");
 
+        Pattern associateTaskContactPattern = Pattern.compile(
+            "^associate\\s+/task\\s+(\\d+)\\s+/contact\\s+(\\d+)$");
+        Pattern associateTaskLocationPattern = Pattern.compile(
+            "^associate\\s+/task\\s+(\\d+)\\s+/location\\s+(\\d+)$");
+
         //TODO association
 
         Matcher matcher;
@@ -163,10 +168,19 @@ public class Parser implements ContactListener {
         } else if ((matcher = deleteAllContactsPattern.matcher(in)).matches()) {
             handleDeleteAllContacts();
         } else if ((matcher = addPlacePattern.matcher(in)).matches()) {
-            handleAddPlace(matcher.group(1), matcher.group(2), matcher.group(3),
-                    matcher.group(4), matcher.group(6));
+            String name = matcher.group(1);
+            String description = matcher.group(2);
+            String address = matcher.group(3);
+            String latitude = matcher.group(4);
+            String longitude = matcher.group(6);
+
+            handleAddPlace(name, description, address, latitude, longitude);
         } else if ((matcher = addWebsitePattern.matcher(in)).matches()) {
-            handleAddWebsite(matcher.group(1), matcher.group(2), matcher.group(3));
+            String name = matcher.group(1);
+            String description = matcher.group(2);
+            String url = matcher.group(3);
+
+            handleAddWebsite(name, description, url);
         } else if ((matcher = searchLocationPattern.matcher(in)).matches()) {
             handleSearchLocation(matcher.group(1));
         } else if ((matcher = viewLocationPattern.matcher(in)).matches()) {
@@ -175,6 +189,10 @@ public class Parser implements ContactListener {
             handleDeleteLocation(matcher.group(1));
         } else if ((matcher = deleteAllLocationsPattern.matcher(in)).matches()) {
             handleDeleteAllLocations();
+        } else if ((matcher = associateTaskContactPattern.matcher(in)).matches()) {
+            handleAssociateTaskContact(matcher.group(1), matcher.group(2));
+        } else if ((matcher = associateTaskLocationPattern.matcher(in)).matches()) {
+            handleAssociateTaskLocation(matcher.group(1), matcher.group(2));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -714,6 +732,34 @@ public class Parser implements ContactListener {
      */
     private void handleDeleteAllLocations() {
         locationList.deleteAll();
+    }
+
+    /**
+     * Create an association between a task and a contact.
+     *
+     * @param taskIdx index of the task in task list
+     * @param contactIdx index of the contact in contact list
+     */
+    private void handleAssociateTaskContact(String taskIdx, String contactIdx) {
+        association.associateTaskWithContact(
+            taskList.getTask(Integer.valueOf(taskIdx) - 1),
+            contactList.getContact(Integer.valueOf(contactIdx) - 1)
+        );
+        ui.printAssociationCreatedMsg();
+    }
+
+    /**
+     * Create an association between a task and a location.
+     *
+     * @param taskIdx index of the task in task list
+     * @param locationIdx index of the location in location list
+     */
+    private void handleAssociateTaskLocation(String taskIdx, String locationIdx) {
+        association.associateTaskWithLocation(
+            taskList.getTask(Integer.valueOf(taskIdx) - 1),
+            locationList.getLocation(Integer.valueOf(locationIdx) - 1)
+        );
+        ui.printAssociationCreatedMsg();
     }
 
     //error codes

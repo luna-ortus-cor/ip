@@ -88,6 +88,7 @@ public class Constants {
     public static final String BJ_INVALID_CHOICE_MSG = "Invalid choice. Type 'h' to hit or 's' to stand.";
     public static final String BJ_BUST_MSG = "You busted on this hand!";
     public static final String BJ_CHOICE_MSG = "Do you want to (h)it or (s)tand? ";
+    public static final String ASSOCIATION_CREATED_MSG = "Association successfully created! :D";
 
     /**
      * Builds input string character by character from the user input to the GUI.

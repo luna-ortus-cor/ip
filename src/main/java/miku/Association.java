@@ -19,15 +19,19 @@ public class Association {
     private Map<Task, Set<Location>> taskLocations;
     private Map<Contact, Set<Task>> contactTasks; // Reverse mapping
     private Map<Location, Set<Task>> locationTasks; // Reverse mapping
+    private Ui ui;
 
     /**
      * Initializes a new Association instance.
+     * 
+     * @param ui a Ui instance
      */
-    public Association() {
+    public Association(Ui ui) {
         this.taskContacts = new HashMap<>();
         this.taskLocations = new HashMap<>();
         this.contactTasks = new HashMap<>();
         this.locationTasks = new HashMap<>();
+        this.ui = ui;
     }
 
     /**

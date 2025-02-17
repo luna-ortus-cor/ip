@@ -54,7 +54,12 @@ public class ContactList {
      * @return contact object at specified index
      */
     public Contact getContact(int idx) {
-        return this.contactList.get(idx); //need try catch on idx
+        try {
+            return this.contactList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            handleError(5);
+        }
+        return null;
     }
 
     /**

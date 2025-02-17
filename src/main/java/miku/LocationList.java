@@ -48,6 +48,21 @@ public class LocationList {
     }
 
     /**
+     * Get location based on index in location list.
+     *
+     * @param idx index of location in location list
+     * @return location object at specified index
+     */
+    public Location getLocation(int idx) {
+        try {
+            return this.locationList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            handleError(5);
+        }
+        return null;
+    }
+
+    /**
      * Add a location object to the list of locations.
      *
      * @param location a location object to be added to the list of locations

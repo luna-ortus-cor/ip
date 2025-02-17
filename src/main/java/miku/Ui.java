@@ -353,6 +353,14 @@ public class Ui {
     }
 
     /**
+     * Prints the message when the user creates an association.
+     */
+    public void printAssociationCreatedMsg() {
+        System.out.println(Constants.INDENT + Constants.ASSOCIATION_CREATED_MSG);
+        System.out.println();
+    }
+
+    /**
      * Prints the relevant error message given an error code.
      *
      * @param code an int denoting the specific type of error

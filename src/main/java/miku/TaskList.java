@@ -65,6 +65,21 @@ public class TaskList {
     }
 
     /**
+     * Get task based on index in task list.
+     *
+     * @param idx index of task in task list
+     * @return task object at specified index
+     */
+    public Task getTask(int idx) {
+        try {
+            return this.taskList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            handleError(5);
+        }
+        return null;
+    }
+
+    /**
      * Mark the task at a specified index as done.
      *
      * @param idx the index of the task in the list
