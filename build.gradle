@@ -15,6 +15,7 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
     implementation 'dev.langchain4j:langchain4j-hugging-face:1.0.0-alpha1'
     implementation 'dev.langchain4j:langchain4j:1.0.0-alpha1'
+    testImplementation "org.testcontainers:testcontainers:1.20.4"
 
     String javaFxVersion = '17.0.7'
 
