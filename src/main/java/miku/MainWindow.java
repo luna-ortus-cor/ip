@@ -55,6 +55,8 @@ public class MainWindow extends AnchorPane {
         //dialogContainer.getChildren().addAll(DialogBox.getMikuDialog("uwu", mikuImage));
         this.miku = new Miku(mikuInputStream, mikuOutputStream); //Initialize Miku
 
+        Platform.runLater(() -> userInput.requestFocus());
+
         Platform.runLater(() -> {
             new Thread(() -> {
                 int response = this.miku.run();
