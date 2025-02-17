@@ -329,6 +329,30 @@ public class Ui {
     }
 
     /**
+     * Prints the message when the user makes an invalid choice in blackjack.
+     */
+    public void printBlackjackInvalidChoiceMsg() {
+        System.out.println(Constants.BJ_INVALID_CHOICE_MSG);
+        System.out.println();
+    }
+
+    /**
+     * Prints the message when the user busts in blackjack.
+     */
+    public void printBlackjackBustMsg() {
+        System.out.println(Constants.BJ_BUST_MSG);
+        System.out.println();
+    }
+
+    /**
+     * Prints the message for the user to make a choice in blackjack.
+     */
+    public void printBlackjackChoiceMsg() {
+        System.out.println(Constants.BJ_CHOICE_MSG);
+        System.out.println();
+    }
+
+    /**
      * Prints the relevant error message given an error code.
      *
      * @param code an int denoting the specific type of error

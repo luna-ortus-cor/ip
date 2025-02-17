@@ -1,9 +1,11 @@
 package miku;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -48,7 +50,8 @@ public class WordleGame {
      */
     private ArrayList<String> loadWordList() {
         ArrayList<String> words = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+        try (InputStream is = this.getClass().getResourceAsStream(FILE_NAME)) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim().toLowerCase();

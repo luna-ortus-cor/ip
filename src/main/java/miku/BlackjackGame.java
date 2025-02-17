@@ -95,8 +95,7 @@ public class BlackjackGame {
             System.out.println("Playing Hand " + (i + 1) + ": " + hand);
             System.out.println();
             while (true) {
-                System.out.println("Do you want to (h)it or (s)tand? ");
-                System.out.println();
+                ui.printBlackjackChoiceMsg();
                 String choice = Constants.buildInputString().toLowerCase();
                 if (choice.equals("exit")) {
                     ui.printGameTerminatedMsg();
@@ -110,16 +109,14 @@ public class BlackjackGame {
                     System.out.println("Your hand: " + hand + " (Score: " + playerScore + ")");
 
                     if (playerScore > 21) {
-                        System.out.println("You busted on this hand!");
-                        System.out.println();
+                        ui.printBlackjackBustMsg();
                         break;
                     }
                     System.out.println();
                 } else if (choice.equals("s")) {
                     break;
                 } else {
-                    System.out.println("Invalid choice. Type 'h' to hit or 's' to stand.");
-                    System.out.println();
+                    ui.printBlackjackInvalidChoiceMsg();
                 }
             }
         }
@@ -135,7 +132,7 @@ public class BlackjackGame {
         System.out.println();
 
         // Determine winner for each hand
-        System.out.println("\nFinal Scores:");
+        System.out.println("Final Scores:");
         int botScore = calculateScore(botHand);
         System.out.println("Bot: " + botScore);
         System.out.println();

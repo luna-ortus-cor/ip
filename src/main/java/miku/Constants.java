@@ -34,7 +34,7 @@ public class Constants {
     public static final ArrayList<String> TRACK_LIST =
         new ArrayList<String>(Arrays.asList("Time", "Mood", "Alcohol", "Back"));
     public static final String STATS_MSG = "^~^ sure! which stats would you like to see?";
-    public static final String FILEPATH_WORDLIST = "./data/words.txt";
+    public static final String FILEPATH_WORDLIST = "/data/words.txt";
     public static final String FILEPATH_TIME_TRACKER = "./data/time_tracker.txt";
     public static final String FILEPATH_MOOD_TRACKER = "./data/mood_tracker.txt";
     public static final String FILEPATH_ALCOHOL_TRACKER = "./data/alcohol_tracker.txt";
@@ -85,6 +85,9 @@ public class Constants {
     public static final String UNSPECIFIED_IO_ERROR = ":3 oops! an unknown IO error occurred";
     public static final String TASK_EDIT_TAG_MSG = "Edited the following task:";
     public static final String INVALID_EMAIL_ERROR = "One or more of the emails provided is invalid.";
+    public static final String BJ_INVALID_CHOICE_MSG = "Invalid choice. Type 'h' to hit or 's' to stand.";
+    public static final String BJ_BUST_MSG = "You busted on this hand!";
+    public static final String BJ_CHOICE_MSG = "Do you want to (h)it or (s)tand? ";
 
     /**
      * Builds input string character by character from the user input to the GUI.
