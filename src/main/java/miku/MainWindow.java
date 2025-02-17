@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -46,7 +47,9 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         mikuOutputStream = new MikuOutputStream(dialogContainer);
         mikuInputStream = new MikuInputStream();
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //This allows scrolling even if scrollpane not in focus
+        //Credits to https://github.com/samuelneo/ip/commit/a4318795662647afe657d1e5047e1c433c283896
+        scrollPane.addEventFilter(ScrollEvent.SCROLL, event -> scrollPane.vvalueProperty().unbind());
         System.setOut(new PrintStream(mikuOutputStream));
         System.setIn(mikuInputStream);
         //dialogContainer.getChildren().addAll(DialogBox.getMikuDialog("uwu", mikuImage));
@@ -81,6 +84,8 @@ public class MainWindow extends AnchorPane {
         //int mikuResponse = miku.getResponse(userText);
         mikuInputStream.add(userText);
         userInput.clear();
+        //Force scroll to bottom of scrollpane after user input (and miku output)
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     /**
