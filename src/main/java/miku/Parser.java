@@ -107,7 +107,7 @@ public class Parser implements ContactListener {
         Pattern associateTaskLocationPattern = Pattern.compile(
             "^associate\\s+/task\\s+(\\d+)\\s+/location\\s+(\\d+)$");
 
-        //TODO association
+        //TODO association, delete all tags
 
         Matcher matcher;
 

@@ -56,20 +56,66 @@ public class Constants {
         "Please enter an instruction (type \"help\" for the full list of instructions)";
     public static final String SEARCH_MSG = "here are the results of your search desu:";
     public static final ArrayList<String> HELP_LIST =
-        new ArrayList<String>(Arrays.asList("type \"bye\" to exit", "type \"list\" to see list of tasks",
-                    "type \"todo <name> [/prio <num>]\" to add a todo",
-                    "type \"deadline <name> /by <datetime> [/prio <num>]\" to add a deadline",
-                    "type \"event <name> /from <datetime> /to <datetime> [/prio <num>]\" to add an event",
-                    "type \"(un)mark <num>\" to mark the task <num> (not) done",
-                    "type \"set <num1> <num2>\" to set the priority of task <num1> to <num2>",
-                    "type \"sort prio <order>\" to sort the task list in order of priority",
-                    "type \"delete <num>\" to delete the task <num>", "type \"delete all\" to delete all tasks",
-                    "type \"games\" to see the list of games", "type \"track\" to track a statistic",
-                    "type \"stats\" to see the list of statistics", "type \"chat\" to chat with Miku",
-                    "fields in [square brackets] are optional", "priority is a number from 1 to 5 "
-                    + "with 1 the lowest priority and 5 the highest priority, defaults to 3",
-                    "order is one of \"/asc\" or \"/desc\" specifying if the sort should be in "
-                    + "ascending or descending order respectively"));
+        new ArrayList<String>(Arrays.asList(
+            "Help Guide:",
+            "────────────────────────────────",
+            "General Commands:",
+            " - type \"bye\" to exit the bot",
+            " - type \"help\" to see this help message",
+            " - type \"chat\" to chat with Miku",
+            " - type \"games\" to see the list of games",
+            " - type \"track\" to track a statistic",
+            " - type \"stats\" to see the list of statistics",
+            "────────────────────────────────",
+            "Task Management:",
+            " - type \"list\" to see all tasks",
+            " - type \"todo <name> [/prio <num>] [/tags <tag1 tag2>]\" to add a to-do task",
+            " - type \"deadline <name> /by <datetime> [/prio <num>] [/tags <tag1 tag2>]\" to add a deadline task",
+            " - type \"event <name> /from <datetime> /to <datetime> "
+            + "[/prio <num>] [/tags <tag1 tag2>]\" to add an event",
+            " - type \"(un)mark <num>\" to mark/unmark task <num> as done",
+            " - type \"set <num1> <num2>\" to set priority of task <num1> to <num2>",
+            " - type \"sort prio <order>\" to sort tasks by priority in ascending or descending order",
+            " - type \"find task <name>\" to search for tasks by name",
+            " - type \"add tags <num> <tag1 tag2>\" to add tags to task <num>",
+            " - type \"delete tags <num> <tag1 tag2>\" to remove specific tags from task <num>",
+            " - type \"delete <num>\" to delete task <num>",
+            " - type \"delete all\" to delete all tasks",
+            "────────────────────────────────",
+            "Contact Management:",
+            " - type \"add contact\" to add a new contact",
+            " - type \"edit contact <num>\" to edit contact <num>",
+            " - type \"contacts\" to view all contacts",
+            " - type \"find name <name>\" to search for a contact by name",
+            " - type \"find email <email>\" to search for a contact by email",
+            " - type \"find address <address>\" to search for a contact by address",
+            " - type \"delete contact <num>\" to delete a contact",
+            " - type \"delete all contacts\" to delete all contacts",
+            "────────────────────────────────",
+            "Location Management:",
+            " - type \"add place <name> /desc <description> /address <address> "
+            + "/lat <latitude> /lon <longitude>\" to add a place",
+            " - type \"add website <name> /desc <description> /url <URL>\" to add a website",
+            " - type \"find location <name>\" to search for a location",
+            " - type \"locations\" to list all locations",
+            " - type \"delete location <num>\" to delete a location",
+            " - type \"delete all locations\" to delete all locations",
+            "────────────────────────────────",
+            "Task Associations:",
+            " - type \"associate /task <task_id> /contact <contact_id>\" to link a task with a contact",
+            " - type \"associate /task <task_id> /location <location_id>\" to link a task with a location",
+            "────────────────────────────────",
+            "Notes:",
+            " - Fields in [square brackets] are optional",
+            " - Priority is a number from 1 (lowest) to 5 (highest), defaults to 3",
+            " - Order for sorting is either \"/asc\" (ascending) or \"/desc\" (descending)"
+        ));
+    public static final ArrayList<String> MISC_LIST =
+        new ArrayList<String>(Arrays.asList("Note that chat functionality is a proof-of-concept and does not "
+                    + "function optimally; it is likely to timeout and crash due to the nature of the LLM API "
+                    + "inferencing used. Work is in progress to transition to a locally hosted model instead.",
+                    "Settings functionality is also not complete and is just a rough outline, only some elements "
+                    + "the theme setting have been implemented.", "Association functionality is not yet complete."));
     public static final String TASK_SET_PRIORITY_SUCCESS = "YATTA! I've changed the priority of this task:";
     public static final String TASK_SET_PRIORITY_FAILURE = "Task is already at that priority";
     public static final String GAME_MATH_INTRO_MSG = "Welcome to Mental Math Game!";

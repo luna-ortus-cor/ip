@@ -78,6 +78,10 @@ public class Ui {
             System.out.println(Constants.INDENT + s);
         }
         System.out.println();
+        for (String s:Constants.MISC_LIST) {
+            System.out.println(Constants.INDENT + s);
+        }
+        System.out.println();
     }
 
     /**
