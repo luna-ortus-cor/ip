@@ -60,6 +60,7 @@ public class Parser implements ContactListener {
      */
     public int parse(String in) {
         in = in.trim();
+
         Pattern listPattern = Pattern.compile("^list$");
         Pattern markPattern = Pattern.compile("^mark\\s+(\\d+)$");
         Pattern unmarkPattern = Pattern.compile("^unmark\\s+(\\d+)$");

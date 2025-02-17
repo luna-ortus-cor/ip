@@ -16,7 +16,7 @@ public class Settings {
     private int fontSize;
     private boolean soundEnabled;
     private boolean typingIndicatorEnabled;
-    private final String settingsFilePath = "settings.txt";
+    private final String settingsFilePath = "./data/settings.txt";
 
     /**
      * Initializes a settings instance and loads settings (creates default settings if none exists yet).

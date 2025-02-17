@@ -29,7 +29,8 @@ public class MikuOutputStream extends OutputStream {
     public void write(byte[] b, int off, int len) {
         String text = new String(b, off, len);
         buffer.append(text);
-        if (buffer.toString().contains("\n\n")) {
+        if (buffer.toString().contains("\n\n") || buffer.toString().contains("\r\r")
+            || buffer.toString().contains("\r\n\r\n")) {
             flushBuffer();
         }
     }
