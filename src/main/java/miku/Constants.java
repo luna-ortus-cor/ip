@@ -42,6 +42,7 @@ public class Constants {
     public static final String FILEPATH_CONTACTLIST = "./data/contacts.txt";
     public static final String FILEPATH_LOCATIONLIST = "./data/locations.txt";
     public static final String FILEPATH_ASSOCIATION = "./data/associations.txt";
+    public static final String FILEPATH_SETTINGS = "./data/settings.txt";
     public static final String READ_TASK_LIST_FILE_ERROR = ":3 oops! error reading task list from file!";
     public static final String WRITE_TASK_LIST_FILE_ERROR = ":3 oops! error writing task list to file!";
     public static final String READ_CONTACT_LIST_FILE_ERROR = ":3 oops! error reading contact list from file!";
@@ -119,7 +120,8 @@ public class Constants {
                     + "function optimally; it is likely to timeout and crash due to the nature of the LLM API "
                     + "inferencing used. Work is in progress to transition to a locally hosted model instead.",
                     "Settings functionality is also not complete and is just a rough outline, only some elements "
-                    + "the theme setting have been implemented.", "Association functionality is not yet complete."));
+                    + "of the theme setting have been implemented. Font size changes are only reflected on the next "
+                    + "app startup.", "Association functionality is not yet complete."));
     public static final String TASK_SET_PRIORITY_SUCCESS = "YATTA! I've changed the priority of this task:";
     public static final String TASK_SET_PRIORITY_FAILURE = "Task is already at that priority";
     public static final String GAME_MATH_INTRO_MSG = "Welcome to Mental Math Game!";

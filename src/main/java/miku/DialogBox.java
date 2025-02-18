@@ -20,6 +20,8 @@ import javafx.scene.text.Font;
  * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final Settings settings = new Settings();
+
     @FXML
     private Label dialog;
     @FXML
@@ -43,6 +45,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(s);
         displayPicture.setImage(i);
+
+        applyFontSize(dialog);
     }
 
     /**
@@ -51,11 +55,19 @@ public class DialogBox extends HBox {
     private void flip() {
         dialog.setStyle("-fx-background-color: #3498DB; -fx-background-radius: 15px; "
             + "-fx-padding: 10px; -fx-text-fill: white;");
-        dialog.setFont(new Font("Arial", 14));
+        applyFontSize(dialog);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
+     * Applies current font size from settings to dialogbox.
+     */
+    private void applyFontSize(Label dialog) {
+        int fontSize = settings.getFontSize();
+        dialog.setFont(new Font("Arial", fontSize));
     }
 
     /**
@@ -66,7 +78,9 @@ public class DialogBox extends HBox {
      * @return dialogbox for the user
      */
     public static DialogBox getUserDialog(String s, Image i) {
-        return new DialogBox(s, i);
+        var db = new DialogBox(s, i);
+        db.getStyleClass().add("user-dialog");
+        return db;
     }
 
     /**
@@ -79,6 +93,7 @@ public class DialogBox extends HBox {
     public static DialogBox getMikuDialog(String s, Image i) {
         var db = new DialogBox(s, i);
         db.flip();
+        db.getStyleClass().add("miku-dialog");
         return db;
     }
 }

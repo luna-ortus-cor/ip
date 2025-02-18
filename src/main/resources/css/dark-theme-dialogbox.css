@@ -1,0 +1,25 @@
+.root {
+    -fx-background-color: #1E1E1E;
+    -fx-text-fill: #E0E0E0;
+}
+
+.label {
+    -fx-text-fill: #E0E0E0;
+}
+
+.dialog-box {
+    -fx-background-color: #2C2C2C;
+    -fx-background-radius: 15px;
+    -fx-padding: 10px;
+}
+
+.user-dialog {
+    -fx-background-color: #4A90E2;
+    -fx-text-fill: white;
+}
+
+.miku-dialog {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+}
+

@@ -9,14 +9,14 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 /**
- * Settings class to handle settings options.
+ * Settings class to handle settings options
  */
 public class Settings {
     private String theme;
     private int fontSize;
     private boolean soundEnabled;
     private boolean typingIndicatorEnabled;
-    private final String settingsFilePath = "./data/settings.txt";
+    private final String settingsFilePath = Constants.FILEPATH_SETTINGS;
 
     /**
      * Initializes a settings instance and loads settings (creates default settings if none exists yet).
