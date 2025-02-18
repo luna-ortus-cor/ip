@@ -136,6 +136,14 @@ delete tags <task_id> <tag1 tag2>
 **Outcome:**
 Removes specified tags from the task.
 
+### ❌ Delete All Tags from Task
+**Command:**
+```plaintext
+delete all tags <task_id>
+```
+**Outcome:**
+Removes all tags from the task.
+
 ---
 ## 📞 Contact Management
 
