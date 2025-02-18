@@ -15,6 +15,7 @@ import java.util.Set;
  * Class to model association between Task, Contact and Location
  */
 public class Association {
+    private static final String FILE_PATH = Constants.FILEPATH_ASSOCIATION;
     private Map<Task, Set<Contact>> taskContacts;
     private Map<Task, Set<Location>> taskLocations;
     private Map<Contact, Set<Task>> contactTasks; // Reverse mapping

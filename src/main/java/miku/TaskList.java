@@ -146,6 +146,20 @@ public class TaskList {
     }
 
     /**
+     * Remove all tags from the task at a specified index.
+     *
+     * @param idx the index of the task in the list
+     */
+    public void removeAllTags(int idx) {
+        try {
+            taskList.get(idx).removeAllTags();
+            ui.printEditTagsMsg(taskList.get(idx));
+        } catch (IndexOutOfBoundsException e) {
+            handleError(5);
+        }
+    }
+
+    /**
      * Delete the task at a specified index.
      *
      * @param idx the index of the task in the list

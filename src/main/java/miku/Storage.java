@@ -44,10 +44,8 @@ public class Storage {
                 Files.createDirectories(path.getParent());
                 Files.createFile(path);
                 return -1;
-                //System.out.println("File created: " + path);
             } else {
                 return 1;
-                //System.out.println("File already exists: " + path);
             }
         } catch (IOException e) {
             return 0;
@@ -158,8 +156,6 @@ public class Storage {
                 bw.write(t.toSaveFormat());
                 bw.newLine();
             }
-            //System.out.println("Tasks saved successfully to " + filename);
-            //System.out.println();
         } catch (IOException e) {
             handleError(7);
         }
@@ -184,6 +180,7 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(" \\| ");
+
                 if (parts.length < 14) {
                     continue; // Ignore malformed lines
                 }
@@ -206,15 +203,13 @@ public class Storage {
                 String secondaryAddress = toNull(parts[14].trim());
 
                 contactList.add(new Contact(firstName, lastName, middleName,
-                                         housePhone, housePhoneExt,
-                                         mobilePhone, mobilePhoneExt,
-                                         workPhone, workPhoneExt,
-                                         birthday, bloodType,
-                                         primaryEmail, secondaryEmail,
-                                         primaryAddress, secondaryAddress));
+                                            housePhone, housePhoneExt,
+                                            mobilePhone, mobilePhoneExt,
+                                            workPhone, workPhoneExt,
+                                            birthday, bloodType,
+                                            primaryEmail, secondaryEmail,
+                                            primaryAddress, secondaryAddress));
             }
-            //System.out.println("Contacts loaded successfully from " + filename);
-            //System.out.println();
         } catch (IOException e) {
             handleError(10);
         }
@@ -243,8 +238,6 @@ public class Storage {
                 writer.write(c.toString());
                 writer.newLine();
             }
-            //System.out.println("Contacts saved successfully to " + filename);
-            //System.out.println();
         } catch (IOException e) {
             handleError(11);
         }
@@ -275,16 +268,16 @@ public class Storage {
                     String address = parts[3].trim();
                     double latitude = Double.parseDouble(parts[4].trim());
                     double longitude = Double.parseDouble(parts[5].trim());
+
                     locationList.add(new Place(name, description, address, latitude, longitude));
                 } else if (parts.length == 4 && parts[0].trim().equals("Website")) {
                     String name = parts[1].trim();
                     String description = parts[2].trim();
                     String url = parts[3].trim();
+
                     locationList.add(new Website(name, description, url));
                 }
             }
-            //System.out.println("Locations loaded successfully from " + filename);
-            //System.out.println();
         } catch (IOException e) {
             handleError(12);
         }
@@ -303,8 +296,6 @@ public class Storage {
                 writer.write(l.toString());
                 writer.newLine();
             }
-            //System.out.println("Locations saved successfully to " + filename);
-            //System.out.println();
         } catch (IOException e) {
             handleError(13);
         }

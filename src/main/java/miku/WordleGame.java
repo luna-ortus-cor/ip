@@ -118,6 +118,8 @@ public class WordleGame {
 
             if (guess.equals("exit")) {
                 ui.printGameTerminatedMsg();
+                System.out.println("The correct word was: " + targetWord);
+                System.out.println();
                 return;
             }
 

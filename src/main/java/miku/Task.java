@@ -7,6 +7,8 @@ import java.util.Set;
  * Task class that stores relevant task related properties
  */
 public class Task implements Comparable<Task> {
+    private static final int MIN_PRIORITY = Constants.MIN_PRIORITY;
+    private static final int MAX_PRIORITY = Constants.MAX_PRIORITY;
     private String name;
     private boolean isDone;
     private int priority; //priority values from 1 to 5, 1 least impt, 5 most impt
@@ -46,7 +48,7 @@ public class Task implements Comparable<Task> {
     public Task(String name, int priority) {
         this.name = name;
         this.isDone = false;
-        this.priority = priority;
+        this.priority = boundPriority(priority);
         this.tags = new HashSet<>();
     }
 
@@ -56,8 +58,27 @@ public class Task implements Comparable<Task> {
     public Task(String name, boolean isDone, int priority) {
         this.name = name;
         this.isDone = isDone;
-        this.priority = priority;
+        this.priority = boundPriority(priority);
         this.tags = new HashSet<>();
+    }
+
+    /**
+     * Bounds the priority to between MIN_PRIORITY and MAX_PRIORITY (inclusive of both) as defined in Constants.java.
+     *
+     * @param priority the priority provided by the user
+     * @return int of the bounded priority
+     */
+    private int boundPriority(int priority) {
+        boolean isBelowMin = (priority < MIN_PRIORITY);
+        boolean isAboveMax = (priority > MAX_PRIORITY);
+
+        if (isBelowMin) {
+            return MIN_PRIORITY;
+        } else if (isAboveMax) {
+            return MAX_PRIORITY;
+        } else {
+            return priority;
+        }
     }
 
     /**
@@ -78,6 +99,13 @@ public class Task implements Comparable<Task> {
         //if tag is not present, then no removal occurs and no runtime exception is thrown
         assert tags.contains(tag.toLowerCase()) : "No such tag associated with this task";
         tags.remove(tag.toLowerCase());
+    }
+
+    /**
+     * Remove all tags from the task.
+     */
+    public void removeAllTags() {
+        tags.clear();
     }
 
     /**
@@ -152,7 +180,7 @@ public class Task implements Comparable<Task> {
      */
     public int setPriority(int priority) {
         if (this.priority != priority) {
-            this.priority = priority;
+            this.priority = boundPriority(priority);
             return 1;
         } else {
             return 0;

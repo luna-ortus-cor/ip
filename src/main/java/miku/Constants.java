@@ -41,6 +41,7 @@ public class Constants {
     public static final String FILEPATH_TASKLIST = "./data/tasks.txt";
     public static final String FILEPATH_CONTACTLIST = "./data/contacts.txt";
     public static final String FILEPATH_LOCATIONLIST = "./data/locations.txt";
+    public static final String FILEPATH_ASSOCIATION = "./data/associations.txt";
     public static final String READ_TASK_LIST_FILE_ERROR = ":3 oops! error reading task list from file!";
     public static final String WRITE_TASK_LIST_FILE_ERROR = ":3 oops! error writing task list to file!";
     public static final String READ_CONTACT_LIST_FILE_ERROR = ":3 oops! error reading contact list from file!";
@@ -55,6 +56,8 @@ public class Constants {
     public static final String AWAIT_INSTR =
         "Please enter an instruction (type \"help\" for the full list of instructions)";
     public static final String SEARCH_MSG = "here are the results of your search desu:";
+    public static final int MIN_PRIORITY = 1;
+    public static final int MAX_PRIORITY = 5;
     public static final ArrayList<String> HELP_LIST =
         new ArrayList<String>(Arrays.asList(
             "Help Guide:",
@@ -79,6 +82,7 @@ public class Constants {
             " - type \"find task <name>\" to search for tasks by name",
             " - type \"add tags <num> <tag1 tag2>\" to add tags to task <num>",
             " - type \"delete tags <num> <tag1 tag2>\" to remove specific tags from task <num>",
+            " - type \"delete all tags <num>\" to remove all tags from task <num>",
             " - type \"delete <num>\" to delete task <num>",
             " - type \"delete all\" to delete all tasks",
             "────────────────────────────────",

@@ -47,14 +47,17 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         mikuOutputStream = new MikuOutputStream(dialogContainer);
         mikuInputStream = new MikuInputStream();
+
         //This allows scrolling even if scrollpane not in focus
         //Credits to https://github.com/samuelneo/ip/commit/a4318795662647afe657d1e5047e1c433c283896
         scrollPane.addEventFilter(ScrollEvent.SCROLL, event -> scrollPane.vvalueProperty().unbind());
+
         System.setOut(new PrintStream(mikuOutputStream));
         System.setIn(mikuInputStream);
-        //dialogContainer.getChildren().addAll(DialogBox.getMikuDialog("uwu", mikuImage));
+
         this.miku = new Miku(mikuInputStream, mikuOutputStream); //Initialize Miku
 
+        //Ensure user input testfield is in focus on application initialization
         Platform.runLater(() -> userInput.requestFocus());
 
         Platform.runLater(() -> {
@@ -66,7 +69,7 @@ public class MainWindow extends AnchorPane {
                     //System.exit(0); //Exit the app entirely
                     delay.play();
                 }
-            }).start(); //Start chatbot loop after UI is ready
+            }).start();
         });
     }
 
@@ -83,9 +86,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String userText = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
-        //int mikuResponse = miku.getResponse(userText);
         mikuInputStream.add(userText);
         userInput.clear();
+
         //Force scroll to bottom of scrollpane after user input (and miku output)
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }

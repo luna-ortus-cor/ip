@@ -80,6 +80,7 @@ public class Parser implements ContactListener {
         Pattern sortPriorityPattern = Pattern.compile("^sort\\s+prio\\s+/(asc|desc)$");
         Pattern addTagsPattern = Pattern.compile("^add\\s+tags\\s+(\\d+)\\s+([\\w\\s+]+)$");
         Pattern deleteTagsPattern = Pattern.compile("^delete\\s+tags\\s+(\\d+)\\s+([\\w\\s+]+)$");
+        Pattern deleteAllTagsPattern = Pattern.compile("^delete\\s+all\\s+tags\\s+(\\d+)$");
 
         Pattern addContactPattern = Pattern.compile("^add\\s+contact$");
         Pattern editContactPattern = Pattern.compile("^edit\\s+contact\\s+(\\d+)$");
@@ -152,6 +153,8 @@ public class Parser implements ContactListener {
             handleAddTags(matcher.group(1), matcher.group(2));
         } else if ((matcher = deleteTagsPattern.matcher(in)).matches()) {
             handleDeleteTags(matcher.group(1), matcher.group(2));
+        } else if ((matcher = deleteAllTagsPattern.matcher(in)).matches()) {
+            handleDeleteAllTags(matcher.group(1));
         } else if ((matcher = addContactPattern.matcher(in)).matches()) {
             handleAddContact();
         } else if ((matcher = editContactPattern.matcher(in)).matches()) {
@@ -574,6 +577,10 @@ public class Parser implements ContactListener {
      */
     private void handleDeleteTags(String idx, String tags) {
         taskList.removeTags(Integer.valueOf(idx.trim()) - 1, tags.split("\\s+"));
+    }
+
+    private void handleDeleteAllTags(String idx) {
+        taskList.removeAllTags(Integer.valueOf(idx.trim()) - 1);
     }
 
     /**

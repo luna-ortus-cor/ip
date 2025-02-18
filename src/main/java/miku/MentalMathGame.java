@@ -40,8 +40,9 @@ public class MentalMathGame {
         this.questions = new ArrayList<String>();
         this.answers = new ArrayList<Integer>();
         this.score = 0;
-        generateQuestions();
         this.ui = ui;
+
+        generateQuestions();
     }
 
     /**
@@ -126,7 +127,7 @@ public class MentalMathGame {
 
         for (int i = 0; i < questions.size(); i++) {
             System.out.println("Question " + (i + 1) + ": " + questions.get(i));
-            //System.out.print("Your answer: ");
+            System.out.print("Your answer: ");
             System.out.println();
             String in = Constants.buildInputString().toLowerCase();
 
