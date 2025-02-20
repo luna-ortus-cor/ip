@@ -21,6 +21,7 @@ public class Parser implements ContactListener {
     private static Storage storage;
     private static Ui ui;
     private static Association association;
+    private static Settings settings;
 
     /**
      * Instantiates a new Parser instance taking in a Ui ui.
@@ -34,6 +35,7 @@ public class Parser implements ContactListener {
         this.locationList = new LocationList(ui);
         this.storage = new Storage(ui);
         this.association = new Association(ui);
+        this.settings = new Settings();
     }
 
     /**

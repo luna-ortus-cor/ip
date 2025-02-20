@@ -30,6 +30,8 @@ public class Settings {
      * Creates settings file if it does not exist, else load settings from file.
      */
     private void loadOrCreateSettings() {
+        Storage s = new Storage(new Ui());
+        s.checkFilePathExistsElseCreate(settingsFilePath);
         File settingsFile = new File(settingsFilePath);
         if (!settingsFile.exists()) {
             // If file doesn't exist, set default settings and save
