@@ -1,6 +1,6 @@
 # Miku
 
-Miku is (primarily) a task management app created for CS2103/T Software Engineering's individual project component, other (secondary) features were added on a whim 😉. It's named after the vocaloid _Miku_. Below is a brief introduction to Miku. Do also refer to the user guide [here].
+Miku is (primarily) a task management app created for CS2103/T Software Engineering's individual project component, other (secondary) features were added on a whim 😉. It's named after the vocaloid _Miku_. Below is a brief introduction to Miku. Do also refer to the user guide [here](https://luna-ortus-cor.github.io/ip/).
 
 ### Miku
 

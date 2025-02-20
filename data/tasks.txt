@@ -1,5 +1,6 @@
 T | 0 | 4 | eat | eat |
-T | 0 | 3 | eat | personal |
-T | 0 | 3 | eat | important personal |
-T | 0 | 2 | sleep | impt personal stuff |
 T | 0 | 3 | sleep | sleep |
+D | 0 | 5 | assignment | friday | important |
+T | 0 | 1 | work |  |
+E | 0 | 5 | midterms | 2025-03-03 0000 | 2025-03-04 2359 |  |
+T | 0 | 1 | meet friend |  |
