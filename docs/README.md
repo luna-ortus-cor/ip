@@ -12,7 +12,7 @@ This bot helps you manage tasks, contacts, locations, and associations efficient
 ---
 ## Getting Started
 1. Ensure you have Java 17 or above installed. You can check the Java version by running ```java --version```.
-2. Download the latest release of the ```miku.jar``` file. This is currently ```v2.0.2``` which can be found [here](https://github.com/luna-ortus-cor/ip/releases)
+2. Download the latest release of the ```miku.jar``` file. This is currently ```v2.0.4``` which can be found [here](https://github.com/luna-ortus-cor/ip/releases)
 3. Open a terminal.
 4. Navigate to the directory where ```miku.jar``` was downloaded to in the terminal. This can be done via the ```cd``` command on most terminals.
 5. From the terminal, execute ```java -jar miku.jar``` to launch the application.
