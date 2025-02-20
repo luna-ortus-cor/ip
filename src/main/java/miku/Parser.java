@@ -75,7 +75,7 @@ public class Parser implements ContactListener {
             "^event\\s+(.+?)\\s+/from\\s+(.+?)\\s+/to\\s+(.+?)(?:\\s+/prio\\s+(\\d))?(?:\\s+/tags\\s+([\\w\\s+]+))?$");
 
         Pattern simpleCommandsPattern = Pattern.compile("^(games|track|stats|chat|bye|help)$");
-        Pattern searchNamePattern = Pattern.compile("^find\\s+task\\s+(.+)$");
+        Pattern searchNamePattern = Pattern.compile("^find\\s+task\\s+name\\s+(.+)$");
         Pattern setPriorityPattern = Pattern.compile("^set\\s+(\\d+)\\s+(\\d)$");
         Pattern sortPriorityPattern = Pattern.compile("^sort\\s+prio\\s+/(asc|desc)$");
         Pattern addTagsPattern = Pattern.compile("^add\\s+tags\\s+(\\d+)\\s+([\\w\\s+]+)$");
@@ -98,17 +98,25 @@ public class Parser implements ContactListener {
             "^add\\s+website\\s+(.+?)\\s+/desc\\s+(.+?)\\s+/url\\s+"
             + "(https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\."
             + "[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*))$");
-        Pattern searchLocationPattern = Pattern.compile("find\\s+location\\s+(.+)$");
+        Pattern searchLocationPattern = Pattern.compile("find\\s+location\\s+name\\s+(.+)$");
         Pattern viewLocationPattern = Pattern.compile("^locations$");
         Pattern deleteLocationPattern = Pattern.compile("^delete\\s+location\\s+(\\d+)$");
         Pattern deleteAllLocationsPattern = Pattern.compile("^delete\\s+all\\s+locations$");
 
         Pattern associateTaskContactPattern = Pattern.compile(
-            "^associate\\s+/task\\s+(\\d+)\\s+/contact\\s+(\\d+)$");
+            "^associate\\s+task\\s+(\\d+)\\s+contact\\s+(\\d+)$");
         Pattern associateTaskLocationPattern = Pattern.compile(
-            "^associate\\s+/task\\s+(\\d+)\\s+/location\\s+(\\d+)$");
+            "^associate\\s+task\\s+(\\d+)\\s+location\\s+(\\d+)$");
+        Pattern findContactTaskPattern = Pattern.compile(
+            "^find\\s+contact\\s+by\\s+task\\s+(\\d+)$");
+        Pattern findLocationTaskPattern = Pattern.compile(
+            "^find\\s+location\\s+by\\s+task\\s+(\\d+)$");
+        Pattern findTaskContactPattern = Pattern.compile(
+            "^find\\s+task\\s+by\\s+contact\\s+(\\d+)$");
+        Pattern findTaskLocationPattern = Pattern.compile(
+            "^find\\s+task\\s+by\\s+location\\s+(\\d+)$");
 
-        //TODO association
+        //TODO association (save)
 
         Matcher matcher;
 
@@ -197,6 +205,14 @@ public class Parser implements ContactListener {
             handleAssociateTaskContact(matcher.group(1), matcher.group(2));
         } else if ((matcher = associateTaskLocationPattern.matcher(in)).matches()) {
             handleAssociateTaskLocation(matcher.group(1), matcher.group(2));
+        } else if ((matcher = findTaskContactPattern.matcher(in)).matches()) {
+            handleFindTaskByContact(matcher.group(1));
+        } else if ((matcher = findTaskLocationPattern.matcher(in)).matches()) {
+            handleFindTaskByLocation(matcher.group(1));
+        } else if ((matcher = findContactTaskPattern.matcher(in)).matches()) {
+            handleFindContactByTask(matcher.group(1));
+        } else if ((matcher = findLocationTaskPattern.matcher(in)).matches()) {
+            handleFindLocationByTask(matcher.group(1));
         } else if ((matcher = simpleCommandsPattern.matcher(in)).matches()) {
             String command = matcher.group(1);
             switch (command) {
@@ -483,7 +499,6 @@ public class Parser implements ContactListener {
             System.out.println("Enter MOOD: ");
             System.out.println();
             String mood = Constants.buildInputString();
-            //Mood m = new Mood(date, mood);
             MoodTracker.trackMood(date, mood);
         } else if (choice == 3) {
             System.out.println("Enter DATE (YYYY-MM-DD): ");
@@ -498,7 +513,6 @@ public class Parser implements ContactListener {
             System.out.println("Enter DRINK QTY (in standard drinks): ");
             System.out.println();
             int qty = Integer.valueOf(Constants.buildInputString());
-            //Alcohol a = new Alcohol(date, drink, name, qty);
             AlcoholTracker.trackAlcohol(date, drink, name, qty);
         } else {
             //go back
@@ -526,8 +540,7 @@ public class Parser implements ContactListener {
      * Handle user chat instruction.
      */
     private void handleChat() {
-        //int choice = sc.nextInt();
-        //sc.nextLine(); //choose language
+        //TODO implement language choice
         ChatInstance chat = new ChatInstance();
         chat.chat();
     }
@@ -750,9 +763,7 @@ public class Parser implements ContactListener {
      */
     private void handleAssociateTaskContact(String taskIdx, String contactIdx) {
         association.associateTaskWithContact(
-            taskList.getTask(Integer.valueOf(taskIdx) - 1),
-            contactList.getContact(Integer.valueOf(contactIdx) - 1)
-        );
+            taskList, Integer.valueOf(taskIdx) - 1, contactList, Integer.valueOf(contactIdx) - 1);
         ui.printAssociationCreatedMsg();
     }
 
@@ -764,10 +775,52 @@ public class Parser implements ContactListener {
      */
     private void handleAssociateTaskLocation(String taskIdx, String locationIdx) {
         association.associateTaskWithLocation(
-            taskList.getTask(Integer.valueOf(taskIdx) - 1),
-            locationList.getLocation(Integer.valueOf(locationIdx) - 1)
-        );
+            taskList, Integer.valueOf(taskIdx) - 1, locationList, Integer.valueOf(locationIdx) - 1);
         ui.printAssociationCreatedMsg();
+    }
+
+    /**
+     * Find contact associated with a task.
+     *
+     * @param in index of the task in task list
+     */
+    private void handleFindContactByTask(String in) {
+        int idx = Integer.valueOf(in) - 1;
+        ArrayList<Contact> searchList = association.getContactsForTask(taskList, idx);
+        printList(searchList, 4);
+    }
+
+    /**
+     * Find location associated with a task.
+     *
+     * @param in index of the task in task list
+     */
+    private void handleFindLocationByTask(String in) {
+        int idx = Integer.valueOf(in) - 1;
+        ArrayList<Location> searchList = association.getLocationsForTask(taskList, idx);
+        printList(searchList, 4);
+    }
+
+    /**
+     * Find task associated with a contact.
+     *
+     * @param in index of the contact in contact list
+     */
+    private void handleFindTaskByContact(String in) {
+        int idx = Integer.valueOf(in) - 1;
+        ArrayList<Task> searchList = association.getTasksForContact(contactList, idx);
+        printList(searchList, 4);
+    }
+
+    /**
+     * Find task associated with a location.
+     *
+     * @param in index of the location in location list
+     */
+    private void handleFindTaskByLocation(String in) {
+        int idx = Integer.valueOf(in) - 1;
+        ArrayList<Task> searchList = association.getTasksForLocation(locationList, idx);
+        printList(searchList, 4);
     }
 
     //error codes
@@ -775,7 +828,7 @@ public class Parser implements ContactListener {
     //2:name field of todo is empty or whitespace
     //3:name and/or by field of deadline is empty or whitespace
     //4:name and/or from and/or to field of event is empty or whitespace
-    //5:no such task exists or task number is empty or whitespace
+    //5:no such list element exists or list number is empty or whitespace
     //6:error reading task list from file
     //7:error writing task list to file
     //8:error sorting

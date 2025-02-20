@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,10 +39,14 @@ public class Association {
     /**
      * Associate a task with a contact.
      *
-     * @param task task to be associated
-     * @param contact contact to be associated
+     * @param taskList list of tasks
+     * @param taskIdx index of task to be associated in task list
+     * @param contactList list of contacts
+     * @param contactIdx index of contact to be associated in contact list
      */
-    public void associateTaskWithContact(Task task, Contact contact) {
+    public void associateTaskWithContact(TaskList taskList, int taskIdx, ContactList contactList, int contactIdx) {
+        Task task = taskList.getTask(taskIdx);
+        Contact contact = contactList.getContact(contactIdx);
         taskContacts.computeIfAbsent(task, k -> new HashSet<>()).add(contact);
         contactTasks.computeIfAbsent(contact, k -> new HashSet<>()).add(task);
     }
@@ -49,10 +54,14 @@ public class Association {
     /**
      * Associate a task with a location.
      *
-     * @param task task to be associated
-     * @param location location to be associated
+     * @param taskList list of tasks
+     * @param taskIdx index of task to be associated in task list
+     * @param locationList list of locations
+     * @param locationIdx index of location to be associated in location list
      */
-    public void associateTaskWithLocation(Task task, Location location) {
+    public void associateTaskWithLocation(TaskList taskList, int taskIdx, LocationList locationList, int locationIdx) {
+        Task task = taskList.getTask(taskIdx);
+        Location location = locationList.getLocation(locationIdx);
         taskLocations.computeIfAbsent(task, k -> new HashSet<>()).add(location);
         locationTasks.computeIfAbsent(location, k -> new HashSet<>()).add(task);
     }
@@ -60,37 +69,65 @@ public class Association {
     /**
      * Retrieve contacts associated with a task.
      *
-     * @param task task to retrieve associated contacts from
+     * @param taskList list of tasks
+     * @param idx index of task to find
+     * @return arraylist of contacts associated with task
      */
-    public Set<Contact> getContactsForTask(Task task) {
-        return taskContacts.getOrDefault(task, Collections.emptySet());
+    public ArrayList<Contact> getContactsForTask(TaskList taskList, int idx) {
+        try {
+            Task task = taskList.getTask(idx);
+            return new ArrayList<>(taskContacts.getOrDefault(task, Collections.emptySet()));
+        } catch (Exception e) {
+            return new ArrayList<Contact>();
+        }
     }
 
     /**
      * Retrieve locations associated with a task.
      *
-     * @param task task to retrieve associated locations from
+     * @param taskList list of tasks
+     * @param idx index of task to find
+     * @return arraylist of locations associated with task
      */
-    public Set<Location> getLocationsForTask(Task task) {
-        return taskLocations.getOrDefault(task, Collections.emptySet());
+    public ArrayList<Location> getLocationsForTask(TaskList taskList, int idx) {
+        try {
+            Task task = taskList.getTask(idx);
+            return new ArrayList<>(taskLocations.getOrDefault(task, Collections.emptySet()));
+        } catch (Exception e) {
+            return new ArrayList<Location>();
+        }
     }
 
     /**
      * Retrieve tasks associated with a contact.
      *
-     * @param contact contact to retrieve associated tasks from
+     * @param contactList list of contacts
+     * @param idx index of contact to find
+     * @return arraylist of tasks associated with contact
      */
-    public Set<Task> getTasksForContact(Contact contact) {
-        return contactTasks.getOrDefault(contact, Collections.emptySet());
+    public ArrayList<Task> getTasksForContact(ContactList contactList, int idx) {
+        try {
+            Contact contact = contactList.getContact(idx);
+            return new ArrayList<>(contactTasks.getOrDefault(contact, Collections.emptySet()));
+        } catch (Exception e) {
+            return new ArrayList<Task>();
+        }
     }
 
     /**
      * Retrieve tasks associated with a location.
      *
-     * @param location location to retrieve associated tasks from
+     * @param locationList list of locations
+     * @param idx index of location to find
+     * @return arraylist of tasks associated with location
      */
-    public Set<Task> getTasksForLocation(Location location) {
-        return locationTasks.getOrDefault(location, Collections.emptySet());
+    public ArrayList<Task> getTasksForLocation(LocationList locationList, int idx) {
+        try {
+            Location location = locationList.getLocation(idx);
+            return new ArrayList<>(locationTasks.getOrDefault(location, Collections.emptySet()));
+        } catch (Exception e) {
+            return new ArrayList<Task>();
+        }
     }
 
     /**

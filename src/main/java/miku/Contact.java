@@ -2,6 +2,7 @@ package miku;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -27,6 +28,7 @@ public class Contact {
     private String emailSecondary = null;
     private String addressPrimary = null;
     private String addressSecondary = null;
+    private final int id;
 
     /**
      * Initialize a Contact instance with relevant fields.
@@ -50,6 +52,7 @@ public class Contact {
         this.emailSecondary = emailSecondary;
         this.addressPrimary = addressPrimary;
         this.addressSecondary = addressSecondary;
+        this.id = Objects.hash(System.currentTimeMillis());
     }
 
     public String getFirstName() {
@@ -226,5 +229,26 @@ public class Contact {
 
     private static String unescape(String value) {
         return value.equals(EMPTY) ? "" : value.replace("\\|", "|");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Contact contact = (Contact) obj;
+        return id == contact.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

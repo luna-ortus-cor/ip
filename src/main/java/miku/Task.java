@@ -1,6 +1,7 @@
 package miku;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -13,6 +14,7 @@ public class Task implements Comparable<Task> {
     private boolean isDone;
     private int priority; //priority values from 1 to 5, 1 least impt, 5 most impt
     private Set<String> tags;
+    private final int id;
 
     /**
      * Creates a new Task instance.
@@ -24,6 +26,7 @@ public class Task implements Comparable<Task> {
         this.isDone = false;
         this.priority = 3;
         this.tags = new HashSet<>();
+        this.id = Objects.hash(System.currentTimeMillis()); // Unique ID based on time hash
     }
 
     /**
@@ -37,6 +40,7 @@ public class Task implements Comparable<Task> {
         this.isDone = isDone;
         this.priority = 3;
         this.tags = new HashSet<>();
+        this.id = Objects.hash(System.currentTimeMillis()); // Unique ID based on time hash
     }
 
     /**
@@ -50,6 +54,7 @@ public class Task implements Comparable<Task> {
         this.isDone = false;
         this.priority = boundPriority(priority);
         this.tags = new HashSet<>();
+        this.id = Objects.hash(System.currentTimeMillis()); // Unique ID based on time hash
     }
 
     /**
@@ -60,6 +65,7 @@ public class Task implements Comparable<Task> {
         this.isDone = isDone;
         this.priority = boundPriority(priority);
         this.tags = new HashSet<>();
+        this.id = Objects.hash(System.currentTimeMillis()); // Unique ID based on time hash
     }
 
     /**
@@ -209,5 +215,26 @@ public class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task t) {
         return Integer.compare(this.priority, t.priority);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Task task = (Task) obj;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

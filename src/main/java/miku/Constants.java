@@ -80,7 +80,7 @@ public class Constants {
             " - type \"(un)mark <num>\" to mark/unmark task <num> as done",
             " - type \"set <num1> <num2>\" to set priority of task <num1> to <num2>",
             " - type \"sort prio <order>\" to sort tasks by priority in ascending or descending order",
-            " - type \"find task <name>\" to search for tasks by name",
+            " - type \"find task name <name>\" to search for tasks by name",
             " - type \"add tags <num> <tag1 tag2>\" to add tags to task <num>",
             " - type \"delete tags <num> <tag1 tag2>\" to remove specific tags from task <num>",
             " - type \"delete all tags <num>\" to remove all tags from task <num>",
@@ -101,14 +101,18 @@ public class Constants {
             " - type \"add place <name> /desc <description> /address <address> "
             + "/lat <latitude> /lon <longitude>\" to add a place",
             " - type \"add website <name> /desc <description> /url <URL>\" to add a website",
-            " - type \"find location <name>\" to search for a location",
+            " - type \"find location name <name>\" to search for a location",
             " - type \"locations\" to list all locations",
             " - type \"delete location <num>\" to delete a location",
             " - type \"delete all locations\" to delete all locations",
             "────────────────────────────────",
             "Task Associations:",
-            " - type \"associate /task <task_id> /contact <contact_id>\" to link a task with a contact",
-            " - type \"associate /task <task_id> /location <location_id>\" to link a task with a location",
+            " - type \"associate /task <task_id> /contact <contact_id>\" to associate a task with a contact",
+            " - type \"associate /task <task_id> /location <location_id>\" to associate a task with a location",
+            " - type \"find task by contact <contact_id>\" to find tasks associated with a contact",
+            " - type \"find task by location <location_id>\" to find tasks associated with a location",
+            " - type \"find contact by task <task_id>\" to find contacts associated with a task",
+            " - type \"find location by task <task_id>\" to find locations associated with a task",
             "────────────────────────────────",
             "Notes:",
             " - Fields in [square brackets] are optional",
@@ -121,7 +125,7 @@ public class Constants {
                     + "inferencing used. Work is in progress to transition to a locally hosted model instead.",
                     "Settings functionality is also not complete and is just a rough outline, only some elements "
                     + "of the theme setting have been implemented. Font size changes are only reflected on the next "
-                    + "app startup.", "Association functionality is not yet complete."));
+                    + "app startup.", "Association functionality does not support persistence yet."));
     public static final String TASK_SET_PRIORITY_SUCCESS = "YATTA! I've changed the priority of this task:";
     public static final String TASK_SET_PRIORITY_FAILURE = "Task is already at that priority";
     public static final String GAME_MATH_INTRO_MSG = "Welcome to Mental Math Game!";
