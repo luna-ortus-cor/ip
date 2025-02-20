@@ -12,7 +12,7 @@ public class MikuInputStream extends InputStream {
     private final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
 
     public MikuInputStream() {
-        
+
     }
 
     @Override

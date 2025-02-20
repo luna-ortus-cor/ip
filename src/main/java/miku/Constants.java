@@ -49,6 +49,8 @@ public class Constants {
     public static final String WRITE_CONTACT_LIST_FILE_ERROR = ":3 oops! error writing contact list to file!";
     public static final String READ_LOCATION_LIST_FILE_ERROR = ":3 oops! error reading location list from file!";
     public static final String WRITE_LOCATION_LIST_FILE_ERROR = ":3 oops! error writing location list to file!";
+    public static final String READ_ASSOCIATIONS_FILE_ERROR = ":3 oops! error reading associations from file!";
+    public static final String WRITE_ASSOCIATIONS_FILE_ERROR = ":3 oops! error writing associations to file!";
     public static final String READ_WORDLIST_FILE_ERROR = ":3 oops! error reading wordlist!";
     public static final String TASK_MARK_DONE_SUCCESS = "YATTA! I've marked this task as done:";
     public static final String TASK_MARK_DONE_FAILURE = "Task is already done";

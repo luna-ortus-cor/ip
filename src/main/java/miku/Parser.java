@@ -837,6 +837,8 @@ public class Parser implements ContactListener {
     //11:error writing contact list to file
     //12:error reading location list from file
     //13:error writing location list to file
+    //14:error reading associations from file
+    //15:error writing associations to file
     /**
      * Handles error messages.
      *

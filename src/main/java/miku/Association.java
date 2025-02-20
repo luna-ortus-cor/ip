@@ -161,5 +161,14 @@ public class Association {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Handles error messages.
+     *
+     * @param code int denoting the error generated
+     */
+    private void handleError(int code) {
+        ui.printErrorMsg(code);
+    }
 }
 
