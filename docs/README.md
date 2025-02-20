@@ -10,6 +10,14 @@ Miku is a productivity tool aimed at organizing tasks, people and important loca
 This bot helps you manage tasks, contacts, locations, and associations efficiently. You can create, modify, search, and delete tasks, contacts, and locations while also associating tasks with contacts and locations.
 
 ---
+## Getting Started
+1. Ensure you have Java 17 or above installed. You can check the Java version by running ```java --version```.
+2. Download the latest release of the ```miku.jar``` file. This is currently ```v2.0.2``` which can be found [here]
+3. Open a terminal.
+4. Navigate to the directory where ```miku.jar``` was downloaded to in the terminal. This can be done via the ```cd``` command on most terminals.
+5. From the terminal, execute ```java -jar miku.jar``` to launch the application.
+
+---
 ## 📋 Task Management
 
 ### 1️⃣ List All Tasks
@@ -99,7 +107,7 @@ event Team meeting /from 10:00 /to 11:30 /prio 1 /tags work meeting
 ### 9️⃣ Search Task by Name
 **Command:**
 ```plaintext
-find task <task_name>
+find task name <task_name>
 ```
 **Outcome:**
 Finds tasks with matching names.
@@ -227,7 +235,7 @@ add website Google /desc Search Engine /url https://www.google.com
 ### 3️⃣ Search Location
 **Command:**
 ```plaintext
-find location <name>
+find location name <name>
 ```
 
 ### 4️⃣ View All Locations
@@ -262,10 +270,42 @@ Links a task with a contact.
 ### 2️⃣ Associate Task with Location
 **Command:**
 ```plaintext
-associate /task <task_id> /location <location_id>
+associate task <task_id> location <location_id>
 ```
 **Outcome:**
 Links a task with a location.
+
+### 3️⃣ Find Tasks Associated with Contact
+**Command:**
+```plaintext
+find task by contact <contact_id>
+```
+**Outcome:**
+Finds all tasks associated with a contact.
+
+### 4️⃣ Find Tasks Assocciated with Location
+**Command:**
+```plaintext
+find task by location <location_id>
+```
+**Outcome:**
+Finds all tasks associated with a location.
+
+### 5️⃣ Find Contacts Associated with Task
+**Command:**
+```plaintext
+find contact by task <task_id>
+```
+**Outcome:**
+Finds all contacts associated with a task.
+
+### 6️⃣ Find Locations Associated with Task
+**Command:**
+```plaintext
+find location by task <task_id>
+```
+**Outcome:**
+Finds all locations associated with a task.
 
 ---
 ## 🎮 Miscellaneous Commands
@@ -289,6 +329,6 @@ help
 
 ---
 ## 🏁 Conclusion
-This bot provides a powerful task, contact, and location management system with easy-to-use commands. Use the appropriate syntax to interact effectively and organize your tasks efficiently!
+Miku provides a powerful task, contact, and location management system with easy-to-use commands. Use the appropriate syntax to interact effectively and organize your tasks efficiently!
 
-Enjoy using the bot! 🚀
+Miku hopes you have fun! 🚀
