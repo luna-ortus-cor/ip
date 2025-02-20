@@ -15,7 +15,7 @@ public class Activity {
     private String name;
 
     /**
-     * Initialize an Activity instance with relevant fields.
+     * Initializes an Activity instance with relevant fields.
      *
      * @param startDate start date
      * @param startTime start time
@@ -41,7 +41,7 @@ public class Activity {
     }
 
     /**
-     * Calculate time spent (in minutes) for Activity.
+     * Calculates time spent (in minutes) for Activity.
      *
      * @return long of the minutes spent
      */

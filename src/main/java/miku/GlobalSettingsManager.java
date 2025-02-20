@@ -30,7 +30,7 @@ public class GlobalSettingsManager {
     }
 
     /**
-     * Apply the settings globally to the primary stage (or any new stage).
+     * Applies the settings globally to the primary stage (or any new stage).
      *
      * @param stage stage to apply settings to
      */
@@ -55,7 +55,7 @@ public class GlobalSettingsManager {
     }
 
     /**
-     * Apply font size and theme to all nodes (buttons, labels, text fields, etc.).
+     * Applies font size and theme to all nodes (buttons, labels, text fields, etc.).
      *
      * @param scene scene to apply settings to
      */
@@ -71,7 +71,7 @@ public class GlobalSettingsManager {
     }
 
     /**
-     * Apply settings to all open windows (also handles new windows)
+     * Applies settings to all open windows (also handles new windows)
      */
     public static void applySettingsToAllWindows() {
         Platform.runLater(() -> {

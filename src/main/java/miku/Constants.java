@@ -140,6 +140,7 @@ public class Constants {
     public static final String SORT_LIST_ERROR = ":3 oops! error when sorting!";
     public static final String UNSPECIFIED_IO_ERROR = ":3 oops! an unknown IO error occurred";
     public static final String TASK_EDIT_TAG_MSG = "Edited the following task:";
+    public static final String INVALID_CONTACT_EDIT = "No changes detected. Please modify at least one field.";
     public static final String INVALID_EMAIL_ERROR = "One or more of the emails provided is invalid.";
     public static final String BJ_INVALID_CHOICE_MSG = "Invalid choice. Type 'h' to hit or 's' to stand.";
     public static final String BJ_BUST_MSG = "You busted on this hand!";

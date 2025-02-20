@@ -30,7 +30,7 @@ public class LocationList {
     }
 
     /**
-     * Load locations from a file given a Storage instance.
+     * Loads locations from a file given a Storage instance.
      *
      * @param s a Storage instance
      */
@@ -39,7 +39,7 @@ public class LocationList {
     }
 
     /**
-     * Save locations to a file given a Storage instance.
+     * Saves locations to a file given a Storage instance.
      *
      * @param s a Storage instance
      */
@@ -48,7 +48,7 @@ public class LocationList {
     }
 
     /**
-     * Get location based on index in location list.
+     * Gets location based on index in location list.
      *
      * @param idx index of location in location list
      * @return location object at specified index
@@ -63,7 +63,7 @@ public class LocationList {
     }
 
     /**
-     * Add a location object to the list of locations.
+     * Adds a location object to the list of locations.
      *
      * @param location a location object to be added to the list of locations
      */
@@ -73,7 +73,7 @@ public class LocationList {
     }
 
     /**
-     * Search locations by name, allowing partial matches in any of the name fields.
+     * Searches locations by name, allowing partial matches in any of the name fields.
      *
      * @param searchString the search string to be matched (either partially or fully)
      * @return an arraylist of location objects containing the search string
@@ -85,7 +85,7 @@ public class LocationList {
     }
 
     /**
-     * Print all locations in list.
+     * Prints all locations in list.
      */
     public void displayAllLocations() {
         for (Location loc : locationList) {
@@ -95,7 +95,7 @@ public class LocationList {
     }
 
     /**
-     * Delete the location at a specified index.
+     * Deletes the location at a specified index.
      *
      * @param idx the index of the location in the list
      */
@@ -111,7 +111,7 @@ public class LocationList {
     }
 
     /**
-     * Delete all locations in the list.
+     * Deletes all locations in the list.
      */
     public void deleteAll() {
         locationList.clear();

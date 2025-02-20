@@ -11,6 +11,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class MikuInputStream extends InputStream {
     private final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
 
+    public MikuInputStream() {
+        
+    }
+
     @Override
     public int read() throws IOException {
         try {
@@ -23,7 +27,7 @@ public class MikuInputStream extends InputStream {
     }
 
     /**
-     * Add a string to the input queue.
+     * Adds a string to the input queue.
      *
      * @param text string to be added
      */

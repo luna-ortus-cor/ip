@@ -7,14 +7,14 @@ public class ChatInstance {
     private Chatbot chatbot;
 
     /**
-     * Initialize a new Chat instance.
+     * Initializes a new Chat instance.
      */
     public ChatInstance() {
         this.chatbot = new Chatbot();
     }
 
     /**
-     * Start chat with LLM.
+     * Starts chat with LLM.
      */
     public void chat() {
         System.out.println(Constants.INDENT + "Yahallo! I'm Miku! ^~^");

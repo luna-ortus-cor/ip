@@ -20,7 +20,6 @@ public class Miku {
         this.ui = new Ui();
         this.p = new Parser(this.ui);
         this.sc = new Scanner(System.in);
-        //this.p.start();
     }
 
     /**
@@ -50,7 +49,6 @@ public class Miku {
                 System.in.notify(); //Force wake-up
             }
             in = Constants.buildInputString();
-            //in = sc.nextLine();
             response = p.parse(in);
         }
         return response;

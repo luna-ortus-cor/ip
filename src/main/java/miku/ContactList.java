@@ -30,7 +30,7 @@ public class ContactList {
     }
 
     /**
-     * Load contacts from a file given a Storage instance.
+     * Loads contacts from a file given a Storage instance.
      *
      * @param s a Storage instance
      */
@@ -39,7 +39,7 @@ public class ContactList {
     }
 
     /**
-     * Save contacts to a file given a Storage instance.
+     * Saves contacts to a file given a Storage instance.
      *
      * @param s a Storage instance
      */
@@ -48,7 +48,7 @@ public class ContactList {
     }
 
     /**
-     * Get contact based on index in contact list.
+     * Gets contact based on index in contact list.
      *
      * @param idx index of contact in contact list
      * @return contact object at specified index
@@ -63,7 +63,7 @@ public class ContactList {
     }
 
     /**
-     * Search contacts by name, allowing partial matches in any of the name fields.
+     * Searches contacts by name, allowing partial matches in any of the name fields.
      *
      * @param searchString the search string to be matched (either partially or fully)
      * @return an arraylist of contact objects containing the search string
@@ -83,7 +83,7 @@ public class ContactList {
     }
 
     /**
-     * Search contacts by email, allowing partial matches in any of the email fields.
+     * Searches contacts by email, allowing partial matches in any of the email fields.
      *
      * @param searchString the search string to be matched (either partially or fully)
      * @return an arraylist of contact objects containing the search string
@@ -100,7 +100,7 @@ public class ContactList {
     }
 
     /**
-     * Search contacts by address, allowing partial matches in any of the address fields.
+     * Searches contacts by address, allowing partial matches in any of the address fields.
      *
      * @param searchString the search string to be matched (either partially or fully)
      * @return an arraylist of contact objects containing the search string
@@ -117,7 +117,7 @@ public class ContactList {
     }
 
     /**
-     * Add a contact object to the list of contacts.
+     * Adds a contact object to the list of contacts.
      *
      * @param c a contact object to be added to the list of contacts
      */
@@ -126,7 +126,7 @@ public class ContactList {
     }
 
     /**
-     * Edit an existing contact object in the list of contacts.
+     * Edits an existing contact object in the list of contacts.
      *
      * @param c1 old contact to be edited
      * @param c2 new contact to replace the old contact
@@ -137,7 +137,7 @@ public class ContactList {
     }
 
     /**
-     * Delete the contact at a specified index.
+     * Deletes the contact at a specified index.
      *
      * @param idx the index of the contact in the list
      */
@@ -153,7 +153,7 @@ public class ContactList {
     }
 
     /**
-     * Delete all contacts in the list.
+     * Deletes all contacts in the list.
      */
     public void deleteAll() {
         contactList.clear();

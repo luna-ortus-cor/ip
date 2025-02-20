@@ -27,7 +27,7 @@ public class Settings {
     }
 
     /**
-     * Create settings file if it does not exist, else load settings from file.
+     * Creates settings file if it does not exist, else load settings from file.
      */
     private void loadOrCreateSettings() {
         File settingsFile = new File(settingsFilePath);
@@ -41,7 +41,7 @@ public class Settings {
     }
 
     /**
-     * Set default settings if no current settings found.
+     * Sets default settings if no current settings found.
      */
     private void setDefaultSettings() {
         this.theme = "light";
@@ -51,7 +51,7 @@ public class Settings {
     }
 
     /**
-     * Load settings from file.
+     * Loads settings from file.
      */
     private void loadSettings() {
         Properties properties = new Properties();
@@ -68,7 +68,7 @@ public class Settings {
     }
 
     /**
-     * Save settings to file.
+     * Saves settings to file.
      */
     public void saveSettings() {
         Properties properties = new Properties();

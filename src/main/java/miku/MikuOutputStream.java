@@ -36,7 +36,7 @@ public class MikuOutputStream extends OutputStream {
     }
 
     /**
-     * Flush the buffer and write the contents of buffer to GUI.
+     * Flushes the buffer and write the contents of buffer to GUI.
      */
     private void flushBuffer() {
         String msg = buffer.toString();

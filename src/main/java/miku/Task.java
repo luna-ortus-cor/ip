@@ -88,7 +88,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Add a tag to the task.
+     * Adds a tag to the task.
      *
      * @param tag tag to be added
      */
@@ -97,7 +97,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Remove a tag from the task.
+     * Removes a tag from the task.
      *
      * @param tag tag to be removed
      */
@@ -108,7 +108,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Remove all tags from the task.
+     * Removes all tags from the task.
      */
     public void removeAllTags() {
         tags.clear();
@@ -179,7 +179,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Set the priority of the task to a specified value
+     * Sets the priority of the task to a specified value
      *
      * @param priority int specifying the new priority of the task
      * @return an int denoting a successful change in priority

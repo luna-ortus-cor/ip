@@ -271,7 +271,7 @@ public class Ui {
     }
 
     /**
-     * Print individual game message.
+     * Prints individual game message.
      *
      * @param game int specifying game the user chose to play
      */
@@ -290,7 +290,7 @@ public class Ui {
     }
 
     /**
-     * Print individual game difficulty message.
+     * Prints individual game difficulty message.
      *
      * @param game int specifying game the user chose to play
      */
@@ -309,7 +309,7 @@ public class Ui {
     }
 
     /**
-     * Print individual game length message.
+     * Prints individual game length message.
      *
      * @param game int specifying game the user chose to play
      */

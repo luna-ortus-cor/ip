@@ -32,7 +32,7 @@ public class Storage {
     //we should also include generic read and write methods for arbitrary files
 
     /**
-     * Check if filepath pointing to a file exists, if it does not then create the filepath and file.
+     * Checks if filepath pointing to a file exists, if it does not then creates the filepath and file.
      *
      * @param fp filepath to check
      * @return int specifying status of the file
@@ -145,7 +145,7 @@ public class Storage {
     }
 
     /**
-     * Write tasks from an arraylist of tasks to a file specified by a file path.
+     * Writes tasks from an arraylist of tasks to a file specified by a file path.
      *
      * @param taskList an ArrayList of Tasks
      * @param fp a String containing the file path
@@ -217,7 +217,7 @@ public class Storage {
     }
 
     /**
-     * Helper method to handle null/empty value representations of fields in Contact
+     * Checks and handles null/empty value representations of fields in Contact
      *
      * @param value string of a field in a Contact object
      * @return null if the string is the empty representation, else value
@@ -227,7 +227,7 @@ public class Storage {
     }
 
     /**
-     * Write contacts from an arraylist of contacts to a file specified by a file path.
+     * Writes contacts from an arraylist of contacts to a file specified by a file path.
      *
      * @param contactList an ArrayList of Contacts
      * @param fp a String containing the file path
@@ -285,7 +285,7 @@ public class Storage {
     }
 
     /**
-     * Write locations from an arraylist of locations to a file specified by a file path.
+     * Writes locations from an arraylist of locations to a file specified by a file path.
      *
      * @param locationList an ArrayList of Locations
      * @param fp a String containing the file path

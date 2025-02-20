@@ -31,7 +31,7 @@ public class Contact {
     private final int id;
 
     /**
-     * Initialize a Contact instance with relevant fields.
+     * Initializes a Contact instance with relevant fields.
      */
     public Contact(String firstName, String lastName, String middleName, String housePhone, String houseExtension,
             String mobilePhone, String mobileExtension, String workPhone, String workExtension, LocalDate birthday,
@@ -55,6 +55,7 @@ public class Contact {
         this.id = Objects.hash(System.currentTimeMillis());
     }
 
+    //getters and setters
     public String getFirstName() {
         return firstName;
     }
@@ -165,7 +166,7 @@ public class Contact {
     }
 
     /**
-     * Validate email, check email follows a valid standard email format.
+     * Validates email, check email follows a valid standard email format.
      *
      * @param email string of email to be validated
      * @return boolean specifying if email is valid or not
@@ -195,7 +196,7 @@ public class Contact {
     }
 
     /**
-     * Return a formatted string for each field in the Contact instance, handling empty/null values correctly.
+     * Returns a formatted string for each field in the Contact instance, handling empty/null values correctly.
      *
      * @param value string of a field value in the contact instance
      * @return a formatted string of the field value
@@ -205,7 +206,7 @@ public class Contact {
     }
 
     /**
-     * Convert a string representation of Contact object back to Contact object.
+     * Converts a string representation of Contact object back to Contact object.
      *
      * @param line string representation of contact object
      * @return contact object from its string representation
@@ -227,6 +228,12 @@ public class Contact {
         );
     }
 
+    /**
+     * Returns a formatted string for each field in the string representation of the Contact instance.
+     *
+     * @param value string of a field value in the string representation of the contact instance
+     * @return a formatted string of the field value
+     */
     private static String unescape(String value) {
         return value.equals(EMPTY) ? "" : value.replace("\\|", "|");
     }

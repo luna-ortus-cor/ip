@@ -25,7 +25,7 @@ public class MoodTracker {
     }
 
     /**
-     * Create and save a mood instance given inputs.
+     * Creates and save a mood instance given inputs.
      *
      * @param date string of date
      * @param moodDescription string of mood
@@ -37,7 +37,7 @@ public class MoodTracker {
     }
 
     /**
-     * Save mood to file.
+     * Saves mood to file.
      *
      * @param mood mood to be saved
      */
@@ -51,7 +51,7 @@ public class MoodTracker {
     }
 
     /**
-     * Load moods from file.
+     * Loads moods from file.
      */
     private static void loadMoodsFromFile() {
         moods.clear();
@@ -69,7 +69,7 @@ public class MoodTracker {
     }
 
     /**
-     * Display statistics.
+     * Displays statistics.
      */
     public static void displayStatistics() {
         loadMoodsFromFile();

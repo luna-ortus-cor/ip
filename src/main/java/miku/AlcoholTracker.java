@@ -17,7 +17,7 @@ public class AlcoholTracker {
     private static ArrayList<Alcohol> alcoholLogs = new ArrayList<>();
 
     /**
-     * Initialize the alcohol tracking file.
+     * Initializes the alcohol tracking file.
      */
     public static void initializeTracker() {
         Storage s = new Storage(new Ui());
@@ -25,7 +25,7 @@ public class AlcoholTracker {
     }
 
     /**
-     * Create and save an alcohol instance given inputs.
+     * Creates and save an alcohol instance given inputs.
      *
      * @param date string of date
      * @param drink string of drink type
@@ -39,7 +39,7 @@ public class AlcoholTracker {
     }
 
     /**
-     * Save alcohol to file.
+     * Saves alcohol to file.
      *
      * @param alcohol alcohol to be saved
      */
@@ -53,7 +53,7 @@ public class AlcoholTracker {
     }
 
     /**
-     * Load alcohol from file.
+     * Loads alcohol from file.
      */
     private static void loadAlcoholLogsFromFile() {
         alcoholLogs.clear();
@@ -76,7 +76,7 @@ public class AlcoholTracker {
     }
 
     /**
-     * Display statistics.
+     * Displays statistics.
      */
     public static void displayStatistics() {
         loadAlcoholLogsFromFile();

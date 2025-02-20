@@ -19,6 +19,11 @@ public class BlackjackGame {
     private static final Map<String, Integer> CARD_VALUES = new HashMap<>();
     private Ui ui;
 
+    /**
+     * Initializes a new blackjack game.
+     *
+     * @param ui a Ui instance
+     */
     public BlackjackGame(Ui ui) {
         this.ui = ui;
     }
@@ -154,7 +159,7 @@ public class BlackjackGame {
     }
 
     /**
-     * Draw a random card (this card is not subject to the usual one-deck probability).
+     * Draws a random card (this card is not subject to the usual one-deck probability).
      *
      * @return string of the card
      */
@@ -163,7 +168,7 @@ public class BlackjackGame {
     }
 
     /**
-     * Calculate the total score of a hand.
+     * Calculates the total score of a hand.
      *
      * @param hand arraylist of cards in hand
      * @param int score of the hand

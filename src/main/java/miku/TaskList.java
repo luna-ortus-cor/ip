@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Load tasks from a file given a Storage instance.
+     * Loads tasks from a file given a Storage instance.
      *
      * @param s a Storage instance
      */
@@ -56,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Save tasks to a file given a Storage instance.
+     * Saves tasks to a file given a Storage instance.
      *
      * @param s a Storage instance
      */
@@ -65,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Get task based on index in task list.
+     * Gets task based on index in task list.
      *
      * @param idx index of task in task list
      * @return task object at specified index
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at a specified index as done.
+     * Marks the task at a specified index as done.
      *
      * @param idx the index of the task in the list
      */
@@ -95,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at a specified index as not done.
+     * Marks the task at a specified index as not done.
      *
      * @param idx the index of the task in the list
      */
@@ -110,7 +110,7 @@ public class TaskList {
     }
 
     /**
-     * Add tags to the task at a specified index.
+     * Adds tags to the task at a specified index.
      *
      * @param idx the index of the task in the list
      * @param tags varargs of string of tags to be added
@@ -128,7 +128,7 @@ public class TaskList {
     }
 
     /**
-     * Remove tags from the task at a specified index.
+     * Removes tags from the task at a specified index.
      *
      * @param idx the index of the task in the list
      * @param tags varargs of string of tags to be removed
@@ -146,7 +146,7 @@ public class TaskList {
     }
 
     /**
-     * Remove all tags from the task at a specified index.
+     * Removes all tags from the task at a specified index.
      *
      * @param idx the index of the task in the list
      */
@@ -160,7 +160,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at a specified index.
+     * Deletes the task at a specified index.
      *
      * @param idx the index of the task in the list
      */
@@ -176,7 +176,7 @@ public class TaskList {
     }
 
     /**
-     * Delete all tasks in the list.
+     * Deletes all tasks in the list.
      */
     public void deleteAll() {
         taskList.clear();
@@ -184,7 +184,7 @@ public class TaskList {
     }
 
     /**
-     * Set the priority of the task at a specified index
+     * Sets the priority of the task at a specified index
      *
      * @param idx the index of the task in the list
      * @param priority the priority to be set to
@@ -200,7 +200,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new Todo Task to the list.
+     * Adds a new Todo Task to the list.
      *
      * @param name description of the Todo
      * @param tags varargs of string tags
@@ -215,7 +215,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new Todo Task to the list.
+     * Adds a new Todo Task to the list.
      *
      * @param name desciption of the Todo
      * @param priority priority of the Todo
@@ -231,7 +231,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new Deadline Task to the list.
+     * Adds a new Deadline Task to the list.
      *
      * @param name description of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
@@ -247,7 +247,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new Deadline Task to the list.
+     * Adds a new Deadline Task to the list.
      *
      * @param name description of the Deadline
      * @param priority priority of the Deadline
@@ -264,7 +264,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new Event Task to the list.
+     * Adds a new Event Task to the list.
      *
      * @param name description of the Event
      * @param from a String representing either a colloquial time or valid date time formmated time
@@ -281,7 +281,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new Event Task to the list.
+     * Adds a new Event Task to the list.
      *
      * @param name description of the Event
      * @param priority priority of the Event
@@ -299,7 +299,7 @@ public class TaskList {
     }
 
     /**
-     * Search for tasks where a particular string appears as a substring in task description.
+     * Searches for tasks where a particular string appears as a substring in task description.
      *
      * @param in string to be searched for in task descriptions
      * @return arraylist of tasks where search string appears as substring in task description

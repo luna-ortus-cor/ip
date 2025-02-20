@@ -17,7 +17,7 @@ public class TimeTracker {
     private static ArrayList<Activity> activities = new ArrayList<>();
 
     /**
-     * Initialize the time tracking file.
+     * Initializes the time tracking file.
      */
     public static void initializeTracker() {
         Storage s = new Storage(new Ui());
@@ -25,7 +25,7 @@ public class TimeTracker {
     }
 
     /**
-     * Save activity to file.
+     * Saves activity to file.
      *
      * @param activity activity to be saved
      */
@@ -39,7 +39,7 @@ public class TimeTracker {
     }
 
     /**
-     * Load activities from file.
+     * Loads activities from file.
      */
     private static void loadActivitiesFromFile() {
         activities.clear(); // Clear the current list to avoid duplication
@@ -74,7 +74,7 @@ public class TimeTracker {
     }
 
     /**
-     * Display statistics.
+     * Displays statistics.
      */
     public static void displayStatistics() {
         loadActivitiesFromFile();

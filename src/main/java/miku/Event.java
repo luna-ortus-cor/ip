@@ -14,7 +14,7 @@ public class Event extends Task {
     private LocalDateTime toLdt;
 
     /**
-     * Create a new Event instance.
+     * Creates a new Event instance.
      *
      * @param name description of the Event
      * @param from a String representing either a colloquial time or valid date time formatted time
@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Create a new Event instance specifying the doneness of the Event.
+     * Creates a new Event instance specifying the doneness of the Event.
      *
      * @param name description of the Event
      * @param isDone boolean denoting doneness of the Event
@@ -61,7 +61,7 @@ public class Event extends Task {
     }
 
     /**
-     * Create a new Event instance specifying the priority of the Deadline.
+     * Creates a new Event instance specifying the priority of the Deadline.
      *
      * @param name description of the Deadline
      * @param priority int denoting priority of the Deadline
@@ -85,7 +85,7 @@ public class Event extends Task {
     }
 
     /**
-     * Create a new Event instance specifying the priority of the Deadline.
+     * Creates a new Event instance specifying the priority of the Deadline.
      *
      * @param name description of the Deadline
      * @param isDone boolean denoting doneness of the Deadline

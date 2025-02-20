@@ -46,7 +46,7 @@ public class WordleGame {
     }
 
     /**
-     * Load wordlist from wordlist file.
+     * Loads wordlist from wordlist file.
      */
     private ArrayList<String> loadWordList() {
         ArrayList<String> words = new ArrayList<>();
@@ -67,7 +67,7 @@ public class WordleGame {
     }
 
     /**
-     * Check if word is of correct difficulty.
+     * Checks if word is of correct difficulty.
      *
      * @param word string of the word proposed
      * @return boolean indicating if the proposed word is of correct difficulty
@@ -87,7 +87,7 @@ public class WordleGame {
     }
 
     /**
-     * Select a random word from the wordlist.
+     * Selects a random word from the wordlist.
      */
     private String selectTargetWord() {
         Random random = new Random();
@@ -149,7 +149,7 @@ public class WordleGame {
     }
 
     /**
-     * Evaluate the user guess.
+     * Evaluates the user guess.
      * Also prints the output of the user guess indicating correct letters,
      * correct letters but wrong position, and wrong letters.
      *

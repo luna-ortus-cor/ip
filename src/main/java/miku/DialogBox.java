@@ -71,7 +71,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Get user dialogbox.
+     * Gets user dialogbox.
      *
      * @param s message to be displayed on dialogbox
      * @param i image to be displayed on dialogbox
@@ -84,7 +84,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Get miku dialogbox.
+     * Gets miku dialogbox.
      *
      * @param s message to be displayed on dialogbox
      * @param i image to be displayed on dialogbox

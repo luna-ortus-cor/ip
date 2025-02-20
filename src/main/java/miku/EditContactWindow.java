@@ -78,6 +78,79 @@ public class EditContactWindow {
         String primaryAddress = primaryAddressField.getText();
         String secondaryAddress = secondaryAddressField.getText();
 
+        boolean isFirstNameChanged = (
+            originalContact.getFirstName() == null && firstName != null)
+                || (originalContact.getFirstName() != null
+                    && !originalContact.getFirstName().equals(firstName));
+        boolean isLastNameChanged = (
+            originalContact.getLastName() == null && lastName != null)
+                || (originalContact.getLastName() != null
+                    && !originalContact.getLastName().equals(lastName));
+        boolean isMiddleNameChanged = (
+            originalContact.getMiddleName() == null && middleName != null)
+                || (originalContact.getMiddleName() != null
+                    && !originalContact.getMiddleName().equals(middleName));
+        boolean isHousePhoneChanged = (
+            originalContact.getHousePhone() == null && housePhone != null)
+                || (originalContact.getHousePhone() != null
+                    && !originalContact.getHousePhone().equals(housePhone));
+        boolean isHouseExtensionChanged = (
+            originalContact.getHouseExtension() == null && houseExtension != null)
+                || (originalContact.getHouseExtension() != null
+                    && !originalContact.getHouseExtension().equals(houseExtension));
+        boolean isMobilePhoneChanged = (
+            originalContact.getMobilePhone() == null && mobilePhone != null)
+                || (originalContact.getMobilePhone() != null
+                    && !originalContact.getMobilePhone().equals(mobilePhone));
+        boolean isMobileExtensionChanged = (
+            originalContact.getMobileExtension() == null && mobileExtension != null)
+                || (originalContact.getMobileExtension() != null
+                    && !originalContact.getMobileExtension().equals(mobileExtension));
+        boolean isWorkPhoneChanged = (
+            originalContact.getWorkPhone() == null && workPhone != null)
+                || (originalContact.getWorkPhone() != null
+                    && !originalContact.getWorkPhone().equals(workPhone));
+        boolean isWorkExtensionChanged = (
+            originalContact.getWorkExtension() == null && workExtension != null)
+                || (originalContact.getWorkExtension() != null
+                    && !originalContact.getWorkExtension().equals(workExtension));
+        boolean isBirthdayChanged = (
+            originalContact.getBirthday() == null && birthday != null)
+                || (originalContact.getBirthday() != null
+                    && !originalContact.getBirthday().equals(birthday));
+        boolean isBloodTypeChanged = (
+            originalContact.getBloodType() == null && bloodType != null)
+                || (originalContact.getBloodType() != null
+                    && !originalContact.getBloodType().equals(bloodType));
+        boolean isPrimaryEmailChanged = (
+            originalContact.getPrimaryEmail() == null && primaryEmail != null)
+                || (originalContact.getPrimaryEmail() != null
+                    && !originalContact.getPrimaryEmail().equals(primaryEmail));
+        boolean isSecondaryEmailChanged = (
+            originalContact.getSecondaryEmail() == null && secondaryEmail != null)
+                || (originalContact.getSecondaryEmail() != null
+                    && !originalContact.getSecondaryEmail().equals(secondaryEmail));
+        boolean isPrimaryAddressChanged = (
+            originalContact.getPrimaryAddress() == null && primaryAddress != null)
+                || (originalContact.getPrimaryAddress() != null
+                    && !originalContact.getPrimaryAddress().equals(primaryAddress));
+        boolean isSecondaryAddressChanged = (
+            originalContact.getSecondaryAddress() == null && secondaryAddress != null)
+                || (originalContact.getSecondaryAddress() != null
+                    && !originalContact.getSecondaryAddress().equals(secondaryAddress));
+
+        boolean isAnyFieldChanged = isFirstNameChanged || isLastNameChanged || isMiddleNameChanged
+                            || isHousePhoneChanged || isHouseExtensionChanged || isMobilePhoneChanged
+                            || isMobileExtensionChanged || isWorkPhoneChanged || isWorkExtensionChanged
+                            || isBirthdayChanged || isBloodTypeChanged || isPrimaryEmailChanged
+                            || isSecondaryEmailChanged || isPrimaryAddressChanged || isSecondaryAddressChanged;
+
+        if (!isAnyFieldChanged) {
+            Alert alert = new Alert(AlertType.ERROR, Constants.INVALID_CONTACT_EDIT);
+            alert.showAndWait();
+            return;
+        }
+
         boolean isValidPrimaryEmail = true;
         boolean isValidSecondaryEmail = true;
         if (!primaryEmail.isEmpty() && !Contact.validateEmail(primaryEmail)) {

@@ -46,7 +46,7 @@ public class MentalMathGame {
     }
 
     /**
-     * Generate questions. Also ensures all answers to questions are integers.
+     * Generates questions. Also ensures all answers to questions are integers.
      */
     private void generateQuestions() {
         Random random = new Random();

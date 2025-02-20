@@ -12,7 +12,7 @@ public class Deadline extends Task {
     private LocalDateTime byLdt;
 
     /**
-     * Create a new Deadline instance
+     * Creates a new Deadline instance
      *
      * @param name description of the Deadline
      * @param by a String representing either a colloquial time or valid date time formatted time
@@ -30,7 +30,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a new Deadline instance specifying the doneness of the Deadline.
+     * Creates a new Deadline instance specifying the doneness of the Deadline.
      *
      * @param name description of the Deadline
      * @param isDone boolean denoting doneness of the Deadline
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a new Deadline instance specifying the priority of the Deadline.
+     * Creates a new Deadline instance specifying the priority of the Deadline.
      *
      * @param name description of the Deadline
      * @param priority int denoting priority of the Deadline
@@ -68,7 +68,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a new Deadline instance specifying the doneness and priority of the Deadline.
+     * Creates a new Deadline instance specifying the doneness and priority of the Deadline.
      *
      * @param name description of the Deadline
      * @param isDone boolean denoting doneness of the Deadline
