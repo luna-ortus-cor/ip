@@ -1,6 +1,6 @@
 # Miku User Guide
 
-![](https://github.com/luna-ortus-cor/ip/blob/master/docs/Ui.png)
+![](Ui.png?raw=true)
 
 Miku is a productivity tool aimed at organizing tasks, people and important locations all in one place. Miku also provides some mentally stimulating games to help stave off boredom.
 
