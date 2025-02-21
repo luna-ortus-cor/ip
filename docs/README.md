@@ -8,6 +8,7 @@ Miku is a productivity tool aimed at organizing tasks, people and important loca
 
 ## Overview
 This bot helps you manage tasks, contacts, locations, and associations efficiently. You can create, modify, search, and delete tasks, contacts, and locations while also associating tasks with contacts and locations.
+Do note that some functionalites (not mentioned here) has not been fully implemented and are a work in progress, please check the help message in the app for more information.
 
 ---
 ## Getting Started
@@ -16,6 +17,7 @@ This bot helps you manage tasks, contacts, locations, and associations efficient
 3. Open a terminal.
 4. Navigate to the directory where ```miku.jar``` was downloaded to in the terminal. This can be done via the ```cd``` command on most terminals.
 5. From the terminal, execute ```java -jar miku.jar``` to launch the application.
+6. To terminate the application, either type ```bye`` in the appliication, close the application manually, or execute ```Ctrl-C``` in the terminal.
 
 ---
 ## 📋 Task Management
@@ -329,6 +331,9 @@ help
 
 ---
 ## 🏁 Conclusion
-Miku provides a powerful task, contact, and location management system with easy-to-use commands. Use the appropriate syntax to interact effectively and organize your tasks efficiently!
+Miku provides a powerful task, contact, and location management system with easy-to-use commands.
+Use the appropriate syntax to interact effectively and organize your tasks and contacts efficiently!
 
 Miku hopes you have fun! 🚀
+Please also provide any feedbak you might have for Miku! <3
+This is Miku, signing off!
